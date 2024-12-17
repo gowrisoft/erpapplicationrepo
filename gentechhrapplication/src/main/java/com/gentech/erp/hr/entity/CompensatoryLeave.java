@@ -7,6 +7,9 @@ import java.sql.Date;
 @Entity
 @Table(name = "compensatory_leave")
 public class CompensatoryLeave{
+	public CompensatoryLeave(){
+
+	}
     public CompensatoryLeave(int compensatoryLeaveId, Date leaveDate, String compensatoryReason, String approvedBy,
 			CompensatoryStatus compensatoryStatus, Employee employee, LeaveLedger leaveLedger) {
 		super();

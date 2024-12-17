@@ -7,6 +7,9 @@ import java.util.List;
 @Entity
 @Table(name = "admin")
 public class Admin{
+	public Admin(){
+
+	}
     public Admin(int adminId, String adminName, long adminPhone, List<SanctionLeave> sanctionLeaves) {
 		super();
 		this.adminId = adminId;

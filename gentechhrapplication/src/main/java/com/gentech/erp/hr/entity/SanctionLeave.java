@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "sanction_leave")
 public class SanctionLeave {
+	public SanctionLeave(){
+
+	}
     public SanctionLeave(int sanctionId, ApplicationStatus applicationStatus, LocalDateTime sanctionDate,
 			LeaveApplication leaveApplication, Admin admin) {
 		super();

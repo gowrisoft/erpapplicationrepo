@@ -7,6 +7,9 @@ import java.sql.Date;
 @Entity
 @Table(name = "leave_ledger")
 public class LeaveLedger {
+	public LeaveLedger(){
+		
+	}
     public LeaveLedger(int ledgerId, int leaveAccrued, Date date, String leaveType, int leaveUsed, int leaveBalance,
 			String remarks, LeaveStatus status, String processedBy, Employee employee,
 			LeaveApplication leaveApplication, CompensatoryLeave compensatoryLeave) {
