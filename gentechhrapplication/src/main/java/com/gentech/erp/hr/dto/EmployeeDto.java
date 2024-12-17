@@ -27,7 +27,7 @@ public class EmployeeDto {
 	private String phoneNumber;
 
 	@NotNull(message = "Base salary cannot be null")
-	@Column(nullable = false) // Ensures database-level constraint
+	@Column(nullable = false)
 	private BigDecimal baseSalary;
 
 	@NotNull(message = "Allowances cannot be null")

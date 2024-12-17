@@ -23,9 +23,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDto addEmployee(EmployeeDto employeeDto) {
+        try{
         Employee employeeEntity = modelMapper.map(employeeDto , Employee.class);
         employeeRepository.save(employeeEntity);
         return modelMapper.map(employeeEntity, EmployeeDto.class);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error while saving employee: " + e.getMessage());
+        }
     }
 
     @Override
@@ -40,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto updateEmployee(Long id, Employee updatedEmployee) {
+    public EmployeeDto updateEmployee(Long id, EmployeeDto updatedEmployee) {
         return employeeRepository.findById(id)
                 .map(employee -> {
                     employee.setFirstName(updatedEmployee.getFirstName());
@@ -60,13 +64,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public String deleteEmployeeById(Long id) {
-        Employee employee=employeeRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Employee","Employee Id",id));
+        employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee", "Employee Id", id));
 
-        if(employee==null){
-            return "Employee with employee id : "+id+" is not found in the database";
-        }
         employeeRepository.deleteById(id);
-        return "Employee with employee id : "+id+" deleted successfully in the database";
+        return String.format("Employee with employee ID %d deleted successfully from the database", id);
     }
+
 }

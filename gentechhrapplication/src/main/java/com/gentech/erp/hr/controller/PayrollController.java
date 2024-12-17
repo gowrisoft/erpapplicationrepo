@@ -35,9 +35,19 @@ public class PayrollController {
         return ResponseEntity.ok(payrollService.createPayroll(employeeId, payroll));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<PayrollDto>> getAllPayrolls() {
+        return ResponseEntity.ok(payrollService.getAllPayrolls());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<PayrollDto> getPayroll(@PathVariable Long id) {
         return ResponseEntity.ok(payrollService.getPayrollById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PayrollDto> updatePayroll(@PathVariable Long id, @RequestBody PayrollDto updatedPayroll) {
+        return ResponseEntity.ok(payrollService.updatePayroll(id, updatedPayroll));
     }
 
     @DeleteMapping("/{id}")
