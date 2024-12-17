@@ -32,5 +32,9 @@ public class ResourceNotFoundException extends RuntimeException{
         return valueof;
     }
 
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+
 
 }

@@ -7,6 +7,8 @@ import com.gentech.erp.hr.dto.EmployeeDto;
 public interface EmployeeService {
     EmployeeDto addEmployee(EmployeeDto employeeDto);
     List<EmployeeDto> getAllEmployees();
-    EmployeeDto getEmployeeById(long id);
-    String deleteEmployeeById(long id);
+
+    EmployeeDto getEmployeeById(Long id);
+
+    String deleteEmployeeById(Long id);
 }
