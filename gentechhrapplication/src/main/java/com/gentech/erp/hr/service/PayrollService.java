@@ -13,9 +13,13 @@ public interface PayrollService {
 
     List<PayrollDto> getPayrollHistory(Long employeeId);
 
+    List<PayrollDto> getAllPayrolls();
+
     PayrollDto createPayroll(Long employeeId, Payroll payroll);
 
     PayrollDto getPayrollById(Long id);
+
+    PayrollDto updatePayroll(Long id, PayrollDto updatedPayroll);
 
     void deletePayroll(Long id);
 }

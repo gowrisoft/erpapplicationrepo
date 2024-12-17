@@ -60,6 +60,12 @@ public class PayrollServiceImpl implements PayrollService {
     }
 
     @Override
+    public List<PayrollDto> getAllPayrolls() {
+        return payrollRepository.findAll()
+                .stream().map(payroll -> modelMapper.map(payroll, PayrollDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
     public PayrollDto createPayroll(Long emp_id, Payroll payroll) {
         Employee employee = employeeRepository.findById(emp_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
@@ -71,6 +77,17 @@ public class PayrollServiceImpl implements PayrollService {
     public PayrollDto getPayrollById(Long payroll_id) {
         return modelMapper.map(payrollRepository.findById(payroll_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Payroll record not found")), PayrollDto.class);
+    }
+
+    @Override
+    public PayrollDto updatePayroll(Long id, PayrollDto updatedPayroll) {
+        Payroll payroll = payrollRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Payroll record not found"));
+        payroll.setSalaryDate(updatedPayroll.getSalaryDate());
+        payroll.setGrossSalary(updatedPayroll.getGrossSalary());
+        payroll.setDeductions(updatedPayroll.getDeductions());
+        payroll.setNetSalary(updatedPayroll.getNetSalary());
+        return modelMapper.map(payrollRepository.save(payroll), PayrollDto.class);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto updateEmployee(Long id, Employee updatedEmployee) {
+    public EmployeeDto updateEmployee(Long id, EmployeeDto updatedEmployee) {
         return employeeRepository.findById(id)
                 .map(employee -> {
                     employee.setFirstName(updatedEmployee.getFirstName());
@@ -64,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public String deleteEmployeeById(Long id) {
-        Employee employee = employeeRepository.findById(id)
+        employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee", "Employee Id", id));
 
         employeeRepository.deleteById(id);
