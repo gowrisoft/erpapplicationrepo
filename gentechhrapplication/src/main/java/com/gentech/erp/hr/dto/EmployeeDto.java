@@ -4,10 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
 
 public class EmployeeDto {
 	private long empId;
