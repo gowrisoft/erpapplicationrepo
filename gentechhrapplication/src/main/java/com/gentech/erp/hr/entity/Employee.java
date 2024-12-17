@@ -47,10 +47,6 @@ public class Employee{
 	@Column(nullable = false)
 	private LocalDate dateOfJoining;
 
-
-	@Column(name= "emp_phone")
-    private long empPhone;
-    @Column(name = "designation")
     private String empDesignation;
 
 
@@ -69,14 +65,15 @@ public class Employee{
 
 	}
 
-	public Employee(long empId, String email, String phoneNumber, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, long empPhone, String empDesignation, List<LeaveApplication> leaveApplications, List<ModifyLeave> modifyLeaves, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities) {
+	public Employee(long empId, String firstName, String lastName, String email, String phoneNumber, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, long empPhone, String empDesignation, List<LeaveApplication> leaveApplications, List<ModifyLeave> modifyLeaves, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities) {
 		this.empId = empId;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.baseSalary = baseSalary;
 		this.allowances = allowances;
 		this.dateOfJoining = dateOfJoining;
-		this.empPhone = empPhone;
 		this.empDesignation = empDesignation;
 		this.leaveApplications = leaveApplications;
 		this.modifyLeaves = modifyLeaves;
@@ -86,6 +83,22 @@ public class Employee{
 
 	public long getEmpId() {
 		return empId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public void setEmpId(long empId) {
@@ -130,14 +143,6 @@ public class Employee{
 
 	public void setDateOfJoining(LocalDate dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
-	}
-
-	public long getEmpPhone() {
-		return empPhone;
-	}
-
-	public void setEmpPhone(long empPhone) {
-		this.empPhone = empPhone;
 	}
 
 	public String getEmpDesignation() {

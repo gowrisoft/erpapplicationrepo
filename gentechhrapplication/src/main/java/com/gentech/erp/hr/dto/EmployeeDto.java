@@ -1,20 +1,12 @@
 package com.gentech.erp.hr.dto;
 
-import com.gentech.erp.hr.entity.CompensatoryLeave;
-import com.gentech.erp.hr.entity.LeaveApplication;
-import com.gentech.erp.hr.entity.LeaveLedger;
-import com.gentech.erp.hr.entity.ModifyLeave;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
 
 
 public class EmployeeDto {
@@ -48,22 +40,7 @@ public class EmployeeDto {
 	@Column(nullable = false)
 	private LocalDate dateOfJoining;
 
-
-	@Column(name= "emp_phone")
-	private long empPhone;
-
-	@Column(name = "designation")
 	private String empDesignation;
-
-
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<LeaveApplication> leaveApplications;
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<ModifyLeave> modifyLeaves;
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<LeaveLedger> leaveLedgers;
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CompensatoryLeave> compensatoryLeaveEntities;
 
 	public EmployeeDto() {
 	}
@@ -132,51 +109,11 @@ public class EmployeeDto {
 		this.dateOfJoining = dateOfJoining;
 	}
 
-	public long getEmpPhone() {
-		return empPhone;
-	}
-
-	public void setEmpPhone(long empPhone) {
-		this.empPhone = empPhone;
-	}
-
 	public String getEmpDesignation() {
 		return empDesignation;
 	}
 
 	public void setEmpDesignation(String empDesignation) {
 		this.empDesignation = empDesignation;
-	}
-
-	public List<LeaveApplication> getLeaveApplications() {
-		return leaveApplications;
-	}
-
-	public void setLeaveApplications(List<LeaveApplication> leaveApplications) {
-		this.leaveApplications = leaveApplications;
-	}
-
-	public List<ModifyLeave> getModifyLeaves() {
-		return modifyLeaves;
-	}
-
-	public void setModifyLeaves(List<ModifyLeave> modifyLeaves) {
-		this.modifyLeaves = modifyLeaves;
-	}
-
-	public List<LeaveLedger> getLeaveLedgers() {
-		return leaveLedgers;
-	}
-
-	public void setLeaveLedgers(List<LeaveLedger> leaveLedgers) {
-		this.leaveLedgers = leaveLedgers;
-	}
-
-	public List<CompensatoryLeave> getCompensatoryLeaveEntities() {
-		return compensatoryLeaveEntities;
-	}
-
-	public void setCompensatoryLeaveEntities(List<CompensatoryLeave> compensatoryLeaveEntities) {
-		this.compensatoryLeaveEntities = compensatoryLeaveEntities;
 	}
 }

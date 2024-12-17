@@ -28,7 +28,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return modelMapper.map(employeeEntity, EmployeeDto.class);
     }
 
-
     @Override
     public List<EmployeeDto> getAllEmployees() {
         return employeeRepository.findAll().stream().map(employee -> modelMapper.map(employee , EmployeeDto.class)).collect(Collectors.toList());
@@ -38,6 +37,24 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDto getEmployeeById(Long id) {
         return modelMapper.map(employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found")), EmployeeDto.class);
+    }
+
+    @Override
+    public EmployeeDto updateEmployee(Long id, Employee updatedEmployee) {
+        return employeeRepository.findById(id)
+                .map(employee -> {
+                    employee.setFirstName(updatedEmployee.getFirstName());
+                    employee.setLastName(updatedEmployee.getLastName());
+                    employee.setEmail(updatedEmployee.getEmail());
+                    employee.setPhoneNumber(updatedEmployee.getPhoneNumber());
+                    employee.setBaseSalary(updatedEmployee.getBaseSalary());
+                    employee.setAllowances(updatedEmployee.getAllowances());
+                    employee.setDateOfJoining(updatedEmployee.getDateOfJoining());
+                    employee.setEmpDesignation(updatedEmployee.getEmpDesignation());
+
+                    return modelMapper.map(employeeRepository.save(employee), EmployeeDto.class);
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
     }
 
     @Override
