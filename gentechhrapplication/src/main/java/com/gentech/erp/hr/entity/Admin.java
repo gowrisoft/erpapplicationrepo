@@ -7,6 +7,9 @@ import java.util.List;
 @Entity
 @Table(name = "admin")
 public class Admin{
+	public Admin(){
+
+	}
     public Admin(int adminId, String adminName, long adminPhone, List<SanctionLeave> sanctionLeaves) {
 		super();
 		this.adminId = adminId;
@@ -14,6 +17,7 @@ public class Admin{
 		this.adminPhone = adminPhone;
 		this.sanctionLeaves = sanctionLeaves;
 	}
+    
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "admin_id")

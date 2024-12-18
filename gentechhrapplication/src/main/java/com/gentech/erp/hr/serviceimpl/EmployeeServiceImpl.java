@@ -1,7 +1,9 @@
 package com.gentech.erp.hr.serviceimpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gentech.erp.hr.dto.EmployeeDto;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.exception.ResourceNotFoundException;
-import com.gentech.erp.hr.mapper.EmployeeMapper;
 import com.gentech.erp.hr.repository.EmployeeRepository;
 import com.gentech.erp.hr.service.EmployeeService;
 
@@ -17,39 +18,60 @@ import com.gentech.erp.hr.service.EmployeeService;
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
     public EmployeeDto addEmployee(EmployeeDto employeeDto) {
-        Employee employeeEntity= EmployeeMapper.mapEmpDtoToEmp(employeeDto);
+        try{
+        Employee employeeEntity = modelMapper.map(employeeDto , Employee.class);
         employeeRepository.save(employeeEntity);
-        EmployeeDto employeeDto1=EmployeeMapper.mapEmpToEmpDto(employeeEntity);
-        return employeeDto1;
+        return modelMapper.map(employeeEntity, EmployeeDto.class);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error while saving employee: " + e.getMessage());
+        }
     }
 
     @Override
     public List<EmployeeDto> getAllEmployees() {
-        List<Employee> employeeEntityList=employeeRepository.findAll();
-        List<EmployeeDto> employeeDto=employeeEntityList.stream().map((employee)->EmployeeMapper.mapEmpToEmpDto(employee)).toList();
-        return employeeDto;
+        return employeeRepository.findAll().stream().map(employee -> modelMapper.map(employee , EmployeeDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public EmployeeDto getEmployeeById(long id) {
-        Employee employee=employeeRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Employee","Employee Id",id));
+    public EmployeeDto getEmployeeById(Long id) {
+        return modelMapper.map(employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found")), EmployeeDto.class);
+    }
 
-        return EmployeeMapper.mapEmpToEmpDto(employee);
+    @Override
+    public EmployeeDto updateEmployee(Long id, EmployeeDto updatedEmployee) {
+        return employeeRepository.findById(id)
+                .map(employee -> {
+                    employee.setFirstName(updatedEmployee.getFirstName());
+                    employee.setLastName(updatedEmployee.getLastName());
+                    employee.setEmail(updatedEmployee.getEmail());
+                    employee.setPhoneNumber(updatedEmployee.getPhoneNumber());
+                    employee.setBaseSalary(updatedEmployee.getBaseSalary());
+                    employee.setAllowances(updatedEmployee.getAllowances());
+                    employee.setDateOfJoining(updatedEmployee.getDateOfJoining());
+                    employee.setEmpDesignation(updatedEmployee.getEmpDesignation());
+                    employee.setMedicalCard(updatedEmployee.getMedicalCard());
+                    employee.setMedicalEntries(updatedEmployee.getMedicalEntries());
+                    employee.setSalary(updatedEmployee.getSalary());
+
+                    return modelMapper.map(employeeRepository.save(employee), EmployeeDto.class);
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
     }
 
     @Override
     @Transactional
-    public String deleteEmployeeById(long id) {
-        Employee employee=employeeRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Employee","Employee Id",id));
+    public String deleteEmployeeById(Long id) {
+        employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee", "Employee Id", id));
 
-        if(employee==null){
-            return "Employee with employee id : "+id+" is not found in the database";
-        }
         employeeRepository.deleteById(id);
-        return "Employee with employee id : "+id+" deleted successfully in the database";
+        return String.format("Employee with employee ID %d deleted successfully from the database", id);
     }
+
 }

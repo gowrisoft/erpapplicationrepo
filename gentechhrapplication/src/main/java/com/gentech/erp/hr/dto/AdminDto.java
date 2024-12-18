@@ -1,7 +1,14 @@
 package com.gentech.erp.hr.dto;
 
 public class AdminDto {
-    public AdminDto(int adminId, String adminName, long adminPhone) {
+	private int adminId;
+    private String adminName;
+    private long adminPhone;
+
+	public AdminDto(){
+
+	}
+	public AdminDto(int adminId, String adminName, long adminPhone) {
 		super();
 		this.adminId = adminId;
 		this.adminName = adminName;
@@ -25,7 +32,4 @@ public class AdminDto {
 	public void setAdminPhone(long adminPhone) {
 		this.adminPhone = adminPhone;
 	}
-	private int adminId;
-    private String adminName;
-    private long adminPhone;
 }

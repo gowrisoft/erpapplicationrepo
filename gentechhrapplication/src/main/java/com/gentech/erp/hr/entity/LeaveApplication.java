@@ -8,6 +8,9 @@ import java.util.List;
 @Entity
 @Table(name = "apply_leave")
 public class LeaveApplication {
+	public LeaveApplication(){
+
+	}
     public LeaveApplication(int leaveRequestId, Date startDate, Date endDate, String reason, String empName,
 			String typeOfLeave, Employee employee, ModifyLeave modifyLeave, SanctionLeave sanctionLeave,
 			List<LeaveLedger> leaveLedgers) {

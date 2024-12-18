@@ -7,6 +7,9 @@ import java.sql.Date;
 @Entity
 @Table(name = "modify_leave")
 public class ModifyLeave {
+	public ModifyLeave(){
+
+	}
     public ModifyLeave(int modifyLeaveId, String empName, Date modifiedDate, Date newStartDate, Date newEndDate,
 			String newLeaveType, Employee employee, LeaveApplication leaveApplication) {
 		super();
