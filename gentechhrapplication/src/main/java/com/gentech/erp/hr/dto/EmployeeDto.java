@@ -1,11 +1,15 @@
 package com.gentech.erp.hr.dto;
 
+import com.gentech.erp.hr.entity.EmployeeMedicalCard;
+import com.gentech.erp.hr.entity.MedicalEntries;
+import com.gentech.erp.hr.entity.Salary;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 public class EmployeeDto {
 	private long empId;
@@ -39,6 +43,10 @@ public class EmployeeDto {
 	private LocalDate dateOfJoining;
 
 	private String empDesignation;
+
+	private EmployeeMedicalCard medicalCard;
+	private List<MedicalEntries> medicalEntries;
+	private Salary salary;
 
 	public EmployeeDto() {
 	}
@@ -113,5 +121,29 @@ public class EmployeeDto {
 
 	public void setEmpDesignation(String empDesignation) {
 		this.empDesignation = empDesignation;
+	}
+
+	public EmployeeMedicalCard getMedicalCard() {
+		return medicalCard;
+	}
+
+	public void setMedicalCard(EmployeeMedicalCard medicalCard) {
+		this.medicalCard = medicalCard;
+	}
+
+	public List<MedicalEntries> getMedicalEntries() {
+		return medicalEntries;
+	}
+
+	public void setMedicalEntries(List<MedicalEntries> medicalEntries) {
+		this.medicalEntries = medicalEntries;
+	}
+
+	public Salary getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Salary salary) {
+		this.salary = salary;
 	}
 }
