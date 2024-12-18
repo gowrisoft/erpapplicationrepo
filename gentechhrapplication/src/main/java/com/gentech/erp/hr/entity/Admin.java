@@ -17,6 +17,7 @@ public class Admin{
 		this.adminPhone = adminPhone;
 		this.sanctionLeaves = sanctionLeaves;
 	}
+    
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "admin_id")
