@@ -2,9 +2,11 @@ package com.gentech.erp.hr.serviceimpl;
 
 
 import com.gentech.erp.hr.dto.PayrollDto;
+import com.gentech.erp.hr.entity.ApprovedMedicalClaim;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.entity.Payroll;
 import com.gentech.erp.hr.exception.ResourceNotFoundException;
+import com.gentech.erp.hr.repository.ApprovedMedicalClaimRepository;
 import com.gentech.erp.hr.repository.EmployeeRepository;
 import com.gentech.erp.hr.repository.PayrollRepository;
 import com.gentech.erp.hr.service.PayrollService;
@@ -27,18 +29,52 @@ public class PayrollServiceImpl implements PayrollService {
     private PayrollRepository payrollRepository;
 
     @Autowired
+    private ApprovedMedicalClaimRepository approvedMedicalClaimRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
+//    @Override
+//    public PayrollDto calculatePayroll(Long emp_id, LocalDate salaryDate) {
+//        Employee employee = employeeRepository.findById(emp_id)
+//                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+//
+//        BigDecimal grossSalary = employee.getBaseSalary().add(employee.getAllowances());
+//        BigDecimal tax = grossSalary.multiply(BigDecimal.valueOf(0.10)); // 10% Tax
+//        BigDecimal providentFund = employee.getBaseSalary().multiply(BigDecimal.valueOf(0.05)); // 5% PF
+//        BigDecimal deductions = tax.add(providentFund);
+//        BigDecimal netSalary = grossSalary.subtract(deductions);
+//
+//        Payroll payroll = new Payroll();
+//        payroll.setEmployee(employee);
+//        payroll.setSalaryDate(salaryDate);
+//        payroll.setGrossSalary(grossSalary);
+//        payroll.setDeductions(deductions);
+//        payroll.setNetSalary(netSalary);
+//
+//        payrollRepository.save(payroll);
+//
+//        return modelMapper.map(payroll, PayrollDto.class);
+//    }
+
     @Override
-    public PayrollDto calculatePayroll(Long emp_id, LocalDate salaryDate) {
-        Employee employee = employeeRepository.findById(emp_id)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+    public PayrollDto calculatePayroll(Long empId, LocalDate salaryDate) {
+        Employee employee = employeeRepository.findById(empId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + empId));
 
         BigDecimal grossSalary = employee.getBaseSalary().add(employee.getAllowances());
+
+        List<ApprovedMedicalClaim> medicalClaims = approvedMedicalClaimRepository.findByEmployee_EmpId(empId);
+        BigDecimal totalMedicalExpenses = medicalClaims.stream()
+                .map(claim -> BigDecimal.valueOf(claim.getApprovedAmount()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal medicalExpenses = totalMedicalExpenses != null ? totalMedicalExpenses : BigDecimal.ZERO;
+
         BigDecimal tax = grossSalary.multiply(BigDecimal.valueOf(0.10)); // 10% Tax
         BigDecimal providentFund = employee.getBaseSalary().multiply(BigDecimal.valueOf(0.05)); // 5% PF
         BigDecimal deductions = tax.add(providentFund);
-        BigDecimal netSalary = grossSalary.subtract(deductions);
+        BigDecimal netSalary = (grossSalary.subtract(deductions)).add(medicalExpenses);
 
         Payroll payroll = new Payroll();
         payroll.setEmployee(employee);
@@ -46,6 +82,7 @@ public class PayrollServiceImpl implements PayrollService {
         payroll.setGrossSalary(grossSalary);
         payroll.setDeductions(deductions);
         payroll.setNetSalary(netSalary);
+        payroll.setMedicalExpenses(totalMedicalExpenses);
 
         payrollRepository.save(payroll);
 

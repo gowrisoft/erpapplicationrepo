@@ -1,22 +1,18 @@
 package com.gentech.erp.hr.dto;
 
-import com.gentech.erp.hr.entity.EmployeeMedicalCard;
-
 public class DependantsDto {
     private Long dependantId;
     private String dependantName;
     private Integer dependantAge;
-    private EmployeeMedicalCard medicalCard;
 
     public DependantsDto(){
 
     }
 
-    public DependantsDto(Long dependantId, String dependantName, Integer dependantAge, EmployeeMedicalCard medicalCard) {
+    public DependantsDto(Long dependantId, String dependantName, Integer dependantAge) {
         this.dependantId = dependantId;
         this.dependantName = dependantName;
         this.dependantAge = dependantAge;
-        this.medicalCard = medicalCard;
     }
 
     public Long getDependantId() {
@@ -41,13 +37,5 @@ public class DependantsDto {
 
     public void setDependantAge(Integer dependantAge) {
         this.dependantAge = dependantAge;
-    }
-
-    public EmployeeMedicalCard getMedicalCard() {
-        return medicalCard;
-    }
-
-    public void setMedicalCard(EmployeeMedicalCard medicalCard) {
-        this.medicalCard = medicalCard;
     }
 }

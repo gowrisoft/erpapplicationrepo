@@ -35,6 +35,19 @@ public class Payroll {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal netSalary;
 
+    @Column(precision = 10, scale = 2)
+    private BigDecimal medicalExpenses;
+
+    public Payroll(Long payrollId, Employee employee, LocalDate salaryDate, BigDecimal grossSalary, BigDecimal deductions, BigDecimal netSalary, BigDecimal medicalExpenses) {
+        this.payrollId = payrollId;
+        this.employee = employee;
+        this.salaryDate = salaryDate;
+        this.grossSalary = grossSalary;
+        this.deductions = deductions;
+        this.netSalary = netSalary;
+        this.medicalExpenses = medicalExpenses;
+    }
+
     public Long getPayrollId() {
         return payrollId;
     }
@@ -83,16 +96,16 @@ public class Payroll {
         this.netSalary = netSalary;
     }
 
-    public Payroll(Long payrollId, Employee employee, LocalDate salaryDate, BigDecimal grossSalary, BigDecimal deductions, BigDecimal netSalary) {
-        this.payrollId = payrollId;
-        this.employee = employee;
-        this.salaryDate = salaryDate;
-        this.grossSalary = grossSalary;
-        this.deductions = deductions;
-        this.netSalary = netSalary;
+    public BigDecimal getMedicalExpenses() {
+        return medicalExpenses;
+    }
+
+    public void setMedicalExpenses(BigDecimal medicalExpenses) {
+        this.medicalExpenses = medicalExpenses;
     }
 
     public Payroll() {
+
     }
 }
 

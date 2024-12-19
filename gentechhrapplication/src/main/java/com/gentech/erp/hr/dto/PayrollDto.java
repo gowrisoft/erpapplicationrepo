@@ -18,11 +18,15 @@ public class PayrollDto {
     @NotNull
     private BigDecimal grossSalary;
 
+    private BigDecimal medicalExpenses;
+
     @NotNull
     private BigDecimal deductions;
 
     @NotNull
     private BigDecimal netSalary;
+
+
 
     public Long getPayrollId() {
         return payrollId;
@@ -70,5 +74,13 @@ public class PayrollDto {
 
     public void setNetSalary(BigDecimal netSalary) {
         this.netSalary = netSalary;
+    }
+
+    public BigDecimal getMedicalExpenses() {
+        return medicalExpenses;
+    }
+
+    public void setMedicalExpenses(BigDecimal medicalExpenses) {
+        this.medicalExpenses = medicalExpenses;
     }
 }
