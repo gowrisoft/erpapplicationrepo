@@ -1,5 +1,6 @@
 package com.gentech.erp.hr.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
@@ -16,9 +17,21 @@ public class PayrollDto {
     private LocalDate salaryDate;
 
     @NotNull
-    private BigDecimal grossSalary;
+    private BigDecimal baseSalary;
+
+    @NotNull
+    private BigDecimal allowances;
 
     private BigDecimal medicalExpenses;
+
+    @NotNull
+    private BigDecimal grossSalary;
+
+    @NotNull
+    private BigDecimal tax;
+
+    @NotNull
+    private BigDecimal providentFund;
 
     @NotNull
     private BigDecimal deductions;
@@ -26,7 +39,8 @@ public class PayrollDto {
     @NotNull
     private BigDecimal netSalary;
 
-
+    public PayrollDto() {
+    }
 
     public Long getPayrollId() {
         return payrollId;
@@ -52,12 +66,52 @@ public class PayrollDto {
         this.salaryDate = salaryDate;
     }
 
+    public BigDecimal getBaseSalary() {
+        return baseSalary;
+    }
+
+    public void setBaseSalary(BigDecimal baseSalary) {
+        this.baseSalary = baseSalary;
+    }
+
+    public BigDecimal getAllowances() {
+        return allowances;
+    }
+
+    public void setAllowances(BigDecimal allowances) {
+        this.allowances = allowances;
+    }
+
+    public BigDecimal getMedicalExpenses() {
+        return medicalExpenses;
+    }
+
+    public void setMedicalExpenses(BigDecimal medicalExpenses) {
+        this.medicalExpenses = medicalExpenses;
+    }
+
     public BigDecimal getGrossSalary() {
         return grossSalary;
     }
 
     public void setGrossSalary(BigDecimal grossSalary) {
         this.grossSalary = grossSalary;
+    }
+
+    public BigDecimal getTax() {
+        return tax;
+    }
+
+    public void setTax(BigDecimal tax) {
+        this.tax = tax;
+    }
+
+    public BigDecimal getProvidentFund() {
+        return providentFund;
+    }
+
+    public void setProvidentFund(BigDecimal providentFund) {
+        this.providentFund = providentFund;
     }
 
     public BigDecimal getDeductions() {
@@ -74,13 +128,5 @@ public class PayrollDto {
 
     public void setNetSalary(BigDecimal netSalary) {
         this.netSalary = netSalary;
-    }
-
-    public BigDecimal getMedicalExpenses() {
-        return medicalExpenses;
-    }
-
-    public void setMedicalExpenses(BigDecimal medicalExpenses) {
-        this.medicalExpenses = medicalExpenses;
     }
 }
