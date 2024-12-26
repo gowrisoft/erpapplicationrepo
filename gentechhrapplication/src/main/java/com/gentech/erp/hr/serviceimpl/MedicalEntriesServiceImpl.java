@@ -12,6 +12,7 @@ import com.gentech.erp.hr.repository.MedicalEntriesRepository;
 import com.gentech.erp.hr.service.MedicalEntriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
 
     @Override
     public void saveMedicalEntry(Long empId, Long dependantId,
-                                 String medicalFiles, Double requestAmount) throws IOException {
+                                 MultipartFile medicalFiles, Double requestAmount) throws IOException {
         Employee employee = employeeRepository.findById(empId)
                 .orElseThrow(() -> new RuntimeException("Employee not found with ID: " + empId));
         Dependants dependants = dependantsRepository.findById(dependantId)
@@ -41,7 +42,7 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
         MedicalEntries medicalEntry = new MedicalEntries();
         medicalEntry.setEmployee(employee);
         medicalEntry.setDependants(dependants);
-        medicalEntry.setMedicalFiles(medicalFiles);
+        medicalEntry.setMedicalFiles(medicalFiles.getBytes());
         medicalEntry.setRequestAmount(requestAmount);
 
         medicalEntriesRepository.save(medicalEntry);
@@ -96,4 +97,3 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
 
     }
 }
-
