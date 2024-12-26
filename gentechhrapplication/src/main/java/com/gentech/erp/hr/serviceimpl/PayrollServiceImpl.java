@@ -68,7 +68,6 @@ public class PayrollServiceImpl implements PayrollService {
         payroll.setNetSalary(netSalary);
 
         payrollRepository.save(payroll);
-
         return modelMapper.map(payroll, PayrollDto.class);
     }
 
