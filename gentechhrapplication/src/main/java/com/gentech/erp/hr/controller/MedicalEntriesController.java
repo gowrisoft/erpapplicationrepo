@@ -20,15 +20,14 @@ public class MedicalEntriesController {
 
     @PostMapping("/add")
     public ResponseEntity<String> addMedicalEntry(
+            @RequestParam("MRno") Long MRno,
             @RequestParam("empId") Long empId,
-            @RequestParam("eCard") String eCard,
-            @RequestParam("dependantName") String dependantName,
-            @RequestParam("dependantAge") Integer dependantAge,
-            @RequestParam("medicalFiles") MultipartFile medicalFiles,
+            @RequestParam("dependantId") Long dependantId,
+            @RequestParam("medicalFiles") String medicalFiles,
             @RequestParam("requestAmount") Double requestAmount) {
 
         try {
-            medicalEntriesService.saveMedicalEntry(empId, eCard, dependantName, dependantAge, medicalFiles, requestAmount);
+            medicalEntriesService.saveMedicalEntry(empId, dependantId, medicalFiles, requestAmount);
             return ResponseEntity.status(HttpStatus.CREATED).body("Medical entry saved successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving medical entry: " + e.getMessage());

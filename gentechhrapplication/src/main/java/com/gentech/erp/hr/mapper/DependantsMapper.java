@@ -6,11 +6,9 @@ public class DependantsMapper {
     public static Dependants DtoToObject(DependantsDto dto)
     {
         Dependants obj = new Dependants(
-
+                dto.getDependantId(),
                 dto.getDependantName(),
-                dto.getDependantAge(),
-                dto.getMedicalCard());
-
+                dto.getDependantAge());
         return obj;
     }
     public static DependantsDto ObjectToDto(Dependants obj)
@@ -18,10 +16,7 @@ public class DependantsMapper {
         DependantsDto dto = new DependantsDto(
                 obj.getDependantId(),
                 obj.getDependantName(),
-                obj.getDependantAge(),
-                obj.getMedicalCard());
+                obj.getDependantAge());
         return dto;
     }
 }
-
-

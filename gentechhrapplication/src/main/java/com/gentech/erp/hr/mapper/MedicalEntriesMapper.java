@@ -8,28 +8,22 @@ public class MedicalEntriesMapper {
     {
         MedicalEntries obj = new MedicalEntries(
                 dto.getMRno(),
-                dto.getEmployee(),
-                dto.getMedicalCard(),
-                dto.getDependantName(),
-                dto.getDependantAge(),
+                dto.getDependants(),
                 dto.getMedicalFiles(),
-                dto.getRequestAmount()
+                dto.getRequestAmount(),
+                dto.getEmployee()
         );
         return obj;
     }
 
-    public static MedicalEntriesDto DtoToObject(MedicalEntries dto)
+    public static MedicalEntriesDto ObjectToDto(MedicalEntries obj)
     {
-        MedicalEntriesDto obj = new MedicalEntriesDto(
-                dto.getMRno(),
-                dto.getEmployee(),
-                dto.getMedicalCard(),
-                dto.getDependantName(),
-                dto.getDependantAge(),
-                dto.getMedicalFiles(),
-                dto.getRequestAmount()
-        );
-        return obj;
+        MedicalEntriesDto dto = new MedicalEntriesDto();
+        dto.setMRno(obj.getMRno());
+        dto.setDependants(obj.getDependants());
+        dto.setMedicalFiles(obj.getMedicalFiles());
+        dto.setRequestAmount(obj.getRequestAmount());
+        dto.setEmployee(obj.getEmployee());
+        return dto;
     }
-
 }

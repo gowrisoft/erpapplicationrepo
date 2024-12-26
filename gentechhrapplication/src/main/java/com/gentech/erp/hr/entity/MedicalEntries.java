@@ -3,13 +3,20 @@ package com.gentech.erp.hr.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-@Table(name = "tbl_medicalentry")
 @Entity
 public class MedicalEntries {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long MRno;
 
+    @ManyToOne
+    @JoinColumn(name = "dependants_dependant_id", referencedColumnName = "dependantId")
+    private Dependants dependants;
+
+    private String medicalFiles;
+
+    private Double requestAmount;
 
     @ManyToOne
     @JsonIgnore
@@ -17,31 +24,15 @@ public class MedicalEntries {
     private Employee employee;
 
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "eCard", referencedColumnName = "eCard")
-    private EmployeeMedicalCard medicalCard;
-
-    private String dependantName;
-    private Integer dependantAge;
-
-    @Lob
-    private byte[] medicalFiles;
-
-    private Double requestAmount;
-
     public MedicalEntries() {
     }
 
-    public MedicalEntries(Long MRno, Employee employee, EmployeeMedicalCard medicalCard, String dependantName,
-                          Integer dependantAge, byte[] medicalFiles, Double requestAmount) {
+    public MedicalEntries(Long MRno, Dependants dependants, String medicalFiles, Double requestAmount, Employee employee) {
         this.MRno = MRno;
-        this.employee = employee;
-        this.medicalCard = medicalCard;
-        this.dependantName = dependantName;
-        this.dependantAge = dependantAge;
+        this.dependants = dependants;
         this.medicalFiles = medicalFiles;
         this.requestAmount = requestAmount;
+        this.employee = employee;
     }
 
     public Long getMRno() {
@@ -52,43 +43,19 @@ public class MedicalEntries {
         this.MRno = MRno;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Dependants getDependants() {
+        return dependants;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setDependants(Dependants dependants) {
+        this.dependants = dependants;
     }
 
-    public EmployeeMedicalCard getMedicalCard() {
-        return medicalCard;
-    }
-
-    public void setMedicalCard(EmployeeMedicalCard medicalCard) {
-        this.medicalCard = medicalCard;
-    }
-
-    public String getDependantName() {
-        return dependantName;
-    }
-
-    public void setDependantName(String dependantName) {
-        this.dependantName = dependantName;
-    }
-
-    public Integer getDependantAge() {
-        return dependantAge;
-    }
-
-    public void setDependantAge(Integer dependantAge) {
-        this.dependantAge = dependantAge;
-    }
-
-    public byte[] getMedicalFiles() {
+    public String getMedicalFiles() {
         return medicalFiles;
     }
 
-    public void setMedicalFiles(byte[] medicalFiles) {
+    public void setMedicalFiles(String medicalFiles) {
         this.medicalFiles = medicalFiles;
     }
 
@@ -98,6 +65,14 @@ public class MedicalEntries {
 
     public void setRequestAmount(Double requestAmount) {
         this.requestAmount = requestAmount;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
 

@@ -55,9 +55,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                     employee.setAllowances(updatedEmployee.getAllowances());
                     employee.setDateOfJoining(updatedEmployee.getDateOfJoining());
                     employee.setEmpDesignation(updatedEmployee.getEmpDesignation());
-                    employee.setMedicalCard(updatedEmployee.getMedicalCard());
-                    employee.setMedicalEntries(updatedEmployee.getMedicalEntries());
-                    employee.setSalary(updatedEmployee.getSalary());
 
                     return modelMapper.map(employeeRepository.save(employee), EmployeeDto.class);
                 })

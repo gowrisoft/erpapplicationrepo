@@ -60,29 +60,15 @@ public class Employee{
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CompensatoryLeave> compensatoryLeaveEntities;
 
-	//Medical Records
-
-	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private EmployeeMedicalCard medicalCard;
-
-
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<MedicalEntries> medicalEntries;
-
-
-	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private Salary salary;
-
-
 
 	public Employee() {
 
 	}
 
-	public Employee(long empId, String firstName, String lastName, String email, String phoneNumber, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, String empDesignation, List<LeaveApplication> leaveApplications, List<ModifyLeave> modifyLeaves, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities, EmployeeMedicalCard medicalCard, List<MedicalEntries> medicalEntries, Salary salary) {
+	public Employee(long empId, String firstName, String lastName, String email, String phoneNumber, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, String empDesignation, List<LeaveApplication> leaveApplications, List<ModifyLeave> modifyLeaves, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities, List<MedicalEntries> medicalEntries) {
 		this.empId = empId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -96,13 +82,15 @@ public class Employee{
 		this.modifyLeaves = modifyLeaves;
 		this.leaveLedgers = leaveLedgers;
 		this.compensatoryLeaveEntities = compensatoryLeaveEntities;
-		this.medicalCard = medicalCard;
 		this.medicalEntries = medicalEntries;
-		this.salary = salary;
 	}
 
 	public long getEmpId() {
 		return empId;
+	}
+
+	public void setEmpId(long empId) {
+		this.empId = empId;
 	}
 
 	public String getFirstName() {
@@ -119,10 +107,6 @@ public class Employee{
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public void setEmpId(long empId) {
-		this.empId = empId;
 	}
 
 	public String getEmail() {
@@ -205,27 +189,11 @@ public class Employee{
 		this.compensatoryLeaveEntities = compensatoryLeaveEntities;
 	}
 
-	public EmployeeMedicalCard getMedicalCard() {
-		return medicalCard;
-	}
-
-	public void setMedicalCard(EmployeeMedicalCard medicalCard) {
-		this.medicalCard = medicalCard;
-	}
-
 	public List<MedicalEntries> getMedicalEntries() {
 		return medicalEntries;
 	}
 
 	public void setMedicalEntries(List<MedicalEntries> medicalEntries) {
 		this.medicalEntries = medicalEntries;
-	}
-
-	public Salary getSalary() {
-		return salary;
-	}
-
-	public void setSalary(Salary salary) {
-		this.salary = salary;
 	}
 }

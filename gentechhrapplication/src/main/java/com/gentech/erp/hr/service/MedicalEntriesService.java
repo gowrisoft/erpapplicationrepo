@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface MedicalEntriesService {
 
-    void saveMedicalEntry(Long empId, String eCard, String dependantName, Integer dependantAge, MultipartFile medicalFiles, Double requestAmount) throws IOException;
+    void saveMedicalEntry(Long empId, Long dependantId,
+                          String medicalFiles, Double requestAmount) throws IOException;
 
     List<MedicalEntriesDto> getAllMedicalEntries();
-
 
     MedicalEntriesDto getMedicalEntryByMRno(Long MRno) throws Exception;
 
