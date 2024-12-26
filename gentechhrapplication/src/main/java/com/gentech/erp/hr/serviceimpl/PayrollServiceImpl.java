@@ -2,9 +2,11 @@ package com.gentech.erp.hr.serviceimpl;
 
 
 import com.gentech.erp.hr.dto.PayrollDto;
+import com.gentech.erp.hr.entity.ApprovedMedicalClaim;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.entity.Payroll;
 import com.gentech.erp.hr.exception.ResourceNotFoundException;
+import com.gentech.erp.hr.repository.ApprovedMedicalClaimRepository;
 import com.gentech.erp.hr.repository.EmployeeRepository;
 import com.gentech.erp.hr.repository.PayrollRepository;
 import com.gentech.erp.hr.service.PayrollService;
@@ -27,23 +29,41 @@ public class PayrollServiceImpl implements PayrollService {
     private PayrollRepository payrollRepository;
 
     @Autowired
+    private ApprovedMedicalClaimRepository approvedMedicalClaimRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
-    public PayrollDto calculatePayroll(Long emp_id, LocalDate salaryDate) {
-        Employee employee = employeeRepository.findById(emp_id)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+    public PayrollDto calculatePayroll(Long empId, LocalDate salaryDate) {
+        Employee employee = employeeRepository.findById(empId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + empId));
 
-        BigDecimal grossSalary = employee.getBaseSalary().add(employee.getAllowances());
-        BigDecimal tax = grossSalary.multiply(BigDecimal.valueOf(0.10)); // 10% Tax
-        BigDecimal providentFund = employee.getBaseSalary().multiply(BigDecimal.valueOf(0.05)); // 5% PF
+        BigDecimal baseSalary = employee.getBaseSalary();
+        BigDecimal allowances = employee.getAllowances();
+
+        List<ApprovedMedicalClaim> medicalClaims = approvedMedicalClaimRepository.findByEmployee_EmpId(empId);
+        BigDecimal medicalExpenses = medicalClaims.stream()
+                .map(claim -> BigDecimal.valueOf(claim.getApprovedAmount()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal grossSalary = baseSalary.add(allowances).add(medicalExpenses);
+
+        BigDecimal tax = baseSalary.multiply(BigDecimal.valueOf(0.10)); // 10% Tax only on baseSalary
+        BigDecimal providentFund = baseSalary.multiply(BigDecimal.valueOf(0.05)); // 5% PF
         BigDecimal deductions = tax.add(providentFund);
+
         BigDecimal netSalary = grossSalary.subtract(deductions);
 
         Payroll payroll = new Payroll();
         payroll.setEmployee(employee);
         payroll.setSalaryDate(salaryDate);
+        payroll.setBaseSalary(baseSalary);
+        payroll.setAllowances(allowances);
+        payroll.setMedicalExpenses(medicalExpenses);
         payroll.setGrossSalary(grossSalary);
+        payroll.setTax(tax);
+        payroll.setProvidentFund(providentFund);
         payroll.setDeductions(deductions);
         payroll.setNetSalary(netSalary);
 
@@ -51,6 +71,7 @@ public class PayrollServiceImpl implements PayrollService {
 
         return modelMapper.map(payroll, PayrollDto.class);
     }
+
 
     @Override
     public List<PayrollDto> getPayrollHistory(Long emp_id) {

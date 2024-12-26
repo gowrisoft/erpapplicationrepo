@@ -14,15 +14,14 @@ public class Dependants {
     private String dependantName;
     private Integer dependantAge;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "eCardIdDep", referencedColumnName = "eCard") // Ensure "id" matches the primary key of EmployeeMedicalCard
-    private EmployeeMedicalCard medicalCard;
-
     public Dependants() {
     }
 
-
+    public Dependants(Long dependantId, String dependantName, Integer dependantAge) {
+        this.dependantId = dependantId;
+        this.dependantName = dependantName;
+        this.dependantAge = dependantAge;
+    }
 
     public Long getDependantId() {
         return dependantId;
@@ -47,22 +46,4 @@ public class Dependants {
     public void setDependantAge(Integer dependantAge) {
         this.dependantAge = dependantAge;
     }
-
-    public EmployeeMedicalCard getMedicalCard() {
-        return medicalCard;
-    }
-
-    public void setMedicalCard(EmployeeMedicalCard medicalCard) {
-        this.medicalCard = medicalCard;
-    }
-
-
-
-    public Dependants(String dependantName, Integer dependantAge, EmployeeMedicalCard medicalCard) {
-        super();
-        this.dependantName = dependantName;
-        this.dependantAge = dependantAge;
-        this.medicalCard = medicalCard;
-    }
-
 }

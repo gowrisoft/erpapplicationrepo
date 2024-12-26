@@ -12,7 +12,7 @@ import com.gentech.erp.hr.dto.EmployeeDto;
 import com.gentech.erp.hr.service.EmployeeService;
 
 @RestController
-@RequestMapping("/v1/api")
+@RequestMapping("user/v1/api")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
