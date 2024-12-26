@@ -20,10 +20,9 @@ public class MedicalEntriesController {
 
     @PostMapping("/add")
     public ResponseEntity<String> addMedicalEntry(
-            @RequestParam("MRno") Long MRno,
             @RequestParam("empId") Long empId,
             @RequestParam("dependantId") Long dependantId,
-            @RequestParam("medicalFiles") String medicalFiles,
+            @RequestParam("medicalFiles") MultipartFile medicalFiles,
             @RequestParam("requestAmount") Double requestAmount) {
 
         try {

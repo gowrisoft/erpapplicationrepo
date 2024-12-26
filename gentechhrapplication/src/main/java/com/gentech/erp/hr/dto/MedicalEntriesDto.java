@@ -7,7 +7,7 @@ public class MedicalEntriesDto {
     private Long MRno;
     private Employee employee;
     private Dependants dependants;
-    private String medicalFiles;
+    private byte[] medicalFiles;
     private Double requestAmount;
 
     public MedicalEntriesDto(){
@@ -39,11 +39,11 @@ public class MedicalEntriesDto {
         this.dependants = dependants;
     }
 
-    public String getMedicalFiles() {
+    public byte[] getMedicalFiles() {
         return medicalFiles;
     }
 
-    public void setMedicalFiles(String medicalFiles) {
+    public void setMedicalFiles(byte[] medicalFiles) {
         this.medicalFiles = medicalFiles;
     }
 

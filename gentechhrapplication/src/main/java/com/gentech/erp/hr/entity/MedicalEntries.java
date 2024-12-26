@@ -14,7 +14,8 @@ public class MedicalEntries {
     @JoinColumn(name = "dependants_dependant_id", referencedColumnName = "dependantId")
     private Dependants dependants;
 
-    private String medicalFiles;
+    @Lob
+    private byte[] medicalFiles;
 
     private Double requestAmount;
 
@@ -27,7 +28,7 @@ public class MedicalEntries {
     public MedicalEntries() {
     }
 
-    public MedicalEntries(Long MRno, Dependants dependants, String medicalFiles, Double requestAmount, Employee employee) {
+    public MedicalEntries(Long MRno, Dependants dependants, byte[] medicalFiles, Double requestAmount, Employee employee) {
         this.MRno = MRno;
         this.dependants = dependants;
         this.medicalFiles = medicalFiles;
@@ -51,11 +52,11 @@ public class MedicalEntries {
         this.dependants = dependants;
     }
 
-    public String getMedicalFiles() {
+    public byte[] getMedicalFiles() {
         return medicalFiles;
     }
 
-    public void setMedicalFiles(String medicalFiles) {
+    public void setMedicalFiles(byte[] medicalFiles) {
         this.medicalFiles = medicalFiles;
     }
 
@@ -75,4 +76,3 @@ public class MedicalEntries {
         this.employee = employee;
     }
 }
-
