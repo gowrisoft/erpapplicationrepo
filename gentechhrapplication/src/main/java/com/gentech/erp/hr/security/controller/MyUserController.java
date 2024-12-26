@@ -1,5 +1,6 @@
 package com.gentech.erp.hr.security.controller;
 
+import com.gentech.erp.hr.dto.MyUserDto;
 import com.gentech.erp.hr.security.entity.MyUser;
 import com.gentech.erp.hr.security.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,7 @@ public class MyUserController {
     private MyUserService service;
 
     @PostMapping("/register")
-    public ResponseEntity<MyUser> registerUser(@RequestBody MyUser user) {
-        MyUser registeredUser = service.registerUser(user);
-        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+    public ResponseEntity<MyUserDto> registerUser(@RequestBody MyUserDto user) {
+        return new ResponseEntity<>(service.registerUser(user), HttpStatus.CREATED);
     }
 }

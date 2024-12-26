@@ -37,7 +37,6 @@ public class DependantsController {
         }
     }
 
-
     @PutMapping("/update/{id}")
     public ResponseEntity<DependantsDto> updateByid(@RequestBody  DependantsDto upd,@PathVariable Long id)throws Exception
     {
@@ -53,4 +52,3 @@ public class DependantsController {
     }
 
 }
-
