@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MedicalEntriesService {
 
-    void saveMedicalEntry(Long empId, Long dependantId,
+    void saveMedicalEntry(Long dependantId,
                           MultipartFile medicalFiles, Double requestAmount) throws IOException;
 
     List<MedicalEntriesDto> getAllMedicalEntries();

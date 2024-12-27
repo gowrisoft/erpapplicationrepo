@@ -3,11 +3,9 @@ package com.gentech.erp.hr.serviceimpl;
 
 import com.gentech.erp.hr.dto.MedicalEntriesDto;
 import com.gentech.erp.hr.entity.Dependant;
-import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.entity.MedicalEntries;
 import com.gentech.erp.hr.mapper.MedicalEntriesMapper;
 import com.gentech.erp.hr.repository.DependantsRepository;
-import com.gentech.erp.hr.repository.EmployeeRepository;
 import com.gentech.erp.hr.repository.MedicalEntriesRepository;
 import com.gentech.erp.hr.service.MedicalEntriesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,27 +24,19 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
     private MedicalEntriesRepository medicalEntriesRepository;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
     private DependantsRepository dependantsRepository;
 
     @Override
-    public void saveMedicalEntry(Long empId, Long dependantId,
-                                 MultipartFile medicalFiles, Double requestAmount) throws IOException {
-        Employee employee = employeeRepository.findById(empId)
-                .orElseThrow(() -> new RuntimeException("Employee not found with ID: " + empId));
+    public void saveMedicalEntry(Long dependantId, MultipartFile medicalFiles, Double requestAmount) throws IOException {
         Dependant dependant = dependantsRepository.findById(dependantId)
                 .orElseThrow(() -> new RuntimeException("Dependant not found with ID: " + dependantId));
 
         MedicalEntries medicalEntry = new MedicalEntries();
-        medicalEntry.setEmployee(employee);
         medicalEntry.setDependant(dependant);
         medicalEntry.setMedicalFiles(medicalFiles.getBytes());
         medicalEntry.setRequestAmount(requestAmount);
 
         medicalEntriesRepository.save(medicalEntry);
-
     }
 
     @Override
@@ -76,7 +66,6 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
         if (obj.isPresent()) {
             MedicalEntries n = obj.get();
             n.setDependant(upd.getDependant());
-            n.setEmployee(upd.getEmployee());
             n.setMedicalFiles(upd.getMedicalFiles());
             n.setMRno(upd.getMRno());
             n.setRequestAmount(upd.getRequestAmount());

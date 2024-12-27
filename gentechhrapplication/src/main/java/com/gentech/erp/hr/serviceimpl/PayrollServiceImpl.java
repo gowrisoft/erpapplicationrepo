@@ -42,7 +42,8 @@ public class PayrollServiceImpl implements PayrollService {
         BigDecimal baseSalary = employee.getBaseSalary();
         BigDecimal allowances = employee.getAllowances();
 
-        List<ApprovedMedicalClaim> medicalClaims = approvedMedicalClaimRepository.findByEmployee_EmpId(empId);
+        List<ApprovedMedicalClaim> medicalClaims = approvedMedicalClaimRepository.findByEmployeeEmpId(empId);
+
         BigDecimal medicalExpenses = medicalClaims.stream()
                 .map(claim -> BigDecimal.valueOf(claim.getApprovedAmount()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

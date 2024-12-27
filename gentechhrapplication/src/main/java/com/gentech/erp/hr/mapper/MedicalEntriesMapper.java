@@ -9,8 +9,7 @@ public class MedicalEntriesMapper {
                 dto.getMRno(),
                 dto.getDependant(),
                 dto.getMedicalFiles(),
-                dto.getRequestAmount(),
-                dto.getEmployee()
+                dto.getRequestAmount()
         );
         return obj;
     }
@@ -21,7 +20,6 @@ public class MedicalEntriesMapper {
         dto.setDependant(obj.getDependants());
         dto.setMedicalFiles(obj.getMedicalFiles());
         dto.setRequestAmount(obj.getRequestAmount());
-        dto.setEmployee(obj.getEmployee());
         return dto;
     }
 }

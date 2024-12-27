@@ -1,6 +1,5 @@
 package com.gentech.erp.hr.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,7 +10,7 @@ public class MedicalEntries {
     private Long MRno;
 
     @ManyToOne
-    @JoinColumn(name = "dependants_dependant_id", referencedColumnName = "dependantId")
+    @JoinColumn(name = "dependant_id", referencedColumnName = "dependantId")
     private Dependant dependant;
 
     @Lob
@@ -19,21 +18,14 @@ public class MedicalEntries {
 
     private Double requestAmount;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "empIdMedical", referencedColumnName = "emp_id")
-    private Employee employee;
-
-
     public MedicalEntries() {
     }
 
-    public MedicalEntries(Long MRno, Dependant dependant, byte[] medicalFiles, Double requestAmount, Employee employee) {
+    public MedicalEntries(Long MRno, Dependant dependant, byte[] medicalFiles, Double requestAmount) {
         this.MRno = MRno;
         this.dependant = dependant;
         this.medicalFiles = medicalFiles;
         this.requestAmount = requestAmount;
-        this.employee = employee;
     }
 
     public Long getMRno() {
@@ -68,11 +60,4 @@ public class MedicalEntries {
         this.requestAmount = requestAmount;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 }
