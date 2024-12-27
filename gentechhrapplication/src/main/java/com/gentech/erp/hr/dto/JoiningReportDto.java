@@ -1,10 +1,10 @@
 package com.gentech.erp.hr.dto;
 
 
-import java.sql.Date;
-
 import com.gentech.erp.hr.entity.Employee;
- // Import Employee entity
+
+import java.sql.Date;
+// Import Employee entity
 
 public class JoiningReportDto {
     private Long joiningId;

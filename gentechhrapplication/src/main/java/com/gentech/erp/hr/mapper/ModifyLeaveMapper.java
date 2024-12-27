@@ -6,8 +6,8 @@ import com.gentech.erp.hr.entity.LeaveApplication;
 import com.gentech.erp.hr.entity.ModifyLeave;
 
 public class ModifyLeaveMapper {
-	public static ModifyLeaveDto mapModifyToModifyDto(ModifyLeave modifyLeave){
-        ModifyLeaveDto modifyDto=new ModifyLeaveDto(
+    public static ModifyLeaveDto mapModifyToModifyDto(ModifyLeave modifyLeave) {
+        ModifyLeaveDto modifyDto = new ModifyLeaveDto(
                 modifyLeave.getModifyLeaveId(),
                 modifyLeave.getEmpName(),
                 modifyLeave.getModifiedDate(),
@@ -19,8 +19,9 @@ public class ModifyLeaveMapper {
         );
         return modifyDto;
     }
-    public static ModifyLeave mapModifyDtoToModify(ModifyLeaveDto modifyDto, Employee employee, LeaveApplication leaveApplication){
-        ModifyLeave modifyLeave=new ModifyLeave(
+
+    public static ModifyLeave mapModifyDtoToModify(ModifyLeaveDto modifyDto, Employee employee, LeaveApplication leaveApplication) {
+        ModifyLeave modifyLeave = new ModifyLeave(
                 modifyDto.getModifyLeaveId(),
                 modifyDto.getEmpName(),
                 modifyDto.getModifiedDate(),

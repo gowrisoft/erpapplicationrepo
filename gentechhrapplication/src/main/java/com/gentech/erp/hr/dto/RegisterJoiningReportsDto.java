@@ -11,6 +11,17 @@ public class RegisterJoiningReportsDto {
     private JoiningReport regJoiningId;
     private Admin verifiedByAdminId;
 
+    public RegisterJoiningReportsDto() {
+
+    }
+
+    public RegisterJoiningReportsDto(Long registerId, Date recordDate, JoiningReport regJoiningId, Admin verifiedByAdminId) {
+        this.registerId = registerId;
+        this.recordDate = recordDate;
+        this.regJoiningId = regJoiningId;
+        this.verifiedByAdminId = verifiedByAdminId;
+    }
+
     public JoiningReport getRegJoiningId() {
         return regJoiningId;
     }
@@ -41,16 +52,5 @@ public class RegisterJoiningReportsDto {
 
     public void setRecordDate(Date recordDate) {
         this.recordDate = recordDate;
-    }
-    
-    public RegisterJoiningReportsDto(){
-
-    }
-
-    public RegisterJoiningReportsDto(Long registerId, Date recordDate, JoiningReport regJoiningId, Admin verifiedByAdminId) {
-        this.registerId = registerId;
-        this.recordDate = recordDate;
-        this.regJoiningId = regJoiningId;
-        this.verifiedByAdminId = verifiedByAdminId;
     }
 }

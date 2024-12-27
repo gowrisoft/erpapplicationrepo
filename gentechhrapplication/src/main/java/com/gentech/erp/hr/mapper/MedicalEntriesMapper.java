@@ -4,8 +4,7 @@ import com.gentech.erp.hr.dto.MedicalEntriesDto;
 import com.gentech.erp.hr.entity.MedicalEntries;
 
 public class MedicalEntriesMapper {
-    public static MedicalEntries DtoToObject(MedicalEntriesDto dto)
-    {
+    public static MedicalEntries DtoToObject(MedicalEntriesDto dto) {
         MedicalEntries obj = new MedicalEntries(
                 dto.getMRno(),
                 dto.getDependants(),
@@ -16,8 +15,7 @@ public class MedicalEntriesMapper {
         return obj;
     }
 
-    public static MedicalEntriesDto ObjectToDto(MedicalEntries obj)
-    {
+    public static MedicalEntriesDto ObjectToDto(MedicalEntries obj) {
         MedicalEntriesDto dto = new MedicalEntriesDto();
         dto.setMRno(obj.getMRno());
         dto.setDependants(obj.getDependants());

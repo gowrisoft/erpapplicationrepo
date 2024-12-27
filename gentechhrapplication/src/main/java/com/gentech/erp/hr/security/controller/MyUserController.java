@@ -1,7 +1,6 @@
 package com.gentech.erp.hr.security.controller;
 
 import com.gentech.erp.hr.dto.MyUserDto;
-import com.gentech.erp.hr.security.entity.MyUser;
 import com.gentech.erp.hr.security.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

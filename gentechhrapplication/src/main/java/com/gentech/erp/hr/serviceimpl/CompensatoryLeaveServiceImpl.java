@@ -1,11 +1,5 @@
 package com.gentech.erp.hr.serviceimpl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.gentech.erp.hr.dto.CompensatoryLeaveDto;
 import com.gentech.erp.hr.entity.CompensatoryLeave;
 import com.gentech.erp.hr.entity.Employee;
@@ -14,6 +8,11 @@ import com.gentech.erp.hr.mapper.CompensatoryLeaveMapper;
 import com.gentech.erp.hr.repository.CompensatoryLeaveRepository;
 import com.gentech.erp.hr.repository.EmployeeRepository;
 import com.gentech.erp.hr.service.CompensatoryLeaveService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class CompensatoryLeaveServiceImpl implements CompensatoryLeaveService {
@@ -21,6 +20,7 @@ public class CompensatoryLeaveServiceImpl implements CompensatoryLeaveService {
     private CompensatoryLeaveRepository compensatoryLeaveRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
+
     @Override
     public CompensatoryLeaveDto addCompensatoryLeave(CompensatoryLeaveDto compensatoryLeaveDto) {
         Employee employee = employeeRepository.findById(compensatoryLeaveDto.getEmpId())
@@ -37,14 +37,14 @@ public class CompensatoryLeaveServiceImpl implements CompensatoryLeaveService {
     public List<CompensatoryLeaveDto> getAllCompensatoryLeaves() {
         return compensatoryLeaveRepository.findAll()
                 .stream()
-                .map((compensatoryLeave)->CompensatoryLeaveMapper.mapCompToCompDto(compensatoryLeave))
+                .map((compensatoryLeave) -> CompensatoryLeaveMapper.mapCompToCompDto(compensatoryLeave))
                 .toList();
     }
 
     @Override
     public CompensatoryLeaveDto getAllCompensatoryLeaveById(int id) {
-        CompensatoryLeave compensatoryLeaveEntity=compensatoryLeaveRepository
-                .findById(id).orElseThrow(()->new ResourceNotFoundException("compensatory leave","compensatory leave id",id));
+        CompensatoryLeave compensatoryLeaveEntity = compensatoryLeaveRepository
+                .findById(id).orElseThrow(() -> new ResourceNotFoundException("compensatory leave", "compensatory leave id", id));
 
         return CompensatoryLeaveMapper.mapCompToCompDto(compensatoryLeaveEntity);
     }
@@ -52,13 +52,13 @@ public class CompensatoryLeaveServiceImpl implements CompensatoryLeaveService {
     @Override
     @Transactional
     public String deleteCompensatoryLeaveById(int id) {
-        CompensatoryLeave compensatoryLeaveEntity=compensatoryLeaveRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Compensatory Leave","Compensatory Leave id",id));
+        CompensatoryLeave compensatoryLeaveEntity = compensatoryLeaveRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Compensatory Leave", "Compensatory Leave id", id));
 
-        if(compensatoryLeaveEntity==null){
-            return "Compensatory Leave with compensatory leave id : "+id+" is not found in the database";
+        if (compensatoryLeaveEntity == null) {
+            return "Compensatory Leave with compensatory leave id : " + id + " is not found in the database";
         }
         compensatoryLeaveRepository.deleteById(id);
-        return "Compensatory Leave with compensatory leave id : "+id+" deleted successfully in the database";
+        return "Compensatory Leave with compensatory leave id : " + id + " deleted successfully in the database";
     }
 }

@@ -1,14 +1,14 @@
 package com.gentech.erp.hr.service;
 
-import java.util.List;
-
 import com.gentech.erp.hr.dto.BiometricAttendanceDto;
+
+import java.util.List;
 
 public interface BiometricAttendanceService {
 
 
-	BiometricAttendanceDto createBiometricAttendance(BiometricAttendanceDto biometricattendanceDto);
-	
-	List<BiometricAttendanceDto> getAllBiometricAttendance();
+    BiometricAttendanceDto createBiometricAttendance(BiometricAttendanceDto biometricattendanceDto);
+
+    List<BiometricAttendanceDto> getAllBiometricAttendance();
 
 }

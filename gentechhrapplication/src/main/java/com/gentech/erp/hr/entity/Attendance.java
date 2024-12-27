@@ -1,25 +1,15 @@
 package com.gentech.erp.hr.entity;
 
+import jakarta.persistence.*;
+
 import java.sql.Date;
-
-import com.gentech.erp.hr.entity.Admin;
-import com.gentech.erp.hr.entity.Employee;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tbl_attendance")
 public class Attendance {
 
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "attendance_id")
     private Long attendanceId;
@@ -48,18 +38,17 @@ public class Attendance {
         this.attendanceStatus = attendanceStatus;
     }
 
-    
 
-	public Attendance(Long attendanceId, Date attendanceDate, String attendanceStatus, Admin admin, Employee employee) {
-		super();
-		this.attendanceId = attendanceId;
-		this.attendanceDate = attendanceDate;
-		this.attendanceStatus = attendanceStatus;
-		this.admin = admin;
-		this.employee = employee;
-	}
+    public Attendance(Long attendanceId, Date attendanceDate, String attendanceStatus, Admin admin, Employee employee) {
+        super();
+        this.attendanceId = attendanceId;
+        this.attendanceDate = attendanceDate;
+        this.attendanceStatus = attendanceStatus;
+        this.admin = admin;
+        this.employee = employee;
+    }
 
-	// Getters and Setters
+    // Getters and Setters
     public Long getAttendanceId() {
         return attendanceId;
     }

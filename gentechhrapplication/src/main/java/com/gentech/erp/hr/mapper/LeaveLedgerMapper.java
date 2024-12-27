@@ -7,8 +7,8 @@ import com.gentech.erp.hr.entity.LeaveApplication;
 import com.gentech.erp.hr.entity.LeaveLedger;
 
 public class LeaveLedgerMapper {
-	public static LeaveLedgerDto mapLedgerToLedgerDto(LeaveLedger leaveLedger){
-        LeaveLedgerDto leaveLedgerDto=new LeaveLedgerDto(
+    public static LeaveLedgerDto mapLedgerToLedgerDto(LeaveLedger leaveLedger) {
+        LeaveLedgerDto leaveLedgerDto = new LeaveLedgerDto(
                 leaveLedger.getLedgerId(),
                 leaveLedger.getLeaveAccrued(),
                 leaveLedger.getDate(),
@@ -24,21 +24,22 @@ public class LeaveLedgerMapper {
         );
         return leaveLedgerDto;
     }
-	public static LeaveLedger mapLedgerDtoToLedger(LeaveLedgerDto leaveLedgerDto, Employee employee, LeaveApplication leaveApplication,CompensatoryLeave compensatoryLeaveEntity){
-	    LeaveLedger leaveLedger=new LeaveLedger(
-	            leaveLedgerDto.getLedgerId(),
-	            leaveLedgerDto.getLeaveAccrued(),
-	            leaveLedgerDto.getDate(),
-	            leaveLedgerDto.getLeaveType(),
-	            leaveLedgerDto.getLeaveUsed(),
-	            leaveLedgerDto.getLeaveBalance(),
-	            leaveLedgerDto.getRemarks(),
-	            leaveLedgerDto.getStatus(),
-	            leaveLedgerDto.getProcessedBy(),
-	            employee,
-	            leaveApplication,
-	            compensatoryLeaveEntity
-	    );
-	    return leaveLedger;
-	}
+
+    public static LeaveLedger mapLedgerDtoToLedger(LeaveLedgerDto leaveLedgerDto, Employee employee, LeaveApplication leaveApplication, CompensatoryLeave compensatoryLeaveEntity) {
+        LeaveLedger leaveLedger = new LeaveLedger(
+                leaveLedgerDto.getLedgerId(),
+                leaveLedgerDto.getLeaveAccrued(),
+                leaveLedgerDto.getDate(),
+                leaveLedgerDto.getLeaveType(),
+                leaveLedgerDto.getLeaveUsed(),
+                leaveLedgerDto.getLeaveBalance(),
+                leaveLedgerDto.getRemarks(),
+                leaveLedgerDto.getStatus(),
+                leaveLedgerDto.getProcessedBy(),
+                employee,
+                leaveApplication,
+                compensatoryLeaveEntity
+        );
+        return leaveLedger;
+    }
 }

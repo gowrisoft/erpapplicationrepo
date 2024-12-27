@@ -1,22 +1,15 @@
 package com.gentech.erp.hr.entity;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tbl_biometric_punching_report")
 public class BiometricPunchingReport {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "report_id")
     private Integer reportId;
@@ -55,31 +48,31 @@ public class BiometricPunchingReport {
 
     // Removed redundant empCode
     public BiometricPunchingReport() {
-    	
+
     }
-    
+
+    public BiometricPunchingReport(Integer reportId, Employee employee, String empName, LocalDate date,
+                                   LocalTime timeIn, LocalTime timeOut, Integer numOfPunches, String location, String designation,
+                                   BiometricAttendance biometricAttendance) {
+        super();
+        this.reportId = reportId;
+        this.employee = employee;
+        this.empName = empName;
+        this.date = date;
+        this.timeIn = timeIn;
+        this.timeOut = timeOut;
+        this.numOfPunches = numOfPunches;
+        this.location = location;
+        this.designation = designation;
+        this.biometricAttendance = biometricAttendance;
+    }
+
     // Getters and Setters
     public Integer getReportId() {
         return reportId;
     }
 
-    public BiometricPunchingReport(Integer reportId, Employee employee, String empName, LocalDate date,
-			LocalTime timeIn, LocalTime timeOut, Integer numOfPunches, String location, String designation,
-			BiometricAttendance biometricAttendance) {
-		super();
-		this.reportId = reportId;
-		this.employee = employee;
-		this.empName = empName;
-		this.date = date;
-		this.timeIn = timeIn;
-		this.timeOut = timeOut;
-		this.numOfPunches = numOfPunches;
-		this.location = location;
-		this.designation = designation;
-		this.biometricAttendance = biometricAttendance;
-	}
-
-	public void setReportId(Integer reportId) {
+    public void setReportId(Integer reportId) {
         this.reportId = reportId;
     }
 

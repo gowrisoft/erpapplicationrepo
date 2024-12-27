@@ -26,12 +26,11 @@ public class ContentController {
 
     @PostMapping("/authenticate")
     public String authenticateAndGetToken(@RequestBody LoginForm loginForm) {
-        Authentication authentication=authenticationManager.authenticate(
+        Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginForm.username(), loginForm.password()));
-        if(authentication.isAuthenticated()) {
+        if (authentication.isAuthenticated()) {
             return jwtService.generateToken(myUserDetailsService.loadUserByUsername(loginForm.username()));
-        }
-        else {
+        } else {
             throw new UsernameNotFoundException("Invalid Credentails!!!");
         }
     }

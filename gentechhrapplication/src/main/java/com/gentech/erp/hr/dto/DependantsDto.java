@@ -5,7 +5,7 @@ public class DependantsDto {
     private String dependantName;
     private Integer dependantAge;
 
-    public DependantsDto(){
+    public DependantsDto() {
 
     }
 

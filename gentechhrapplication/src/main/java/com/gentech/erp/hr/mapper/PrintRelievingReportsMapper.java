@@ -1,9 +1,10 @@
 package com.gentech.erp.hr.mapper;
+
 import com.gentech.erp.hr.dto.PrintRelievingReportsDto;
 import com.gentech.erp.hr.entity.PrintRelievingReports;
 
 public class PrintRelievingReportsMapper {
-    public static PrintRelievingReportsDto mapPrintRelToPrintRelDto(PrintRelievingReports printRelievingReports){
+    public static PrintRelievingReportsDto mapPrintRelToPrintRelDto(PrintRelievingReports printRelievingReports) {
         PrintRelievingReportsDto printRelievingReportsDto = new PrintRelievingReportsDto(
                 printRelievingReports.getPrintId(),
                 printRelievingReports.getStatus(),
@@ -14,7 +15,7 @@ public class PrintRelievingReportsMapper {
         return printRelievingReportsDto;
     }
 
-    public static PrintRelievingReports mapPrintRelDtoToPrintRel(PrintRelievingReportsDto printRelievingReportsDto){
+    public static PrintRelievingReports mapPrintRelDtoToPrintRel(PrintRelievingReportsDto printRelievingReportsDto) {
         PrintRelievingReports printRelievingReports = new PrintRelievingReports(
                 printRelievingReportsDto.getPrintId(),
                 printRelievingReportsDto.getPrintDate(),

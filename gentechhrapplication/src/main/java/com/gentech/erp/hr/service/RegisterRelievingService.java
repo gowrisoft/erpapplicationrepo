@@ -1,13 +1,13 @@
 package com.gentech.erp.hr.service;
 
-import java.util.List;
-
 import com.gentech.erp.hr.dto.RegisterRelievingReportsDto;
+
+import java.util.List;
 
 public interface RegisterRelievingService {
 
     RegisterRelievingReportsDto createRegisterReport(RegisterRelievingReportsDto registerDto);
-	
-	List<RegisterRelievingReportsDto> getAllRegisterReports();
-	
+
+    List<RegisterRelievingReportsDto> getAllRegisterReports();
+
 }

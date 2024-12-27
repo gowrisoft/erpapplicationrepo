@@ -16,12 +16,11 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class JwtService {
-    private static final String secret="09C9CAD1E5F2EAD707158862AE481C8FB3ACB79257B09E25520D0E03F8C813B2310A6ACA1F9F1F2D892CA9AC30E5DE05A210704F7C55DFF5B0BA3486508AF4EA";
-    private static final long validity= TimeUnit.MINUTES.toMillis(30);
+    private static final String secret = "09C9CAD1E5F2EAD707158862AE481C8FB3ACB79257B09E25520D0E03F8C813B2310A6ACA1F9F1F2D892CA9AC30E5DE05A210704F7C55DFF5B0BA3486508AF4EA";
+    private static final long validity = TimeUnit.MINUTES.toMillis(30);
 
-    public String generateToken(UserDetails userDetails)
-    {
-        Map<String,String> claims=new HashMap<>();
+    public String generateToken(UserDetails userDetails) {
+        Map<String, String> claims = new HashMap<>();
         claims.put("issuer", "https://www.gentechacademy.com");
 
         return Jwts.builder()
@@ -33,14 +32,13 @@ public class JwtService {
                 .compact();
     }
 
-    public SecretKey generateKey()
-    {
-        byte[] decodedKey= Base64.getDecoder().decode(secret);
+    public SecretKey generateKey() {
+        byte[] decodedKey = Base64.getDecoder().decode(secret);
         return Keys.hmacShaKeyFor(decodedKey);
     }
 
     public String extractUser(String jwt) {
-        Claims claims=Jwts.parser()
+        Claims claims = Jwts.parser()
                 .verifyWith(generateKey())
                 .build()
                 .parseSignedClaims(jwt)
@@ -50,7 +48,7 @@ public class JwtService {
 
     public boolean isTokenValid(String jwt) {
         try {
-            Claims claims=Jwts.parser()
+            Claims claims = Jwts.parser()
                     .verifyWith(generateKey())
                     .build()
                     .parseSignedClaims(jwt)

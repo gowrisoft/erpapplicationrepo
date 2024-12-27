@@ -7,8 +7,8 @@ import com.gentech.erp.hr.entity.ModifyLeave;
 import com.gentech.erp.hr.entity.SanctionLeave;
 
 public class LeaveApplicationMapper {
-    public static LeaveApplicationDto mapLeaveToLeaveDto(LeaveApplication leaveApplication){
-        LeaveApplicationDto leaveDto=new LeaveApplicationDto(
+    public static LeaveApplicationDto mapLeaveToLeaveDto(LeaveApplication leaveApplication) {
+        LeaveApplicationDto leaveDto = new LeaveApplicationDto(
                 leaveApplication.getLeaveRequestId(),
                 leaveApplication.getStartDate(),
                 leaveApplication.getEndDate(),
@@ -19,8 +19,9 @@ public class LeaveApplicationMapper {
         );
         return leaveDto;
     }
-    public static LeaveApplication mapLeaveDtoToLeave(LeaveApplicationDto leaveDto, Employee employee, ModifyLeave modifyLeave, SanctionLeave sanctionLeave){
-        LeaveApplication leaveApplication=new LeaveApplication(
+
+    public static LeaveApplication mapLeaveDtoToLeave(LeaveApplicationDto leaveDto, Employee employee, ModifyLeave modifyLeave, SanctionLeave sanctionLeave) {
+        LeaveApplication leaveApplication = new LeaveApplication(
                 leaveDto.getLeaveRequestId(),
                 leaveDto.getStartDate(),
                 leaveDto.getEndDate(),

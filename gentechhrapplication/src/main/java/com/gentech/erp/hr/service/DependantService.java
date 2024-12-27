@@ -14,7 +14,6 @@ public interface DependantService {
     DependantsDto getDependantById(Long dependantId) throws Exception;
 
 
-
     DependantsDto updateItem(DependantsDto upd, Long id) throws Exception;
 
     void deleteItemById(Long id);

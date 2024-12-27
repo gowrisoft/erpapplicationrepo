@@ -12,6 +12,17 @@ public class RegisterRelievingReportsDto {
     private Admin verifiedByAdminId;
 
 
+    public RegisterRelievingReportsDto() {
+
+    }
+
+    public RegisterRelievingReportsDto(Long registerId, Date recordDate, RelievingReport regRelievingId, Admin verifiedByAdminId) {
+        this.registerId = registerId;
+        this.recordDate = recordDate;
+        this.regRelievingId = regRelievingId;
+        this.verifiedByAdminId = verifiedByAdminId;
+    }
+
     public RelievingReport getRegRelievingId() {
         return regRelievingId;
     }
@@ -42,17 +53,5 @@ public class RegisterRelievingReportsDto {
 
     public void setRecordDate(Date recordDate) {
         this.recordDate = recordDate;
-    }
-    
-
-    public RegisterRelievingReportsDto(){
-
-    }
-
-    public RegisterRelievingReportsDto(Long registerId, Date recordDate, RelievingReport regRelievingId, Admin verifiedByAdminId) {
-        this.registerId = registerId;
-        this.recordDate = recordDate;
-        this.regRelievingId = regRelievingId;
-        this.verifiedByAdminId = verifiedByAdminId;
     }
 }

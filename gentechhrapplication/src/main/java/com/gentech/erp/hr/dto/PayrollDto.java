@@ -1,6 +1,5 @@
 package com.gentech.erp.hr.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;

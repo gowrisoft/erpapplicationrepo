@@ -10,8 +10,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
-public class MyUserDetailsService implements UserDetailsService{
+public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private MyUserRepository repository;
@@ -19,27 +20,23 @@ public class MyUserDetailsService implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<MyUser> user=repository.findByUsername(username);
-        MyUser existingUser=user.get();
-        if(user.isPresent())
-        {
+        Optional<MyUser> user = repository.findByUsername(username);
+        MyUser existingUser = user.get();
+        if (user.isPresent()) {
             return User.builder()
                     .username(existingUser.getUsername())
                     .password(existingUser.getPassword())
                     .roles(getRoles(existingUser))
                     .build();
-        }
-        else
-        {
-            throw new UsernameNotFoundException("The User "+username+" has not found in database");
+        } else {
+            throw new UsernameNotFoundException("The User " + username + " has not found in database");
         }
     }
 
-    public String[] getRoles(MyUser user)
-    {
-        if(user.getRole()==null) {
-            return new String[] {"USER"};
-        }else {
+    public String[] getRoles(MyUser user) {
+        if (user.getRole() == null) {
+            return new String[]{"USER"};
+        } else {
             return user.getRole().split(",");
         }
     }
