@@ -2,7 +2,6 @@ package com.gentech.erp.hr.controller;
 
 
 import com.gentech.erp.hr.dto.PayrollDto;
-import com.gentech.erp.hr.entity.Payroll;
 import com.gentech.erp.hr.service.PayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/payroll")
+@RequestMapping("/home/api/payroll")
 public class PayrollController {
 
     @Autowired
@@ -27,12 +26,12 @@ public class PayrollController {
 
     @GetMapping("/history/{employeeId}")
     public ResponseEntity<List<PayrollDto>> getPayrollHistory(@PathVariable Long employeeId) {
-        return ResponseEntity.ok(payrollService.getPayrollHistory(employeeId));
+        return ResponseEntity.ok(payrollService.getPayrollByEmpId(employeeId));
     }
 
     @PostMapping
-    public ResponseEntity<PayrollDto> createPayroll(@RequestParam Long employeeId, @RequestBody Payroll payroll) {
-        return ResponseEntity.ok(payrollService.createPayroll(employeeId, payroll));
+    public ResponseEntity<PayrollDto> createPayroll(@RequestBody PayrollDto payrollDto) {
+        return ResponseEntity.ok(payrollService.createPayroll(payrollDto));
     }
 
     @GetMapping("/all")

@@ -12,7 +12,7 @@ public class MedicalEntries {
 
     @ManyToOne
     @JoinColumn(name = "dependants_dependant_id", referencedColumnName = "dependantId")
-    private Dependants dependants;
+    private Dependant dependant;
 
     @Lob
     private byte[] medicalFiles;
@@ -28,9 +28,9 @@ public class MedicalEntries {
     public MedicalEntries() {
     }
 
-    public MedicalEntries(Long MRno, Dependants dependants, byte[] medicalFiles, Double requestAmount, Employee employee) {
+    public MedicalEntries(Long MRno, Dependant dependant, byte[] medicalFiles, Double requestAmount, Employee employee) {
         this.MRno = MRno;
-        this.dependants = dependants;
+        this.dependant = dependant;
         this.medicalFiles = medicalFiles;
         this.requestAmount = requestAmount;
         this.employee = employee;
@@ -44,12 +44,12 @@ public class MedicalEntries {
         this.MRno = MRno;
     }
 
-    public Dependants getDependants() {
-        return dependants;
+    public Dependant getDependants() {
+        return dependant;
     }
 
-    public void setDependants(Dependants dependants) {
-        this.dependants = dependants;
+    public void setDependant(Dependant dependant) {
+        this.dependant = dependant;
     }
 
     public byte[] getMedicalFiles() {

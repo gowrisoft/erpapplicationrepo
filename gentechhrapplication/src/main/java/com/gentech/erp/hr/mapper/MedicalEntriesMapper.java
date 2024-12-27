@@ -7,7 +7,7 @@ public class MedicalEntriesMapper {
     public static MedicalEntries DtoToObject(MedicalEntriesDto dto) {
         MedicalEntries obj = new MedicalEntries(
                 dto.getMRno(),
-                dto.getDependants(),
+                dto.getDependant(),
                 dto.getMedicalFiles(),
                 dto.getRequestAmount(),
                 dto.getEmployee()
@@ -18,7 +18,7 @@ public class MedicalEntriesMapper {
     public static MedicalEntriesDto ObjectToDto(MedicalEntries obj) {
         MedicalEntriesDto dto = new MedicalEntriesDto();
         dto.setMRno(obj.getMRno());
-        dto.setDependants(obj.getDependants());
+        dto.setDependant(obj.getDependants());
         dto.setMedicalFiles(obj.getMedicalFiles());
         dto.setRequestAmount(obj.getRequestAmount());
         dto.setEmployee(obj.getEmployee());

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin/api/medical-approval")
-public class MedicalApproval {
+public class MedicalApprovalController {
 
     @Autowired
     private MedicalApprovalService medicalApprovalService;

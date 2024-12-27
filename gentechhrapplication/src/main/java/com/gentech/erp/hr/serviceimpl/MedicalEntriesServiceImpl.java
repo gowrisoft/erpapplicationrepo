@@ -2,7 +2,7 @@ package com.gentech.erp.hr.serviceimpl;
 
 
 import com.gentech.erp.hr.dto.MedicalEntriesDto;
-import com.gentech.erp.hr.entity.Dependants;
+import com.gentech.erp.hr.entity.Dependant;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.entity.MedicalEntries;
 import com.gentech.erp.hr.mapper.MedicalEntriesMapper;
@@ -36,12 +36,12 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
                                  MultipartFile medicalFiles, Double requestAmount) throws IOException {
         Employee employee = employeeRepository.findById(empId)
                 .orElseThrow(() -> new RuntimeException("Employee not found with ID: " + empId));
-        Dependants dependants = dependantsRepository.findById(dependantId)
+        Dependant dependant = dependantsRepository.findById(dependantId)
                 .orElseThrow(() -> new RuntimeException("Dependant not found with ID: " + dependantId));
 
         MedicalEntries medicalEntry = new MedicalEntries();
         medicalEntry.setEmployee(employee);
-        medicalEntry.setDependants(dependants);
+        medicalEntry.setDependant(dependant);
         medicalEntry.setMedicalFiles(medicalFiles.getBytes());
         medicalEntry.setRequestAmount(requestAmount);
 
@@ -75,7 +75,7 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
         Optional<MedicalEntries> obj = medicalEntriesRepository.findById(id);
         if (obj.isPresent()) {
             MedicalEntries n = obj.get();
-            n.setDependants(upd.getDependants());
+            n.setDependant(upd.getDependant());
             n.setEmployee(upd.getEmployee());
             n.setMedicalFiles(upd.getMedicalFiles());
             n.setMRno(upd.getMRno());

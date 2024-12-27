@@ -1,12 +1,12 @@
 package com.gentech.erp.hr.dto;
 
-import com.gentech.erp.hr.entity.Dependants;
+import com.gentech.erp.hr.entity.Dependant;
 import com.gentech.erp.hr.entity.Employee;
 
 public class MedicalEntriesDto {
     private Long MRno;
     private Employee employee;
-    private Dependants dependants;
+    private Dependant dependant;
     private byte[] medicalFiles;
     private Double requestAmount;
 
@@ -31,12 +31,12 @@ public class MedicalEntriesDto {
     }
 
 
-    public Dependants getDependants() {
-        return dependants;
+    public Dependant getDependant() {
+        return dependant;
     }
 
-    public void setDependants(Dependants dependants) {
-        this.dependants = dependants;
+    public void setDependant(Dependant dependants) {
+        this.dependant = dependants;
     }
 
     public byte[] getMedicalFiles() {
