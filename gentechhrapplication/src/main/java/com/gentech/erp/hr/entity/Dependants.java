@@ -1,6 +1,5 @@
 package com.gentech.erp.hr.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Table(name = "tbl_dependents")

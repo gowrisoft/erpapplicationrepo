@@ -10,7 +10,7 @@ public class MedicalEntriesDto {
     private byte[] medicalFiles;
     private Double requestAmount;
 
-    public MedicalEntriesDto(){
+    public MedicalEntriesDto() {
 
     }
 

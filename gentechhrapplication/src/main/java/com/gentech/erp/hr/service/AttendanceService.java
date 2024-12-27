@@ -1,13 +1,13 @@
 package com.gentech.erp.hr.service;
 
-import java.util.List;
-
 import com.gentech.erp.hr.dto.AttendanceDto;
+
+import java.util.List;
 
 public interface AttendanceService {
 
-	AttendanceDto createAttendance(AttendanceDto attendanceDto);
-	
-	List<AttendanceDto> getAllAttendance();
+    AttendanceDto createAttendance(AttendanceDto attendanceDto);
+
+    List<AttendanceDto> getAllAttendance();
 
 }

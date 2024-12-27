@@ -28,7 +28,7 @@ public class DependantsController {
     }
 
     @GetMapping("/{dependantId}")
-    public ResponseEntity<DependantsDto> getDependantById(@PathVariable Long dependantId) throws Exception{
+    public ResponseEntity<DependantsDto> getDependantById(@PathVariable Long dependantId) throws Exception {
         DependantsDto dependant = depService.getDependantById(dependantId);
         if (dependant != null) {
             return ResponseEntity.ok(dependant);
@@ -38,17 +38,15 @@ public class DependantsController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<DependantsDto> updateByid(@RequestBody  DependantsDto upd,@PathVariable Long id)throws Exception
-    {
+    public ResponseEntity<DependantsDto> updateByid(@RequestBody DependantsDto upd, @PathVariable Long id) throws Exception {
         upd.setDependantId(id);
-        return new ResponseEntity<DependantsDto>(depService.updateItem(upd,id), HttpStatusCode.valueOf(200));
+        return new ResponseEntity<DependantsDto>(depService.updateItem(upd, id), HttpStatusCode.valueOf(200));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteItem(@PathVariable Long id)
-    {
+    public ResponseEntity<String> deleteItem(@PathVariable Long id) {
         depService.deleteItemById(id);
-        return new ResponseEntity<String>("Item with Id "+id+" was successfully deleted",HttpStatusCode.valueOf(200));
+        return new ResponseEntity<String>("Item with Id " + id + " was successfully deleted", HttpStatusCode.valueOf(200));
     }
 
 }

@@ -1,13 +1,14 @@
 package com.gentech.erp.hr.service;
 
-import java.util.List;
 import com.gentech.erp.hr.dto.PrintJoiningReportsDto;
+
+import java.util.List;
 
 
 public interface PrintJoiningReportsService {
-	
-	PrintJoiningReportsDto createPrintReports(PrintJoiningReportsDto printDto);
-	
-	List<PrintJoiningReportsDto> getAllPrintReportss();
+
+    PrintJoiningReportsDto createPrintReports(PrintJoiningReportsDto printDto);
+
+    List<PrintJoiningReportsDto> getAllPrintReportss();
 
 }

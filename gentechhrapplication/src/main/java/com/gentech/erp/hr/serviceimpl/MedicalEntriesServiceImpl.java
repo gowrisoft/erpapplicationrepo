@@ -51,20 +51,18 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
 
     @Override
     public List<MedicalEntriesDto> getAllMedicalEntries() {
-        List<MedicalEntries> obj=medicalEntriesRepository.findAll();
-        List<MedicalEntriesDto> objDto= new ArrayList<>();
-        for(int i=0;i<obj.size();i++)
-        {
+        List<MedicalEntries> obj = medicalEntriesRepository.findAll();
+        List<MedicalEntriesDto> objDto = new ArrayList<>();
+        for (int i = 0; i < obj.size(); i++) {
             objDto.add(MedicalEntriesMapper.ObjectToDto(obj.get(i)));
         }
         return objDto;
     }
 
     @Override
-    public MedicalEntriesDto getMedicalEntryByMRno(Long MRno) throws Exception{
-        Optional<MedicalEntries> obj= medicalEntriesRepository.findById(MRno);
-        if(obj.isPresent())
-        {
+    public MedicalEntriesDto getMedicalEntryByMRno(Long MRno) throws Exception {
+        Optional<MedicalEntries> obj = medicalEntriesRepository.findById(MRno);
+        if (obj.isPresent()) {
             MedicalEntriesDto dto = MedicalEntriesMapper.ObjectToDto(obj.get());
             return dto;
 
@@ -73,10 +71,9 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
     }
 
     @Override
-    public MedicalEntriesDto updateItem(MedicalEntriesDto upd, Long id) throws Exception{
-        Optional<MedicalEntries> obj=medicalEntriesRepository.findById(id);
-        if(obj.isPresent())
-        {
+    public MedicalEntriesDto updateItem(MedicalEntriesDto upd, Long id) throws Exception {
+        Optional<MedicalEntries> obj = medicalEntriesRepository.findById(id);
+        if (obj.isPresent()) {
             MedicalEntries n = obj.get();
             n.setDependants(upd.getDependants());
             n.setEmployee(upd.getEmployee());
@@ -85,7 +82,7 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
             n.setRequestAmount(upd.getRequestAmount());
 
             medicalEntriesRepository.save(n);
-            upd=MedicalEntriesMapper.ObjectToDto(n);
+            upd = MedicalEntriesMapper.ObjectToDto(n);
             return upd;
         }
         throw new Exception("The item is not present");

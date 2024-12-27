@@ -1,23 +1,16 @@
 package com.gentech.erp.hr.entity;
 
+import jakarta.persistence.*;
+
 import java.sql.Date;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tbl_print_joining_report")
-public class PrintJoiningReports{
+public class PrintJoiningReports {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+
     @Column(name = "print_id")
     private Long printId;
 
@@ -27,72 +20,72 @@ public class PrintJoiningReports{
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "print_joining_id", referencedColumnName = "joining_id")
     private JoiningReport printJoiningId;
-    
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "print_admin_id", referencedColumnName = "admin_id")
     private Admin printadminId;
-    
+
     @Column(name = "status")
     private String status;
-    
+
     public PrintJoiningReports() {
-    	
+
     }
-    
-	public PrintJoiningReports(Date printDate, JoiningReport printJoiningId, Admin printadminId, String status) {
-		super();
-		this.printDate = printDate;
-		this.printJoiningId = printJoiningId;
-		this.printadminId = printadminId;
-		this.status = status;
-	}
 
-	public PrintJoiningReports(Long printId, Date printDate, JoiningReport printJoiningId, Admin printadminId, String status) {
-		this.printId = printId;
-		this.printDate = printDate;
-		this.printJoiningId = printJoiningId;
-		this.printadminId = printadminId;
-		this.status = status;
-	}
-	
-	public Long getPrintId() {
-		return printId;
-	}
+    public PrintJoiningReports(Date printDate, JoiningReport printJoiningId, Admin printadminId, String status) {
+        super();
+        this.printDate = printDate;
+        this.printJoiningId = printJoiningId;
+        this.printadminId = printadminId;
+        this.status = status;
+    }
 
-	public void setPrintId(Long printId) {
-		this.printId = printId;
-	}
+    public PrintJoiningReports(Long printId, Date printDate, JoiningReport printJoiningId, Admin printadminId, String status) {
+        this.printId = printId;
+        this.printDate = printDate;
+        this.printJoiningId = printJoiningId;
+        this.printadminId = printadminId;
+        this.status = status;
+    }
 
-	public Date getPrintDate() {
-		return printDate;
-	}
+    public Long getPrintId() {
+        return printId;
+    }
 
-	public void setPrintDate(Date printDate) {
-		this.printDate = printDate;
-	}
+    public void setPrintId(Long printId) {
+        this.printId = printId;
+    }
 
-	public JoiningReport getPrintJoiningId() {
-		return printJoiningId;
-	}
+    public Date getPrintDate() {
+        return printDate;
+    }
 
-	public void setPrintJoiningId(JoiningReport printJoiningId) {
-		this.printJoiningId = printJoiningId;
-	}
+    public void setPrintDate(Date printDate) {
+        this.printDate = printDate;
+    }
 
-	public Admin getPrintadminId() {
-		return printadminId;
-	}
+    public JoiningReport getPrintJoiningId() {
+        return printJoiningId;
+    }
 
-	public void setPrintadminId(Admin printadminId) {
-		this.printadminId = printadminId;
-	}
+    public void setPrintJoiningId(JoiningReport printJoiningId) {
+        this.printJoiningId = printJoiningId;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public Admin getPrintadminId() {
+        return printadminId;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setPrintadminId(Admin printadminId) {
+        this.printadminId = printadminId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
 }

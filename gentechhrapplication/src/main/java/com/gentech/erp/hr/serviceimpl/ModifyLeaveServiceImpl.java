@@ -1,12 +1,5 @@
 package com.gentech.erp.hr.serviceimpl;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.gentech.erp.hr.dto.ModifyLeaveDto;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.entity.LeaveApplication;
@@ -17,6 +10,12 @@ import com.gentech.erp.hr.repository.EmployeeRepository;
 import com.gentech.erp.hr.repository.LeaveApplicationRepository;
 import com.gentech.erp.hr.repository.ModifyLeaveRepository;
 import com.gentech.erp.hr.service.ModifyLeaveService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ModifyLeaveServiceImpl implements ModifyLeaveService {
@@ -26,17 +25,18 @@ public class ModifyLeaveServiceImpl implements ModifyLeaveService {
     private LeaveApplicationRepository leaveRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
+
     @Override
     public ModifyLeaveDto addModifyLeave(ModifyLeaveDto modifyDto) {
-        Employee employeeEntity=employeeRepository.findById(modifyDto.getEmpId()).
-                orElseThrow(()->new RuntimeException("Employee with Employee Id : "+modifyDto.getEmpId()+" is not found"));
+        Employee employeeEntity = employeeRepository.findById(modifyDto.getEmpId()).
+                orElseThrow(() -> new RuntimeException("Employee with Employee Id : " + modifyDto.getEmpId() + " is not found"));
 
-        LeaveApplication leaveApplication=leaveRepository.findById(modifyDto.getLeaveRequestId()).
-                orElseThrow(()->new RuntimeException("The LeaveApplication with id "+modifyDto.getLeaveRequestId()+" is not found"));
+        LeaveApplication leaveApplication = leaveRepository.findById(modifyDto.getLeaveRequestId()).
+                orElseThrow(() -> new RuntimeException("The LeaveApplication with id " + modifyDto.getLeaveRequestId() + " is not found"));
 
-        ModifyLeave modifyLeave= ModifyLeaveMapper.mapModifyDtoToModify(modifyDto,employeeEntity,leaveApplication);
+        ModifyLeave modifyLeave = ModifyLeaveMapper.mapModifyDtoToModify(modifyDto, employeeEntity, leaveApplication);
         modifyRepository.save(modifyLeave);
-        ModifyLeaveDto modifyDto1=ModifyLeaveMapper.mapModifyToModifyDto(modifyLeave);
+        ModifyLeaveDto modifyDto1 = ModifyLeaveMapper.mapModifyToModifyDto(modifyLeave);
         return modifyDto1;
     }
 
@@ -44,14 +44,14 @@ public class ModifyLeaveServiceImpl implements ModifyLeaveService {
     public List<ModifyLeaveDto> getAllModifiedLeaves() {
         return modifyRepository.findAll()
                 .stream()
-                .map((modifyleave)->ModifyLeaveMapper.mapModifyToModifyDto(modifyleave))
+                .map((modifyleave) -> ModifyLeaveMapper.mapModifyToModifyDto(modifyleave))
                 .toList();
     }
 
     @Override
     public ModifyLeaveDto getModifyLeaveById(int id) {
-        ModifyLeave modifyLeave=modifyRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Modify Leave","Modify leave id",id));
+        ModifyLeave modifyLeave = modifyRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Modify Leave", "Modify leave id", id));
 
         return ModifyLeaveMapper.mapModifyToModifyDto(modifyLeave);
     }

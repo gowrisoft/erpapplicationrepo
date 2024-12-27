@@ -1,9 +1,8 @@
 package com.gentech.erp.hr.repository;
 
+import com.gentech.erp.hr.entity.Attendance;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.gentech.erp.hr.entity.Attendance;
-
-public interface AttendanceRepository extends JpaRepository<Attendance,Long>{
+public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
 
 }

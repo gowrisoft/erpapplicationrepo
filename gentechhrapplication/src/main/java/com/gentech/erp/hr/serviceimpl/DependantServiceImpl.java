@@ -22,26 +22,24 @@ public class DependantServiceImpl implements DependantService {
     public DependantsDto saveDependant(DependantsDto dep) {
         Dependants obj = DependantsMapper.DtoToObject(dep);
         repo.save(obj);
-        dep=DependantsMapper.ObjectToDto(obj);
+        dep = DependantsMapper.ObjectToDto(obj);
         return dep;
     }
 
     @Override
     public List<DependantsDto> getAllDependant() {
-        List<Dependants> obj=repo.findAll();
-        List<DependantsDto> menuDto= new ArrayList<>();
-        for(int i=0;i<obj.size();i++)
-        {
+        List<Dependants> obj = repo.findAll();
+        List<DependantsDto> menuDto = new ArrayList<>();
+        for (int i = 0; i < obj.size(); i++) {
             menuDto.add(DependantsMapper.ObjectToDto(obj.get(i)));
         }
         return menuDto;
     }
 
     @Override
-    public DependantsDto getDependantById(Long dependantId) throws Exception  {
-        Optional<Dependants> obj= repo.findById(dependantId);
-        if(obj.isPresent())
-        {
+    public DependantsDto getDependantById(Long dependantId) throws Exception {
+        Optional<Dependants> obj = repo.findById(dependantId);
+        if (obj.isPresent()) {
             DependantsDto dto = DependantsMapper.ObjectToDto(obj.get());
             return dto;
 
@@ -51,17 +49,16 @@ public class DependantServiceImpl implements DependantService {
 
 
     @Override
-    public DependantsDto updateItem(DependantsDto upd, Long id)  throws Exception{
-        Optional<Dependants> obj=repo.findById(id);
-        if(obj.isPresent())
-        {
+    public DependantsDto updateItem(DependantsDto upd, Long id) throws Exception {
+        Optional<Dependants> obj = repo.findById(id);
+        if (obj.isPresent()) {
             Dependants n = obj.get();
             n.setDependantId(upd.getDependantId());
             n.setDependantAge(upd.getDependantAge());
             n.setDependantName(upd.getDependantName());
 
             repo.save(n);
-            upd=DependantsMapper.ObjectToDto(n);
+            upd = DependantsMapper.ObjectToDto(n);
             return upd;
         }
         throw new Exception("The item is not present");

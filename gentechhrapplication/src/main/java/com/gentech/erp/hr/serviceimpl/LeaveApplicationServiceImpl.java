@@ -1,10 +1,5 @@
 package com.gentech.erp.hr.serviceimpl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.gentech.erp.hr.dto.LeaveApplicationDto;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.entity.LeaveApplication;
@@ -16,6 +11,10 @@ import com.gentech.erp.hr.repository.EmployeeRepository;
 import com.gentech.erp.hr.repository.LeaveApplicationRepository;
 import com.gentech.erp.hr.repository.ModifyLeaveRepository;
 import com.gentech.erp.hr.service.LeaveApplicationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class LeaveApplicationServiceImpl implements LeaveApplicationService {
@@ -27,47 +26,48 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 
     @Autowired
     private ModifyLeaveRepository modifyRepository;
+
     @Override
     public LeaveApplicationDto addLeave(LeaveApplicationDto leaveDto) {
-        Employee employeeEntity= employeeRepository.findById(leaveDto.getEmpId()).
-                orElseThrow(()->new RuntimeException("Employee not found with ID: " + leaveDto.getEmpId()));
+        Employee employeeEntity = employeeRepository.findById(leaveDto.getEmpId()).
+                orElseThrow(() -> new RuntimeException("Employee not found with ID: " + leaveDto.getEmpId()));
         ModifyLeave modifyLeave = null;
         if (leaveDto.getLeaveRequestId() != 0 && leaveDto.getLeaveRequestId() > 0) {
             modifyLeave = modifyRepository.findById(leaveDto.getLeaveRequestId())
                     .orElseThrow(() -> new RuntimeException("The LeaveApplication with id " + leaveDto.getLeaveRequestId() + " is not found"));
         }
-        SanctionLeave sanctionLeave=null;
-        LeaveApplication leaveApplication=LeaveApplicationMapper.mapLeaveDtoToLeave(leaveDto,employeeEntity,modifyLeave,sanctionLeave);
+        SanctionLeave sanctionLeave = null;
+        LeaveApplication leaveApplication = LeaveApplicationMapper.mapLeaveDtoToLeave(leaveDto, employeeEntity, modifyLeave, sanctionLeave);
         leaveRepository.save(leaveApplication);
-        LeaveApplicationDto leaveDto1=LeaveApplicationMapper.mapLeaveToLeaveDto(leaveApplication);
+        LeaveApplicationDto leaveDto1 = LeaveApplicationMapper.mapLeaveToLeaveDto(leaveApplication);
         return leaveDto1;
     }
 
     @Override
     public List<LeaveApplicationDto> getAllLeaves() {
-        List<LeaveApplication> leaveApplications=leaveRepository.findAll();
+        List<LeaveApplication> leaveApplications = leaveRepository.findAll();
         return leaveApplications.stream().
-                map((leaves)->LeaveApplicationMapper.mapLeaveToLeaveDto(leaves))
+                map((leaves) -> LeaveApplicationMapper.mapLeaveToLeaveDto(leaves))
                 .toList();
     }
 
     @Override
     public LeaveApplicationDto getLeaveById(int id) {
-        LeaveApplication leaveApplication=leaveRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Leave application","leave id",id));
+        LeaveApplication leaveApplication = leaveRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Leave application", "leave id", id));
 
         return LeaveApplicationMapper.mapLeaveToLeaveDto(leaveApplication);
     }
 
     @Override
     public String deleteLeaveById(int id) {
-        LeaveApplication leaveApplication=leaveRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Leave Application","Leave id",id));
+        LeaveApplication leaveApplication = leaveRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Leave Application", "Leave id", id));
 
-        if(leaveApplication==null){
-            return "Leave Application with Leave id : "+id+" is not found in the database";
+        if (leaveApplication == null) {
+            return "Leave Application with Leave id : " + id + " is not found in the database";
         }
         leaveRepository.deleteById(id);
-        return "Leave Application with Leave id : "+id+" is successfully deleted in the database";
+        return "Leave Application with Leave id : " + id + " is successfully deleted in the database";
     }
 }

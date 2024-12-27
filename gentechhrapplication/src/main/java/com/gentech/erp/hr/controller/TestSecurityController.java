@@ -7,20 +7,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestSecurityController {
 
     @GetMapping("/home")
-    public String handleHomePage()
-    {
+    public String handleHomePage() {
         return "Home Page has displayed Successfully";
     }
 
     @GetMapping("/user")
-    public String handleUserHomePage()
-    {
+    public String handleUserHomePage() {
         return "The User Home Page has displayed Successfully";
     }
 
     @GetMapping("/admin")
-    public String handleAdminHomePage()
-    {
+    public String handleAdminHomePage() {
         return "The Admin Home Page has displayed Successfully";
     }
 }

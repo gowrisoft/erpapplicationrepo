@@ -1,7 +1,9 @@
 package com.gentech.erp.hr.dto;
-import java.sql.Date;
 
 import com.gentech.erp.hr.entity.Employee;
+
+import java.sql.Date;
+
 public class RelievingReportDto {
     private Long relievingId;
     private String empName;
@@ -10,6 +12,20 @@ public class RelievingReportDto {
     private String reason;
     private String status;
     private Date relievingDate;
+
+    public RelievingReportDto() {
+
+    }
+
+    public RelievingReportDto(Long relievingId, String empName, String designation, Employee relievingEmployee, String reason, String status, Date relievingDate) {
+        this.relievingId = relievingId;
+        this.empName = empName;
+        this.designation = designation;
+        this.relievingEmployee = relievingEmployee;
+        this.reason = reason;
+        this.status = status;
+        this.relievingDate = relievingDate;
+    }
 
     public Long getRelievingId() {
         return relievingId;
@@ -64,19 +80,6 @@ public class RelievingReportDto {
     }
 
     public void setRelievingDate(Date relievingDate) {
-        this.relievingDate = relievingDate;
-    }
-    
-    public RelievingReportDto(){
-
-    }
-    public RelievingReportDto(Long relievingId, String empName, String designation, Employee relievingEmployee, String reason, String status, Date relievingDate) {
-        this.relievingId = relievingId;
-        this.empName = empName;
-        this.designation = designation;
-        this.relievingEmployee = relievingEmployee;
-        this.reason = reason;
-        this.status = status;
         this.relievingDate = relievingDate;
     }
 }

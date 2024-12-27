@@ -4,8 +4,8 @@ import com.gentech.erp.hr.dto.JoiningReportDto;
 import com.gentech.erp.hr.entity.JoiningReport;
 
 public class JoiningReportMapper {
-    public static JoiningReportDto mapJoinToJoinDto(JoiningReport joiningReport){
-        JoiningReportDto joiningReportDto=new JoiningReportDto(
+    public static JoiningReportDto mapJoinToJoinDto(JoiningReport joiningReport) {
+        JoiningReportDto joiningReportDto = new JoiningReportDto(
                 joiningReport.getJoiningId(),
                 joiningReport.getEmpName(),
                 joiningReport.getDesignation(),
@@ -13,12 +13,13 @@ public class JoiningReportMapper {
                 joiningReport.getJoiningDate(),
                 joiningReport.getJoiningEmployee(),
                 joiningReport.getReportingManagerId()
-                
+
         );
         return joiningReportDto;//here order of DTO layer matters
     }
-    public static JoiningReport mapJoinDtoToJoin(JoiningReportDto joiningReportDto){
-        JoiningReport joiningReport=new JoiningReport(
+
+    public static JoiningReport mapJoinDtoToJoin(JoiningReportDto joiningReportDto) {
+        JoiningReport joiningReport = new JoiningReport(
                 joiningReportDto.getJoiningId(),
                 joiningReportDto.getEmpName(),
                 joiningReportDto.getDesignation(),

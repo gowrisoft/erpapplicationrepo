@@ -1,14 +1,13 @@
 package com.gentech.erp.hr.service;
 
-import java.util.List;
-
 import com.gentech.erp.hr.dto.BiometricPunchingReportDto;
-import com.gentech.erp.hr.entity.BiometricPunchingReport;
+
+import java.util.List;
 
 public interface BiometricPunchingReportService {
 
-	BiometricPunchingReportDto createBiometricPunchingReport(BiometricPunchingReportDto biometricpunchingreportDto);
-	
-	List<BiometricPunchingReportDto> getAllBiometricPunchingReport();
+    BiometricPunchingReportDto createBiometricPunchingReport(BiometricPunchingReportDto biometricpunchingreportDto);
+
+    List<BiometricPunchingReportDto> getAllBiometricPunchingReport();
 
 }

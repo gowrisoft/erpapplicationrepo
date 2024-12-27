@@ -45,18 +45,15 @@ public class MedicalEntriesController {
     }
 
 
-
     @PutMapping("/update/{id}")
-    public ResponseEntity<MedicalEntriesDto> updateByid(@RequestBody  MedicalEntriesDto upd,@PathVariable Long id) throws Exception
-    {
+    public ResponseEntity<MedicalEntriesDto> updateByid(@RequestBody MedicalEntriesDto upd, @PathVariable Long id) throws Exception {
         upd.setMRno(id);
-        return new ResponseEntity<MedicalEntriesDto>(medicalEntriesService.updateItem(upd,id), HttpStatusCode.valueOf(200));
+        return new ResponseEntity<MedicalEntriesDto>(medicalEntriesService.updateItem(upd, id), HttpStatusCode.valueOf(200));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteItem(@PathVariable Long id)
-    {
+    public ResponseEntity<String> deleteItem(@PathVariable Long id) {
         medicalEntriesService.deleteItemById(id);
-        return new ResponseEntity<String>("Item with Id "+id+" was successfully deleted",HttpStatusCode.valueOf(200));
+        return new ResponseEntity<String>("Item with Id " + id + " was successfully deleted", HttpStatusCode.valueOf(200));
     }
 }

@@ -1,10 +1,10 @@
 package com.gentech.erp.hr.dto;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import com.gentech.erp.hr.entity.BiometricAttendance;
 import com.gentech.erp.hr.entity.Employee;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class BiometricPunchingReportDto {
     private Integer reportId;
@@ -17,115 +17,108 @@ public class BiometricPunchingReportDto {
     private String location;
     private String designation;
     private BiometricAttendance biometricAttendance;
-    
+
     public BiometricPunchingReportDto() {
-    	
+
     }
-    
-    
-
-	public BiometricPunchingReportDto(Integer reportId, Employee employee, String empName, LocalDate date,
-			LocalTime timeIn, LocalTime timeOut, Integer numOfPunches, String location, String designation,
-			BiometricAttendance biometricAttendance) {
-		super();
-		this.reportId = reportId;
-		this.employee = employee;
-		this.empName = empName;
-		this.date = date;
-		this.timeIn = timeIn;
-		this.timeOut = timeOut;
-		this.numOfPunches = numOfPunches;
-		this.location = location;
-		this.designation = designation;
-		this.biometricAttendance = biometricAttendance;
-	}
 
 
+    public BiometricPunchingReportDto(Integer reportId, Employee employee, String empName, LocalDate date,
+                                      LocalTime timeIn, LocalTime timeOut, Integer numOfPunches, String location, String designation,
+                                      BiometricAttendance biometricAttendance) {
+        super();
+        this.reportId = reportId;
+        this.employee = employee;
+        this.empName = empName;
+        this.date = date;
+        this.timeIn = timeIn;
+        this.timeOut = timeOut;
+        this.numOfPunches = numOfPunches;
+        this.location = location;
+        this.designation = designation;
+        this.biometricAttendance = biometricAttendance;
+    }
 
-	public Integer getReportId() {
-		return reportId;
-	}
 
-	public void setReportId(Integer reportId) {
-		this.reportId = reportId;
-	}
+    public Integer getReportId() {
+        return reportId;
+    }
 
-	public Employee getEmployee() {
-		return employee;
-	}
+    public void setReportId(Integer reportId) {
+        this.reportId = reportId;
+    }
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
+    public Employee getEmployee() {
+        return employee;
+    }
 
-	public String getEmpName() {
-		return empName;
-	}
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
+    public String getEmpName() {
+        return empName;
+    }
 
-	public LocalDate getDate() {
-		return date;
-	}
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
 
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
+    public LocalDate getDate() {
+        return date;
+    }
 
-	public LocalTime getTimeIn() {
-		return timeIn;
-	}
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
-	public void setTimeIn(LocalTime timeIn) {
-		this.timeIn = timeIn;
-	}
+    public LocalTime getTimeIn() {
+        return timeIn;
+    }
 
-	public LocalTime getTimeOut() {
-		return timeOut;
-	}
+    public void setTimeIn(LocalTime timeIn) {
+        this.timeIn = timeIn;
+    }
 
-	public void setTimeOut(LocalTime timeOut) {
-		this.timeOut = timeOut;
-	}
+    public LocalTime getTimeOut() {
+        return timeOut;
+    }
 
-	public Integer getNumOfPunches() {
-		return numOfPunches;
-	}
+    public void setTimeOut(LocalTime timeOut) {
+        this.timeOut = timeOut;
+    }
 
-	public void setNumOfPunches(Integer numOfPunches) {
-		this.numOfPunches = numOfPunches;
-	}
+    public Integer getNumOfPunches() {
+        return numOfPunches;
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public void setNumOfPunches(Integer numOfPunches) {
+        this.numOfPunches = numOfPunches;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    public String getLocation() {
+        return location;
+    }
 
-	public String getDesignation() {
-		return designation;
-	}
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
+    public String getDesignation() {
+        return designation;
+    }
 
-	public BiometricAttendance getBiometricAttendance() {
-		return biometricAttendance;
-	}
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
 
-	public void setBiometricAttendance(BiometricAttendance biometricAttendance) {
-		this.biometricAttendance = biometricAttendance;
-	}
+    public BiometricAttendance getBiometricAttendance() {
+        return biometricAttendance;
+    }
 
-    
-    
-	
-    
-    
-    
+    public void setBiometricAttendance(BiometricAttendance biometricAttendance) {
+        this.biometricAttendance = biometricAttendance;
+    }
+
+
 }

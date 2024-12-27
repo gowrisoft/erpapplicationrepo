@@ -1,11 +1,9 @@
 package com.gentech.erp.hr.repository;
 
+import com.gentech.erp.hr.entity.RegisterRelievingReports;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-import com.gentech.erp.hr.entity.RegisterRelievingReports;
-
-
-public interface RegisterRelievingRepository extends JpaRepository<RegisterRelievingReports,Long> {
+public interface RegisterRelievingRepository extends JpaRepository<RegisterRelievingReports, Long> {
 
 }

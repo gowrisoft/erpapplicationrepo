@@ -1,11 +1,5 @@
 package com.gentech.erp.hr.serviceimpl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.gentech.erp.hr.dto.SanctionLeaveDto;
 import com.gentech.erp.hr.entity.Admin;
 import com.gentech.erp.hr.entity.LeaveApplication;
@@ -16,6 +10,11 @@ import com.gentech.erp.hr.repository.AdminRepository;
 import com.gentech.erp.hr.repository.LeaveApplicationRepository;
 import com.gentech.erp.hr.repository.SanctionLeaveRepository;
 import com.gentech.erp.hr.service.SanctionLeaveService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class SanctionLeaveServiceImpl implements SanctionLeaveService {
@@ -25,17 +24,18 @@ public class SanctionLeaveServiceImpl implements SanctionLeaveService {
     private AdminRepository adminRepository;
     @Autowired
     private SanctionLeaveRepository sanctionLeaveRepository;
+
     @Override
     public SanctionLeaveDto addSanctionLeave(SanctionLeaveDto sanctionLeaveDto) {
-        LeaveApplication leaveApplication=leaveRepository.findById(sanctionLeaveDto.getLeaveRequestId()).
-                orElseThrow(()->new ResourceNotFoundException("Reservation","Id",sanctionLeaveDto.getSanctionId()));
+        LeaveApplication leaveApplication = leaveRepository.findById(sanctionLeaveDto.getLeaveRequestId()).
+                orElseThrow(() -> new ResourceNotFoundException("Reservation", "Id", sanctionLeaveDto.getSanctionId()));
 
-        Admin admin=adminRepository.findById(sanctionLeaveDto.getAdminId()).
-                orElseThrow(()->new ResourceNotFoundException("Reservation","Id",sanctionLeaveDto.getAdminId()));
+        Admin admin = adminRepository.findById(sanctionLeaveDto.getAdminId()).
+                orElseThrow(() -> new ResourceNotFoundException("Reservation", "Id", sanctionLeaveDto.getAdminId()));
 
-        SanctionLeave sanctionLeave= SanctionLeaveMapper.mapSancDtoToSanc(sanctionLeaveDto,leaveApplication,admin);
+        SanctionLeave sanctionLeave = SanctionLeaveMapper.mapSancDtoToSanc(sanctionLeaveDto, leaveApplication, admin);
         sanctionLeaveRepository.save(sanctionLeave);
-        SanctionLeaveDto sanctionLeaveDto1=SanctionLeaveMapper.mapSancToSancDto(sanctionLeave);
+        SanctionLeaveDto sanctionLeaveDto1 = SanctionLeaveMapper.mapSancToSancDto(sanctionLeave);
         return sanctionLeaveDto1;
     }
 
@@ -43,14 +43,14 @@ public class SanctionLeaveServiceImpl implements SanctionLeaveService {
     public List<SanctionLeaveDto> getALlSanctionedLeaves() {
         return sanctionLeaveRepository.findAll()
                 .stream()
-                .map((sanctionedLeave)->SanctionLeaveMapper.mapSancToSancDto(sanctionedLeave))
+                .map((sanctionedLeave) -> SanctionLeaveMapper.mapSancToSancDto(sanctionedLeave))
                 .toList();
     }
 
     @Override
     public SanctionLeaveDto getSanctionLeaveById(int id) {
-        SanctionLeave sanctionLeave=sanctionLeaveRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Sanction Leave","sanction leave id",id));
+        SanctionLeave sanctionLeave = sanctionLeaveRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Sanction Leave", "sanction leave id", id));
 
         return SanctionLeaveMapper.mapSancToSancDto(sanctionLeave);
     }
@@ -58,21 +58,21 @@ public class SanctionLeaveServiceImpl implements SanctionLeaveService {
     @Override
     @Transactional
     public String deleteSanctionLeaveById(int id) {
-        SanctionLeave sanctionLeave=sanctionLeaveRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Sanction Leave","Sanction Leave id",id));
-        if(sanctionLeave==null){
-            return "Sanction leave with sanction id : "+id+" is not found in the database";
+        SanctionLeave sanctionLeave = sanctionLeaveRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Sanction Leave", "Sanction Leave id", id));
+        if (sanctionLeave == null) {
+            return "Sanction leave with sanction id : " + id + " is not found in the database";
         }
-        LeaveApplication leaveApplication=sanctionLeave.getLeaveApplication();
-        if(leaveApplication!=null){
+        LeaveApplication leaveApplication = sanctionLeave.getLeaveApplication();
+        if (leaveApplication != null) {
             leaveApplication.setSanctionLeave(null);
         }
-        Admin admin=sanctionLeave.getAdmin();
-        if(admin!=null){
+        Admin admin = sanctionLeave.getAdmin();
+        if (admin != null) {
             admin.getSanctionLeaves().remove(sanctionLeave);
         }
         sanctionLeaveRepository.delete(sanctionLeave);
-        return "Sanction leave with sanction id : "+id+" is successfully deleted in the database";
+        return "Sanction leave with sanction id : " + id + " is successfully deleted in the database";
     }
 }
 

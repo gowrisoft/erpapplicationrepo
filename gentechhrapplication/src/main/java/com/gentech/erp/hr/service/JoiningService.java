@@ -1,12 +1,13 @@
 package com.gentech.erp.hr.service;
 
-import java.util.List;
 import com.gentech.erp.hr.dto.JoiningReportDto;
 
+import java.util.List;
+
 public interface JoiningService {
-	
-	JoiningReportDto createJoiningReport(JoiningReportDto joiningDto);
-	
-	List<JoiningReportDto> getAllJoiningReports();
-	
+
+    JoiningReportDto createJoiningReport(JoiningReportDto joiningDto);
+
+    List<JoiningReportDto> getAllJoiningReports();
+
 }

@@ -26,22 +26,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        String authHeader=request.getHeader("Authorization");
-        if(authHeader==null || !authHeader.startsWith("Bearer "))
-        {
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        String jwt=authHeader.substring(7);
-        String username=jwtService.extractUser(jwt);
+        String jwt = authHeader.substring(7);
+        String username = jwtService.extractUser(jwt);
 
-        if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null)
-        {
-            UserDetails userDetials=myUserDetailsService.loadUserByUsername(username);
-            if(userDetials!=null && jwtService.isTokenValid(jwt))
-            {
-                UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetials = myUserDetailsService.loadUserByUsername(username);
+            if (userDetials != null && jwtService.isTokenValid(jwt)) {
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         username,
                         userDetials.getPassword(),
                         userDetials.getAuthorities()
