@@ -20,13 +20,12 @@ public class MedicalEntriesController {
 
     @PostMapping("/add")
     public ResponseEntity<String> addMedicalEntry(
-            @RequestParam("empId") Long empId,
             @RequestParam("dependantId") Long dependantId,
             @RequestParam("medicalFiles") MultipartFile medicalFiles,
             @RequestParam("requestAmount") Double requestAmount) {
 
         try {
-            medicalEntriesService.saveMedicalEntry(empId, dependantId, medicalFiles, requestAmount);
+            medicalEntriesService.saveMedicalEntry(dependantId, medicalFiles, requestAmount);
             return ResponseEntity.status(HttpStatus.CREATED).body("Medical entry saved successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving medical entry: " + e.getMessage());
@@ -48,7 +47,7 @@ public class MedicalEntriesController {
     @PutMapping("/update/{id}")
     public ResponseEntity<MedicalEntriesDto> updateByid(@RequestBody MedicalEntriesDto upd, @PathVariable Long id) throws Exception {
         upd.setMRno(id);
-        return new ResponseEntity<MedicalEntriesDto>(medicalEntriesService.updateItem(upd, id), HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(medicalEntriesService.updateItem(upd, id), HttpStatusCode.valueOf(200));
     }
 
     @DeleteMapping("/delete/{id}")

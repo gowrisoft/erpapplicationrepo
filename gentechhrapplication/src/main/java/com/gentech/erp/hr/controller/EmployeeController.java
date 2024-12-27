@@ -10,33 +10,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("user/v1/api")
+@RequestMapping("home/v1/api")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @PostMapping("/addEmployee")
+    @PostMapping("/Employee")
     ResponseEntity<EmployeeDto> addEmployee(@RequestBody EmployeeDto employeeDto) {
         return new ResponseEntity<>(employeeService.addEmployee(employeeDto), HttpStatus.OK);
     }
 
-    @GetMapping("/allEmployees")
+    @GetMapping("/Employees")
     ResponseEntity<List<EmployeeDto>> getAllEmployees() {
         return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
     }
 
-    @GetMapping("/getEmployeeById")
-    ResponseEntity<EmployeeDto> getEmployeeById(@RequestParam long id) {
+    @GetMapping("Employee/{id}")
+    ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable long id) {
         return new ResponseEntity<>(employeeService.getEmployeeById(id), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("Employee/{id}")
     public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDto updatedEmployee) {
         return ResponseEntity.ok(employeeService.updateEmployee(id, updatedEmployee));
     }
 
-    @DeleteMapping("/deleteEmployeeById")
-    ResponseEntity<String> deleteEmployeeById(@RequestParam long id) {
+    @DeleteMapping("Employee/{id}")
+    ResponseEntity<String> deleteEmployeeById(@PathVariable long id) {
         return new ResponseEntity<>(employeeService.deleteEmployeeById(id), HttpStatus.OK);
     }
 }

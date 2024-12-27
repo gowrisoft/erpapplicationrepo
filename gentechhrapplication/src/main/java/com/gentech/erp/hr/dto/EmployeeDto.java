@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class EmployeeDto {
-    private long empId;
+    private long employeeId;
 
     @NotNull(message = "First name cannot be null")
     @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
@@ -44,12 +44,12 @@ public class EmployeeDto {
     public EmployeeDto() {
     }
 
-    public long getEmpId() {
-        return empId;
+    public long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmpId(long empId) {
-        this.empId = empId;
+    public void setEmployeeId(long employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getFirstName() {

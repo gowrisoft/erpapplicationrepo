@@ -11,11 +11,11 @@ public interface PayrollService {
 
     PayrollDto calculatePayroll(Long employeeId, LocalDate salaryDate);
 
-    List<PayrollDto> getPayrollHistory(Long employeeId);
+    List<PayrollDto> getPayrollByEmpId(Long employeeId);
 
     List<PayrollDto> getAllPayrolls();
 
-    PayrollDto createPayroll(Long employeeId, Payroll payroll);
+    PayrollDto createPayroll(PayrollDto payroll);
 
     PayrollDto getPayrollById(Long id);
 

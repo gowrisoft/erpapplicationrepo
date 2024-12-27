@@ -1,6 +1,5 @@
 package com.gentech.erp.hr.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,29 +10,22 @@ public class MedicalEntries {
     private Long MRno;
 
     @ManyToOne
-    @JoinColumn(name = "dependants_dependant_id", referencedColumnName = "dependantId")
-    private Dependants dependants;
+    @JoinColumn(name = "dependant_id", referencedColumnName = "dependantId")
+    private Dependant dependant;
 
     @Lob
     private byte[] medicalFiles;
 
     private Double requestAmount;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "empIdMedical", referencedColumnName = "emp_id")
-    private Employee employee;
-
-
     public MedicalEntries() {
     }
 
-    public MedicalEntries(Long MRno, Dependants dependants, byte[] medicalFiles, Double requestAmount, Employee employee) {
+    public MedicalEntries(Long MRno, Dependant dependant, byte[] medicalFiles, Double requestAmount) {
         this.MRno = MRno;
-        this.dependants = dependants;
+        this.dependant = dependant;
         this.medicalFiles = medicalFiles;
         this.requestAmount = requestAmount;
-        this.employee = employee;
     }
 
     public Long getMRno() {
@@ -44,12 +36,12 @@ public class MedicalEntries {
         this.MRno = MRno;
     }
 
-    public Dependants getDependants() {
-        return dependants;
+    public Dependant getDependants() {
+        return dependant;
     }
 
-    public void setDependants(Dependants dependants) {
-        this.dependants = dependants;
+    public void setDependant(Dependant dependant) {
+        this.dependant = dependant;
     }
 
     public byte[] getMedicalFiles() {
@@ -68,11 +60,4 @@ public class MedicalEntries {
         this.requestAmount = requestAmount;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 }

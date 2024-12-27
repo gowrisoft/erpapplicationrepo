@@ -15,20 +15,15 @@ public class ApprovedMedicalClaim {
     @JoinColumn(name = "MRno", referencedColumnName = "MRno", nullable = false)
     private MedicalEntries medicalEntry;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee;
-
     @Column(nullable = false)
     private Double approvedAmount;
 
     @Column(nullable = false)
     private LocalDate approvalDate;
 
-    public ApprovedMedicalClaim(Long claimId, MedicalEntries medicalEntry, Employee employee, Double approvedAmount, LocalDate approvalDate) {
+    public ApprovedMedicalClaim(Long claimId, MedicalEntries medicalEntry, Double approvedAmount, LocalDate approvalDate) {
         this.claimId = claimId;
         this.medicalEntry = medicalEntry;
-        this.employee = employee;
         this.approvedAmount = approvedAmount;
         this.approvalDate = approvalDate;
     }
@@ -50,14 +45,6 @@ public class ApprovedMedicalClaim {
 
     public void setMedicalEntry(MedicalEntries medicalEntry) {
         this.medicalEntry = medicalEntry;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     public Double getApprovedAmount() {

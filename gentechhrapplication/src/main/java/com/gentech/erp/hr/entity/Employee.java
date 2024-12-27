@@ -1,6 +1,5 @@
 package com.gentech.erp.hr.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -49,7 +48,6 @@ public class Employee {
 
     private String empDesignation;
 
-
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LeaveApplication> leaveApplications;
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -59,15 +57,11 @@ public class Employee {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CompensatoryLeave> compensatoryLeaveEntities;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<MedicalEntries> medicalEntries;
-
     public Employee() {
 
     }
 
-    public Employee(long empId, String firstName, String lastName, String email, String phoneNumber, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, String empDesignation, List<LeaveApplication> leaveApplications, List<ModifyLeave> modifyLeaves, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities, List<MedicalEntries> medicalEntries) {
+    public Employee(long empId, String firstName, String lastName, String email, String phoneNumber, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, String empDesignation, List<LeaveApplication> leaveApplications, List<ModifyLeave> modifyLeaves, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities) {
         this.empId = empId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -81,7 +75,6 @@ public class Employee {
         this.modifyLeaves = modifyLeaves;
         this.leaveLedgers = leaveLedgers;
         this.compensatoryLeaveEntities = compensatoryLeaveEntities;
-        this.medicalEntries = medicalEntries;
     }
 
     public long getEmpId() {
@@ -186,13 +179,5 @@ public class Employee {
 
     public void setCompensatoryLeaveEntities(List<CompensatoryLeave> compensatoryLeaveEntities) {
         this.compensatoryLeaveEntities = compensatoryLeaveEntities;
-    }
-
-    public List<MedicalEntries> getMedicalEntries() {
-        return medicalEntries;
-    }
-
-    public void setMedicalEntries(List<MedicalEntries> medicalEntries) {
-        this.medicalEntries = medicalEntries;
     }
 }

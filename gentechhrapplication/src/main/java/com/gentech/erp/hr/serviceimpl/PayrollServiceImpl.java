@@ -42,7 +42,8 @@ public class PayrollServiceImpl implements PayrollService {
         BigDecimal baseSalary = employee.getBaseSalary();
         BigDecimal allowances = employee.getAllowances();
 
-        List<ApprovedMedicalClaim> medicalClaims = approvedMedicalClaimRepository.findByEmployee_EmpId(empId);
+        List<ApprovedMedicalClaim> medicalClaims = approvedMedicalClaimRepository.findByEmployeeEmpId(empId);
+
         BigDecimal medicalExpenses = medicalClaims.stream()
                 .map(claim -> BigDecimal.valueOf(claim.getApprovedAmount()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -73,8 +74,7 @@ public class PayrollServiceImpl implements PayrollService {
 
 
     @Override
-    public List<PayrollDto> getPayrollHistory(Long emp_id) {
-
+    public List<PayrollDto> getPayrollByEmpId(Long emp_id) {
         return payrollRepository.findByEmployee_EmpId(emp_id)
                 .stream().map(payroll -> modelMapper.map(payroll, PayrollDto.class)).collect(Collectors.toList());
     }
@@ -86,9 +86,10 @@ public class PayrollServiceImpl implements PayrollService {
     }
 
     @Override
-    public PayrollDto createPayroll(Long emp_id, Payroll payroll) {
-        Employee employee = employeeRepository.findById(emp_id)
+    public PayrollDto createPayroll(PayrollDto payrollDto) {
+        Employee employee = employeeRepository.findById(payrollDto.getEmployeeId())
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+        Payroll payroll = modelMapper.map(payrollDto, Payroll.class);
         payroll.setEmployee(employee);
         return modelMapper.map(payrollRepository.save(payroll), PayrollDto.class);
     }
