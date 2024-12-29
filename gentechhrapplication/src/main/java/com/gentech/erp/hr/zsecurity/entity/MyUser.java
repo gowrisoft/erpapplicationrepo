@@ -1,4 +1,4 @@
-package com.gentech.erp.hr.security.entity;
+package com.gentech.erp.hr.zsecurity.entity;
 
 import jakarta.persistence.*;
 

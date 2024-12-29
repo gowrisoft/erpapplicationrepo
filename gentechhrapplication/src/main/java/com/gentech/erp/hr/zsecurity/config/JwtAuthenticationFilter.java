@@ -1,6 +1,7 @@
-package com.gentech.erp.hr.security.webtoken;
+package com.gentech.erp.hr.zsecurity.config;
 
-import com.gentech.erp.hr.security.service.MyUserDetailsService;
+import com.gentech.erp.hr.zsecurity.serviceimpl.MyUserDetailsServiceImpl;
+import com.gentech.erp.hr.zsecurity.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtService jwtService;
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
+    private MyUserDetailsServiceImpl myUserDetailsServiceImpl;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -36,7 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String username = jwtService.extractUser(jwt);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetials = myUserDetailsService.loadUserByUsername(username);
+            UserDetails userDetials = myUserDetailsServiceImpl.loadUserByUsername(username);
             if (userDetials != null && jwtService.isTokenValid(jwt)) {
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         username,
@@ -49,6 +50,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
-
-
 }

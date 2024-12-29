@@ -1,7 +1,7 @@
-package com.gentech.erp.hr.security.controller;
+package com.gentech.erp.hr.zsecurity.controller;
 
 import com.gentech.erp.hr.dto.MyUserDto;
-import com.gentech.erp.hr.security.service.MyUserService;
+import com.gentech.erp.hr.zsecurity.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,8 @@
-package com.gentech.erp.hr.security.controller;
+package com.gentech.erp.hr.zsecurity.controller;
 
-import com.gentech.erp.hr.security.service.MyUserDetailsService;
-import com.gentech.erp.hr.security.webtoken.JwtService;
-import com.gentech.erp.hr.security.webtoken.LoginForm;
+import com.gentech.erp.hr.zsecurity.serviceimpl.MyUserDetailsServiceImpl;
+import com.gentech.erp.hr.zsecurity.service.JwtService;
+import com.gentech.erp.hr.zsecurity.entity.LoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,14 +22,14 @@ public class ContentController {
     private JwtService jwtService;
 
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
+    private MyUserDetailsServiceImpl myUserDetailsServiceImpl;
 
     @PostMapping("/authenticate")
     public String authenticateAndGetToken(@RequestBody LoginForm loginForm) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginForm.username(), loginForm.password()));
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(myUserDetailsService.loadUserByUsername(loginForm.username()));
+            return jwtService.generateToken(myUserDetailsServiceImpl.loadUserByUsername(loginForm.username()));
         } else {
             throw new UsernameNotFoundException("Invalid Credentails!!!");
         }
