@@ -1,23 +1,38 @@
 package com.gentech.erp.hr.controller;
 
-import com.gentech.erp.hr.entity.ApprovedMedicalClaim;
+import com.gentech.erp.hr.dto.ApprovedMedicalClaimDto;
 import com.gentech.erp.hr.service.MedicalApprovalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/admin/api/medical-approval")
+@RequestMapping("/home/v1/api/medical-approval")
 public class MedicalApprovalController {
 
     @Autowired
     private MedicalApprovalService medicalApprovalService;
 
     @PostMapping("/approve")
-    public ResponseEntity<ApprovedMedicalClaim> approveMedicalEntry(@RequestParam("MRno") Long MRno, @RequestParam("approvedAmount") Double approvedAmount) {
-        return ResponseEntity.ok(medicalApprovalService.approveMedicalEntry(MRno, approvedAmount));
+    public ResponseEntity<ApprovedMedicalClaimDto> approveMedicalEntry(@RequestParam("medicalEntryId") Long medicalEntryId, @RequestParam("approvedAmount") Double approvedAmount) {
+        return ResponseEntity.ok(medicalApprovalService.approveMedicalEntry(medicalEntryId, approvedAmount));
     }
+
+    @GetMapping("/{empId}")
+    public ResponseEntity<List<ApprovedMedicalClaimDto>> getApprovedMedicalClaimByEmployeeId(@PathVariable Long empId) {
+        return ResponseEntity.ok(medicalApprovalService.getApprovedMedicalClaimByEmployeeId(empId));
+    }
+
+    @GetMapping("/{claimId}")
+    public ResponseEntity<ApprovedMedicalClaimDto> getApprovedMedicalClaimById(@PathVariable Long claimId) {
+        return ResponseEntity.ok(medicalApprovalService.getApprovedMedicalClaimById(claimId));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ApprovedMedicalClaimDto>> getAllApprovedMedicalClaims() {
+        return ResponseEntity.ok(medicalApprovalService.getAllApprovedMedicalClaims());
+    }
+
 }

@@ -23,7 +23,7 @@ public class Employee {
     private String firstName;
 
     @NotNull(message = "Last name cannot be null")
-    @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
+    @Size(min = 1, max = 50, message = "Last name must be between 2 and 50 characters")
     private String lastName;
 
     @NotNull(message = "Email cannot be null")

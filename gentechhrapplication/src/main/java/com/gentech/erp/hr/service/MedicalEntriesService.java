@@ -13,9 +13,9 @@ public interface MedicalEntriesService {
 
     List<MedicalEntriesDto> getAllMedicalEntries();
 
-    MedicalEntriesDto getMedicalEntryByMRno(Long MRno) throws Exception;
+    MedicalEntriesDto getMedicalEntryByMedicalEntryId(Long medicalEntryId) throws Exception;
 
-    MedicalEntriesDto updateItem(MedicalEntriesDto upd, Long id) throws Exception;
+    MedicalEntriesDto updateItem(MedicalEntriesDto medicalEntriesDto, Long medicalEntryId) throws Exception;
 
     void deleteItemById(Long id);
 }

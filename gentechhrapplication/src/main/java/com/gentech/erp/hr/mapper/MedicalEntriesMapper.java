@@ -4,20 +4,20 @@ import com.gentech.erp.hr.dto.MedicalEntriesDto;
 import com.gentech.erp.hr.entity.MedicalEntries;
 
 public class MedicalEntriesMapper {
-    public static MedicalEntries DtoToObject(MedicalEntriesDto dto) {
-        MedicalEntries obj = new MedicalEntries(
-                dto.getMRno(),
-                dto.getDependant(),
-                dto.getMedicalFiles(),
-                dto.getRequestAmount()
-        );
+
+    public static MedicalEntries dtoToObject(MedicalEntriesDto dto) {
+        MedicalEntries obj = new MedicalEntries();
+        obj.setMedicalEntryId(dto.getMedicalEntryId());
+        obj.setDependant(dto.getDependant());
+        obj.setMedicalFiles(dto.getMedicalFiles());
+        obj.setRequestAmount(dto.getRequestAmount());
         return obj;
     }
 
-    public static MedicalEntriesDto ObjectToDto(MedicalEntries obj) {
+    public static MedicalEntriesDto objectToDto(MedicalEntries obj) {
         MedicalEntriesDto dto = new MedicalEntriesDto();
-        dto.setMRno(obj.getMRno());
-        dto.setDependant(obj.getDependants());
+        dto.setMedicalEntryId(obj.getMedicalEntryId());
+        dto.setDependant(obj.getDependant());
         dto.setMedicalFiles(obj.getMedicalFiles());
         dto.setRequestAmount(obj.getRequestAmount());
         return dto;
