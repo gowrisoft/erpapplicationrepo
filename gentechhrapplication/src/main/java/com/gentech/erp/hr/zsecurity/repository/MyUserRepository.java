@@ -1,6 +1,6 @@
-package com.gentech.erp.hr.security.repository;
+package com.gentech.erp.hr.zsecurity.repository;
 
-import com.gentech.erp.hr.security.entity.MyUser;
+import com.gentech.erp.hr.zsecurity.entity.MyUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,10 +1,10 @@
-package com.gentech.erp.hr.security.service;
+package com.gentech.erp.hr.zsecurity.service;
 
 import com.gentech.erp.hr.dto.MyUserDto;
 import com.gentech.erp.hr.exception.EmptyUsernameException;
 import com.gentech.erp.hr.exception.UsernameAlreadyExistsException;
-import com.gentech.erp.hr.security.entity.MyUser;
-import com.gentech.erp.hr.security.repository.MyUserRepository;
+import com.gentech.erp.hr.zsecurity.entity.MyUser;
+import com.gentech.erp.hr.zsecurity.repository.MyUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,4 +1,4 @@
-package com.gentech.erp.hr.security.webtoken;
+package com.gentech.erp.hr.zsecurity.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
