@@ -13,4 +13,5 @@ public interface ApprovedMedicalClaimRepository extends JpaRepository<ApprovedMe
             "JOIN d.employee e " +
             "WHERE e.empId = :empId")
     List<ApprovedMedicalClaim> findByEmployeeEmpId(Long empId);
+
 }

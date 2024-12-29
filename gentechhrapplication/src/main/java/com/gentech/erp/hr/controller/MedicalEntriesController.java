@@ -12,13 +12,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/medical-entry")
+@RequestMapping("/home/v1/api/medical-entry")
 public class MedicalEntriesController {
 
     @Autowired
     private MedicalEntriesService medicalEntriesService;
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public ResponseEntity<String> addMedicalEntry(
             @RequestParam("dependantId") Long dependantId,
             @RequestParam("medicalFiles") MultipartFile medicalFiles,
@@ -32,25 +32,25 @@ public class MedicalEntriesController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntries() {
         return ResponseEntity.ok(medicalEntriesService.getAllMedicalEntries());
     }
 
     @GetMapping("/{MRno}")
-    public ResponseEntity<MedicalEntriesDto> getMedicalEntryByMRno(@PathVariable Long MRno) throws Exception {
-        MedicalEntriesDto medicalEntry = medicalEntriesService.getMedicalEntryByMRno(MRno);
+    public ResponseEntity<MedicalEntriesDto> getMedicalEntryByMRno(@PathVariable Long medicalEntryId) throws Exception {
+        MedicalEntriesDto medicalEntry = medicalEntriesService.getMedicalEntryByMedicalEntryId(medicalEntryId);
         return medicalEntry != null ? ResponseEntity.ok(medicalEntry) : ResponseEntity.notFound().build();
     }
 
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<MedicalEntriesDto> updateByid(@RequestBody MedicalEntriesDto upd, @PathVariable Long id) throws Exception {
-        upd.setMRno(id);
+        upd.setMedicalEntryId(id);
         return new ResponseEntity<>(medicalEntriesService.updateItem(upd, id), HttpStatusCode.valueOf(200));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteItem(@PathVariable Long id) {
         medicalEntriesService.deleteItemById(id);
         return new ResponseEntity<String>("Item with Id " + id + " was successfully deleted", HttpStatusCode.valueOf(200));

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/home/api/payroll")
+@RequestMapping("/home/v1/api/payroll")
 public class PayrollController {
 
     @Autowired

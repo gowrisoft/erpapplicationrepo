@@ -7,7 +7,7 @@ public class MedicalEntries {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long MRno;
+    private Long medicalEntryId;
 
     @ManyToOne
     @JoinColumn(name = "dependant_id", referencedColumnName = "dependantId")
@@ -21,22 +21,22 @@ public class MedicalEntries {
     public MedicalEntries() {
     }
 
-    public MedicalEntries(Long MRno, Dependant dependant, byte[] medicalFiles, Double requestAmount) {
-        this.MRno = MRno;
+    public MedicalEntries(Long medicalEntryId, Dependant dependant, byte[] medicalFiles, Double requestAmount) {
+        this.medicalEntryId = medicalEntryId;
         this.dependant = dependant;
         this.medicalFiles = medicalFiles;
         this.requestAmount = requestAmount;
     }
 
-    public Long getMRno() {
-        return MRno;
+    public Long getMedicalEntryId() {
+        return medicalEntryId;
     }
 
-    public void setMRno(Long MRno) {
-        this.MRno = MRno;
+    public void setMedicalEntryId(Long medicalEntryId) {
+        this.medicalEntryId = medicalEntryId;
     }
 
-    public Dependant getDependants() {
+    public Dependant getDependant() {
         return dependant;
     }
 
@@ -59,5 +59,4 @@ public class MedicalEntries {
     public void setRequestAmount(Double requestAmount) {
         this.requestAmount = requestAmount;
     }
-
 }

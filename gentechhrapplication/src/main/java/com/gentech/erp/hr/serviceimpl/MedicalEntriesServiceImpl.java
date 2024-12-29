@@ -1,6 +1,5 @@
 package com.gentech.erp.hr.serviceimpl;
 
-
 import com.gentech.erp.hr.dto.MedicalEntriesDto;
 import com.gentech.erp.hr.entity.Dependant;
 import com.gentech.erp.hr.entity.MedicalEntries;
@@ -44,16 +43,16 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
         List<MedicalEntries> obj = medicalEntriesRepository.findAll();
         List<MedicalEntriesDto> objDto = new ArrayList<>();
         for (int i = 0; i < obj.size(); i++) {
-            objDto.add(MedicalEntriesMapper.ObjectToDto(obj.get(i)));
+            objDto.add(MedicalEntriesMapper.objectToDto(obj.get(i)));
         }
         return objDto;
     }
 
     @Override
-    public MedicalEntriesDto getMedicalEntryByMRno(Long MRno) throws Exception {
-        Optional<MedicalEntries> obj = medicalEntriesRepository.findById(MRno);
+    public MedicalEntriesDto getMedicalEntryByMedicalEntryId(Long medicalEntryId) throws Exception {
+        Optional<MedicalEntries> obj = medicalEntriesRepository.findById(medicalEntryId);
         if (obj.isPresent()) {
-            MedicalEntriesDto dto = MedicalEntriesMapper.ObjectToDto(obj.get());
+            MedicalEntriesDto dto = MedicalEntriesMapper.objectToDto(obj.get());
             return dto;
 
         }
@@ -61,25 +60,25 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
     }
 
     @Override
-    public MedicalEntriesDto updateItem(MedicalEntriesDto upd, Long id) throws Exception {
-        Optional<MedicalEntries> obj = medicalEntriesRepository.findById(id);
+    public MedicalEntriesDto updateItem(MedicalEntriesDto upd, Long medicalEntryId) throws Exception {
+        Optional<MedicalEntries> obj = medicalEntriesRepository.findById(medicalEntryId);
         if (obj.isPresent()) {
             MedicalEntries n = obj.get();
             n.setDependant(upd.getDependant());
             n.setMedicalFiles(upd.getMedicalFiles());
-            n.setMRno(upd.getMRno());
+            n.setMedicalEntryId(upd.getMedicalEntryId());
             n.setRequestAmount(upd.getRequestAmount());
 
             medicalEntriesRepository.save(n);
-            upd = MedicalEntriesMapper.ObjectToDto(n);
+            upd = MedicalEntriesMapper.objectToDto(n);
             return upd;
         }
         throw new Exception("The item is not present");
     }
 
     @Override
-    public void deleteItemById(Long id) {
-        medicalEntriesRepository.deleteById(id);
+    public void deleteItemById(Long medicalEntryId) {
+        medicalEntriesRepository.deleteById(medicalEntryId);
 
     }
 }

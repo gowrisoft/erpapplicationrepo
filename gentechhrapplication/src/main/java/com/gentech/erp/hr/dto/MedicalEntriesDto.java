@@ -3,29 +3,35 @@ package com.gentech.erp.hr.dto;
 import com.gentech.erp.hr.entity.Dependant;
 
 public class MedicalEntriesDto {
-    private Long MRno;
+    private Long medicalEntryId;
     private Dependant dependant;
     private byte[] medicalFiles;
     private Double requestAmount;
 
     public MedicalEntriesDto() {
-
     }
 
-    public Long getMRno() {
-        return MRno;
+    public MedicalEntriesDto(Long medicalEntryId, Dependant dependant, byte[] medicalFiles, Double requestAmount) {
+        this.medicalEntryId = medicalEntryId;
+        this.dependant = dependant;
+        this.medicalFiles = medicalFiles;
+        this.requestAmount = requestAmount;
     }
 
-    public void setMRno(Long MRno) {
-        this.MRno = MRno;
+    public Long getMedicalEntryId() {
+        return medicalEntryId;
+    }
+
+    public void setMedicalEntryId(Long medicalEntryId) {
+        this.medicalEntryId = medicalEntryId;
     }
 
     public Dependant getDependant() {
         return dependant;
     }
 
-    public void setDependant(Dependant dependants) {
-        this.dependant = dependants;
+    public void setDependant(Dependant dependant) {
+        this.dependant = dependant;
     }
 
     public byte[] getMedicalFiles() {

@@ -3,7 +3,7 @@ package com.gentech.erp.hr.dto;
 import com.gentech.erp.hr.entity.Dependant;
 import jakarta.validation.constraints.NotNull;
 
-public class DependantsDto {
+public class DependantDto {
     @NotNull
     private Long dependantId;
 
@@ -19,10 +19,10 @@ public class DependantsDto {
     @NotNull
     private Dependant.RelationshipType relationship;
 
-    public DependantsDto() {
+    public DependantDto() {
     }
 
-    public DependantsDto(Long dependantId, Long employeeId, String dependantName, Integer dependantAge, Dependant.RelationshipType relationship) {
+    public DependantDto(Long dependantId, Long employeeId, String dependantName, Integer dependantAge, Dependant.RelationshipType relationship) {
         this.dependantId = dependantId;
         this.employeeId = employeeId;
         this.dependantName = dependantName;

@@ -1,20 +1,20 @@
 package com.gentech.erp.hr.service;
 
-import com.gentech.erp.hr.dto.DependantsDto;
+import com.gentech.erp.hr.dto.DependantDto;
 
 import java.util.List;
 
 public interface DependantService {
 
-    DependantsDto saveDependant(DependantsDto employee);
+    DependantDto saveDependant(DependantDto employee);
 
-    List<DependantsDto> getAllDependant();
-
-
-    DependantsDto getDependantById(Long dependantId) throws Exception;
+    List<DependantDto> getAllDependant();
 
 
-    DependantsDto updateItem(DependantsDto upd, Long id) throws Exception;
+    DependantDto getDependantById(Long dependantId) throws Exception;
+
+
+    DependantDto updateItem(DependantDto upd, Long id) throws Exception;
 
     void deleteItemById(Long id);
 }
