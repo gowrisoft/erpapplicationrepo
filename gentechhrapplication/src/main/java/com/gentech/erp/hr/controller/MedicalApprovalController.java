@@ -15,17 +15,17 @@ public class MedicalApprovalController {
     @Autowired
     private MedicalApprovalService medicalApprovalService;
 
-    @PostMapping("/approve")
+    @PostMapping("/")
     public ResponseEntity<ApprovedMedicalClaimDto> approveMedicalEntry(@RequestParam("medicalEntryId") Long medicalEntryId, @RequestParam("approvedAmount") Double approvedAmount) {
         return ResponseEntity.ok(medicalApprovalService.approveMedicalEntry(medicalEntryId, approvedAmount));
     }
 
-    @GetMapping("/{empId}")
+    @GetMapping("/empId/{empId}")
     public ResponseEntity<List<ApprovedMedicalClaimDto>> getApprovedMedicalClaimByEmployeeId(@PathVariable Long empId) {
         return ResponseEntity.ok(medicalApprovalService.getApprovedMedicalClaimByEmployeeId(empId));
     }
 
-    @GetMapping("/{claimId}")
+    @GetMapping("/claimId/{claimId}")
     public ResponseEntity<ApprovedMedicalClaimDto> getApprovedMedicalClaimById(@PathVariable Long claimId) {
         return ResponseEntity.ok(medicalApprovalService.getApprovedMedicalClaimById(claimId));
     }
@@ -34,5 +34,4 @@ public class MedicalApprovalController {
     public ResponseEntity<List<ApprovedMedicalClaimDto>> getAllApprovedMedicalClaims() {
         return ResponseEntity.ok(medicalApprovalService.getAllApprovedMedicalClaims());
     }
-
 }
