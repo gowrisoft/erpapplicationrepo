@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/home/v1/api/medical-entry")
+@RequestMapping("/v1/api/medical-entry")
 public class MedicalEntriesController {
 
     @Autowired

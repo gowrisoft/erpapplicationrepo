@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/home/v1/api/payroll")
+@RequestMapping("/v1/api/payroll")
 public class PayrollController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class PayrollController {
         return ResponseEntity.ok(payrollService.calculatePayroll(employeeId, salaryDate));
     }
 
-    @GetMapping("/history/{employeeId}")
+    @GetMapping("/empId/{employeeId}")
     public ResponseEntity<List<PayrollDto>> getPayrollHistory(@PathVariable Long employeeId) {
         return ResponseEntity.ok(payrollService.getPayrollByEmpId(employeeId));
     }
@@ -39,9 +39,9 @@ public class PayrollController {
         return ResponseEntity.ok(payrollService.getAllPayrolls());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PayrollDto> getPayroll(@PathVariable Long id) {
-        return ResponseEntity.ok(payrollService.getPayrollById(id));
+    @GetMapping("/payrollId/{payrollId}")
+    public ResponseEntity<PayrollDto> getPayroll(@PathVariable Long payrollId) {
+        return ResponseEntity.ok(payrollService.getPayrollById(payrollId));
     }
 
     @PutMapping("/{id}")

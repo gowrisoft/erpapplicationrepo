@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/home/v1/api/medical-approval")
+@RequestMapping("/v1/api/medical-approval")
 public class MedicalApprovalController {
 
     @Autowired
