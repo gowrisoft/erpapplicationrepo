@@ -1,5 +1,9 @@
 package com.gentech.erp.hr.entity;
 
+import java.util.Date;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +14,7 @@ public class MedicalEntries {
     private Long medicalEntryId;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "dependant_id", referencedColumnName = "dependantId")
     private Dependant dependant;
 
@@ -21,7 +26,7 @@ public class MedicalEntries {
     public MedicalEntries() {
     }
 
-    public MedicalEntries(Long medicalEntryId, Dependant dependant, byte[] medicalFiles, Double requestAmount) {
+    public MedicalEntries(Long medicalEntryId, Dependant dependant, byte[] medicalFiles, Double requestAmount, Date date, Date date2) {
         this.medicalEntryId = medicalEntryId;
         this.dependant = dependant;
         this.medicalFiles = medicalFiles;
@@ -36,7 +41,7 @@ public class MedicalEntries {
         this.medicalEntryId = medicalEntryId;
     }
 
-    public Dependant getDependant() {
+    public Dependant getDependants() {
         return dependant;
     }
 
@@ -59,4 +64,33 @@ public class MedicalEntries {
     public void setRequestAmount(Double requestAmount) {
         this.requestAmount = requestAmount;
     }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Dependant getDependant() {
+        return dependant;
+    }
+
+    @CreationTimestamp
+    @Column(name="created_at",nullable = false,updatable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column(name="updated_at")
+    private Date updatedAt;
+
 }

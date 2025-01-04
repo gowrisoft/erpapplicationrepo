@@ -18,11 +18,12 @@ public class MedicalEntriesController {
     @Autowired
     private MedicalEntriesService medicalEntriesService;
 
-    @PostMapping("/")
+    @PostMapping("/add")
     public ResponseEntity<String> addMedicalEntry(
             @RequestParam("dependantId") Long dependantId,
             @RequestParam("medicalFiles") MultipartFile medicalFiles,
-            @RequestParam("requestAmount") Double requestAmount) {
+            @RequestParam("requestAmount") Double requestAmount
+    ) {
 
         try {
             medicalEntriesService.saveMedicalEntry(dependantId, medicalFiles, requestAmount);
@@ -32,27 +33,46 @@ public class MedicalEntriesController {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntries() {
         return ResponseEntity.ok(medicalEntriesService.getAllMedicalEntries());
     }
 
-    @GetMapping("/{MRno}")
+
+
+    @GetMapping("/{medicalEntryId}")
     public ResponseEntity<MedicalEntriesDto> getMedicalEntryByMRno(@PathVariable Long medicalEntryId) throws Exception {
-        MedicalEntriesDto medicalEntry = medicalEntriesService.getMedicalEntryByMedicalEntryId(medicalEntryId);
+        MedicalEntriesDto medicalEntry = medicalEntriesService.getMedicalEntryByMRno(medicalEntryId);
         return medicalEntry != null ? ResponseEntity.ok(medicalEntry) : ResponseEntity.notFound().build();
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<MedicalEntriesDto> updateByid(@RequestBody MedicalEntriesDto upd, @PathVariable Long id) throws Exception {
-        upd.setMedicalEntryId(id);
-        return new ResponseEntity<>(medicalEntriesService.updateItem(upd, id), HttpStatusCode.valueOf(200));
+    @GetMapping("/employee/{medicalEntryId}")
+    public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntriesByEmpId(@PathVariable Long medicalEntryId) {
+        return ResponseEntity.ok(medicalEntriesService.getMedicalEntryByeEmployeeId(medicalEntryId));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteItem(@PathVariable Long id) {
-        medicalEntriesService.deleteItemById(id);
-        return new ResponseEntity<String>("Item with Id " + id + " was successfully deleted", HttpStatusCode.valueOf(200));
+
+    @PutMapping("/add")
+    public ResponseEntity<String> updateByid(
+            @RequestParam Long dependantId,
+            @RequestParam MultipartFile medicalFiles,
+            @RequestParam Double requestAmount,
+            @RequestParam("medicalEntryId") Long id
+    ) {
+        System.out.println("medicalEntryId: " + id + ", Dependant ID: " + dependantId + ", Request Amount: " + requestAmount);
+        try {
+            medicalEntriesService.updateItem(dependantId, medicalFiles, requestAmount, id);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Medical entry Edited successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving medical entry: " + e.getMessage());
+        }
+    }
+
+
+    @DeleteMapping("/delete/{medicalEntryId}")
+    public ResponseEntity<String> deleteItem(@PathVariable Long medicalEntryId) {
+        medicalEntriesService.deleteItemById(medicalEntryId);
+        return new ResponseEntity<String>("Item with Id " + medicalEntryId + " was successfully deleted", HttpStatusCode.valueOf(200));
     }
 }

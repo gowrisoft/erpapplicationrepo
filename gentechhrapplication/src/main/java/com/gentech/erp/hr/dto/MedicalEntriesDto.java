@@ -1,5 +1,6 @@
 package com.gentech.erp.hr.dto;
 
+import java.util.Date;
 import com.gentech.erp.hr.entity.Dependant;
 
 public class MedicalEntriesDto {
@@ -7,15 +8,10 @@ public class MedicalEntriesDto {
     private Dependant dependant;
     private byte[] medicalFiles;
     private Double requestAmount;
+    private Date createdAt;
+    private Date updatedAt;
 
     public MedicalEntriesDto() {
-    }
-
-    public MedicalEntriesDto(Long medicalEntryId, Dependant dependant, byte[] medicalFiles, Double requestAmount) {
-        this.medicalEntryId = medicalEntryId;
-        this.dependant = dependant;
-        this.medicalFiles = medicalFiles;
-        this.requestAmount = requestAmount;
     }
 
     public Long getMedicalEntryId() {
@@ -48,5 +44,21 @@ public class MedicalEntriesDto {
 
     public void setRequestAmount(Double requestAmount) {
         this.requestAmount = requestAmount;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

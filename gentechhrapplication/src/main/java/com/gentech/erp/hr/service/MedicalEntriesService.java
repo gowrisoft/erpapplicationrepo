@@ -4,6 +4,7 @@ import com.gentech.erp.hr.dto.MedicalEntriesDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+
 import java.util.List;
 
 public interface MedicalEntriesService {
@@ -13,9 +14,13 @@ public interface MedicalEntriesService {
 
     List<MedicalEntriesDto> getAllMedicalEntries();
 
-    MedicalEntriesDto getMedicalEntryByMedicalEntryId(Long medicalEntryId) throws Exception;
+    MedicalEntriesDto getMedicalEntryByMRno(Long medicalEntryId) throws Exception;
 
-    MedicalEntriesDto updateItem(MedicalEntriesDto medicalEntriesDto, Long medicalEntryId) throws Exception;
 
-    void deleteItemById(Long id);
+
+    void deleteItemById(Long medicalEntryId);
+
+    List<MedicalEntriesDto> getMedicalEntryByeEmployeeId(Long medicalEntryId);
+
+    void updateItem(Long dependantId, MultipartFile medicalFiles, Double requestAmount, Long medicalEntryId) throws Exception;
 }
