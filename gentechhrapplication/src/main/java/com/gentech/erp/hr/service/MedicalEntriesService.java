@@ -7,15 +7,15 @@ import java.io.IOException;
 import java.util.List;
 
 public interface MedicalEntriesService {
-
-    void saveMedicalEntry(Long dependantId,
-                          MultipartFile medicalFiles, Double requestAmount) throws IOException;
+    MedicalEntriesDto saveMedicalEntry(Long dependantId, MultipartFile medicalFiles, Double requestAmount) throws IOException;
 
     List<MedicalEntriesDto> getAllMedicalEntries();
 
-    MedicalEntriesDto getMedicalEntryByMedicalEntryId(Long medicalEntryId) throws Exception;
-
-    MedicalEntriesDto updateItem(MedicalEntriesDto medicalEntriesDto, Long medicalEntryId) throws Exception;
+    MedicalEntriesDto getMedicalEntryById(Long MedicalEntryId);
 
     void deleteItemById(Long id);
+
+    List<MedicalEntriesDto> getMedicalEntryByeEmployeeId(Long employeeId);
+
+    MedicalEntriesDto updateMedicalEntry(Long dependantId, MultipartFile medicalFiles, Double requestAmount, Long medicalEntryId) throws IOException;
 }

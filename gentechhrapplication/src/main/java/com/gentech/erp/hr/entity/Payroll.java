@@ -15,8 +15,7 @@ public class Payroll {
     private Long payrollId;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "employee_id",referencedColumnName = "emp_id", nullable = false)
     private Employee employee;
 
     @NotNull

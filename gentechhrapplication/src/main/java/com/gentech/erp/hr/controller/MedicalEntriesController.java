@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -18,41 +19,50 @@ public class MedicalEntriesController {
     @Autowired
     private MedicalEntriesService medicalEntriesService;
 
-    @PostMapping("/")
-    public ResponseEntity<String> addMedicalEntry(
+    @PostMapping("/add")
+    public ResponseEntity<MedicalEntriesDto> addMedicalEntry(
             @RequestParam("dependantId") Long dependantId,
             @RequestParam("medicalFiles") MultipartFile medicalFiles,
-            @RequestParam("requestAmount") Double requestAmount) {
+            @RequestParam("requestAmount") Double requestAmount) throws IOException {
+        return ResponseEntity.ok(medicalEntriesService.saveMedicalEntry(dependantId, medicalFiles, requestAmount));
+    }
 
+    @GetMapping
+    public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntries() {
+        return ResponseEntity.ok(medicalEntriesService.getAllMedicalEntries());
+    }
+
+    @GetMapping("/medicalentryid/{medicalEntryId}")
+    public ResponseEntity<MedicalEntriesDto> getMedicalEntryByMRno(@PathVariable Long medicalEntryId) throws Exception {
+        MedicalEntriesDto medicalEntry = medicalEntriesService.getMedicalEntryById(medicalEntryId);
+        return medicalEntry != null ? ResponseEntity.ok(medicalEntry) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntriesByEmpId(@PathVariable Long employeeId) {
+        return ResponseEntity.ok(medicalEntriesService.getMedicalEntryByeEmployeeId(employeeId));
+    }
+
+    @PutMapping("/add")
+    public ResponseEntity<String> updateByid(
+            @RequestParam Long dependantId,
+            @RequestParam MultipartFile medicalFiles,
+            @RequestParam Double requestAmount,
+            @RequestParam("medicalEntryId") Long id
+    ) {
+        System.out.println("medicalEntryId: " + id + ", Dependant ID: " + dependantId + ", Request Amount: " + requestAmount);
         try {
-            medicalEntriesService.saveMedicalEntry(dependantId, medicalFiles, requestAmount);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Medical entry saved successfully");
+            medicalEntriesService.updateMedicalEntry(dependantId, medicalFiles, requestAmount, id);
+            return ResponseEntity.status(HttpStatus.OK).body("Medical entry Edited successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving medical entry: " + e.getMessage());
         }
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntries() {
-        return ResponseEntity.ok(medicalEntriesService.getAllMedicalEntries());
-    }
 
-    @GetMapping("/{MRno}")
-    public ResponseEntity<MedicalEntriesDto> getMedicalEntryByMRno(@PathVariable Long medicalEntryId) throws Exception {
-        MedicalEntriesDto medicalEntry = medicalEntriesService.getMedicalEntryByMedicalEntryId(medicalEntryId);
-        return medicalEntry != null ? ResponseEntity.ok(medicalEntry) : ResponseEntity.notFound().build();
-    }
-
-
-    @PutMapping("/{id}")
-    public ResponseEntity<MedicalEntriesDto> updateByid(@RequestBody MedicalEntriesDto upd, @PathVariable Long id) throws Exception {
-        upd.setMedicalEntryId(id);
-        return new ResponseEntity<>(medicalEntriesService.updateItem(upd, id), HttpStatusCode.valueOf(200));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteItem(@PathVariable Long id) {
-        medicalEntriesService.deleteItemById(id);
-        return new ResponseEntity<String>("Item with Id " + id + " was successfully deleted", HttpStatusCode.valueOf(200));
+    @DeleteMapping("/delete/{medicalEntryId}")
+    public ResponseEntity<String> deleteItem(@PathVariable Long medicalEntryId) {
+        medicalEntriesService.deleteItemById(medicalEntryId);
+        return new ResponseEntity<String>("Item with Id " + medicalEntryId + " was successfully deleted", HttpStatusCode.valueOf(200));
     }
 }

@@ -1,6 +1,7 @@
 package com.gentech.erp.hr.serviceimpl;
 
 import com.gentech.erp.hr.dto.DependantDto;
+import com.gentech.erp.hr.dto.EmployeeDto;
 import com.gentech.erp.hr.entity.Dependant;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.exception.ResourceNotFoundException;
@@ -11,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,10 +28,10 @@ public class DependantServiceImpl implements DependantService {
     @Autowired
     private EmployeeRepository employeeRepository;
     @Override
-    public DependantDto saveDependant(DependantDto dependantDto) {
-        Employee employee = employeeRepository.findById(dependantDto.getEmployeeId())
+    public DependantDto saveDependant(DependantDto dependantsDto) {
+        Employee employee = employeeRepository.findById(dependantsDto.getEmployeeId())
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
-        Dependant dependant = modelMapper.map(dependantDto, Dependant.class);
+        Dependant dependant = modelMapper.map(dependantsDto, Dependant.class);
         dependant.setEmployee(employee);
         return modelMapper.map(dependantsRepository.save(dependant), DependantDto.class);
     }
@@ -46,13 +48,15 @@ public class DependantServiceImpl implements DependantService {
                 .orElseThrow(() -> new Exception("Dependent is not present with id "+ dependantId)), DependantDto.class);
     }
 
+
+
     @Override
-    public DependantDto updateItem(DependantDto dependantDto, Long id) throws Exception {
+    public DependantDto updateItem(DependantDto dependantsDto, Long id) throws Exception {
         Dependant dependant = dependantsRepository.findById(id)
                 .orElseThrow(() -> new Exception("Dependent is not present with id "+ id));
-        dependant.setDependantName(dependantDto.getDependantName());
-        dependant.setDependantAge(dependantDto.getDependantAge());
-        dependant.setRelationship(dependantDto.getRelationship());
+        dependant.setDependantName(dependantsDto.getDependantName());
+        dependant.setDependantAge(dependantsDto.getDependantAge());
+        dependant.setRelationship(dependantsDto.getRelationship());
 
         return modelMapper.map(dependantsRepository.save(dependant), DependantDto.class);
     }
@@ -63,5 +67,26 @@ public class DependantServiceImpl implements DependantService {
             throw new ResourceNotFoundException("Dependent is not present with id "+ id);
         }
         dependantsRepository.deleteById(id);
+    }
+
+
+
+    @Override
+    public List<DependantDto> getDependantByEmployeeId(Long empId) throws Exception{
+        EmployeeDto dto= modelMapper.map(employeeRepository.findById(empId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found")), EmployeeDto.class);
+
+        List<DependantDto> dtolist=dependantsRepository.findAll().stream()
+                .map(dependant -> modelMapper.map(dependant, DependantDto.class)).collect(Collectors.toList());
+
+        List<DependantDto> sendList=new ArrayList<>();
+        for(DependantDto a:dtolist)
+        {
+            if(a.getEmployeeId() == dto.getEmployeeId())
+            {
+                sendList.add(a);
+            }
+        }
+        return sendList;
     }
 }
