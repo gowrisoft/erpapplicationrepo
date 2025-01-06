@@ -10,13 +10,13 @@ public interface DependantService {
 
     List<DependantDto> getAllDependant();
 
-
     DependantDto getDependantById(Long dependantId) throws Exception;
-
 
     DependantDto updateItem(DependantDto upd, Long id) throws Exception;
 
     void deleteItemById(Long id);
 
     List<DependantDto> getDependantByEmployeeId(Long id) throws Exception;
+
+    List<DependantDto> getDependantByDependantId(Long id);
 }
