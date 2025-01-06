@@ -21,13 +21,6 @@ public class Dependant {
     @Enumerated(EnumType.STRING)
     private RelationshipType relationship;
 
-    public enum RelationshipType {
-        SPOUSE,
-        CHILD,
-        PARENT,
-        OTHER
-    }
-
     public Dependant() {
     }
 
@@ -77,5 +70,11 @@ public class Dependant {
 
     public void setRelationship(RelationshipType relationship) {
         this.relationship = relationship;
+    }
+
+    public enum RelationshipType {
+        SPOUSE,
+        CHILD,
+        PARENT
     }
 }

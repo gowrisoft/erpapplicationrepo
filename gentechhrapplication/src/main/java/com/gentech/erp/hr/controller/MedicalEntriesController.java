@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -19,18 +20,11 @@ public class MedicalEntriesController {
     private MedicalEntriesService medicalEntriesService;
 
     @PostMapping("/add")
-    public ResponseEntity<String> addMedicalEntry(
+    public ResponseEntity<MedicalEntriesDto> addMedicalEntry(
             @RequestParam("dependantId") Long dependantId,
             @RequestParam("medicalFiles") MultipartFile medicalFiles,
-            @RequestParam("requestAmount") Double requestAmount
-    ) {
-
-        try {
-            medicalEntriesService.saveMedicalEntry(dependantId, medicalFiles, requestAmount);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Medical entry saved successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving medical entry: " + e.getMessage());
-        }
+            @RequestParam("requestAmount") Double requestAmount) throws IOException {
+        return ResponseEntity.ok(medicalEntriesService.saveMedicalEntry(dependantId, medicalFiles, requestAmount));
     }
 
     @GetMapping
@@ -38,20 +32,16 @@ public class MedicalEntriesController {
         return ResponseEntity.ok(medicalEntriesService.getAllMedicalEntries());
     }
 
-
-
-    @GetMapping("/{medicalEntryId}")
+    @GetMapping("/medicalentryid/{medicalEntryId}")
     public ResponseEntity<MedicalEntriesDto> getMedicalEntryByMRno(@PathVariable Long medicalEntryId) throws Exception {
-        MedicalEntriesDto medicalEntry = medicalEntriesService.getMedicalEntryByMRno(medicalEntryId);
+        MedicalEntriesDto medicalEntry = medicalEntriesService.getMedicalEntryById(medicalEntryId);
         return medicalEntry != null ? ResponseEntity.ok(medicalEntry) : ResponseEntity.notFound().build();
     }
 
-
-    @GetMapping("/employee/{medicalEntryId}")
-    public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntriesByEmpId(@PathVariable Long medicalEntryId) {
-        return ResponseEntity.ok(medicalEntriesService.getMedicalEntryByeEmployeeId(medicalEntryId));
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntriesByEmpId(@PathVariable Long employeeId) {
+        return ResponseEntity.ok(medicalEntriesService.getMedicalEntryByeEmployeeId(employeeId));
     }
-
 
     @PutMapping("/add")
     public ResponseEntity<String> updateByid(
@@ -62,8 +52,8 @@ public class MedicalEntriesController {
     ) {
         System.out.println("medicalEntryId: " + id + ", Dependant ID: " + dependantId + ", Request Amount: " + requestAmount);
         try {
-            medicalEntriesService.updateItem(dependantId, medicalFiles, requestAmount, id);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Medical entry Edited successfully");
+            medicalEntriesService.updateMedicalEntry(dependantId, medicalFiles, requestAmount, id);
+            return ResponseEntity.status(HttpStatus.OK).body("Medical entry Edited successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving medical entry: " + e.getMessage());
         }

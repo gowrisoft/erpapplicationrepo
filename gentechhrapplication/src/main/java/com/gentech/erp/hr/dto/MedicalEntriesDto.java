@@ -5,7 +5,7 @@ import com.gentech.erp.hr.entity.Dependant;
 
 public class MedicalEntriesDto {
     private Long medicalEntryId;
-    private Dependant dependant;
+    private Long dependantId;
     private byte[] medicalFiles;
     private Double requestAmount;
     private Date createdAt;
@@ -22,12 +22,12 @@ public class MedicalEntriesDto {
         this.medicalEntryId = medicalEntryId;
     }
 
-    public Dependant getDependant() {
-        return dependant;
+    public Long getDependantId() {
+        return dependantId;
     }
 
-    public void setDependant(Dependant dependant) {
-        this.dependant = dependant;
+    public void setDependantId(Long dependantId) {
+        this.dependantId = dependantId;
     }
 
     public byte[] getMedicalFiles() {

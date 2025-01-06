@@ -1,10 +1,11 @@
 package com.gentech.erp.hr.entity;
 
-import java.util.Date;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.util.Date;
 
 @Entity
 public class MedicalEntries {
@@ -22,6 +23,14 @@ public class MedicalEntries {
     private byte[] medicalFiles;
 
     private Double requestAmount;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Date updatedAt;
 
     public MedicalEntries() {
     }
@@ -43,10 +52,6 @@ public class MedicalEntries {
 
     public Dependant getDependants() {
         return dependant;
-    }
-
-    public void setDependant(Dependant dependant) {
-        this.dependant = dependant;
     }
 
     public byte[] getMedicalFiles() {
@@ -85,12 +90,8 @@ public class MedicalEntries {
         return dependant;
     }
 
-    @CreationTimestamp
-    @Column(name="created_at",nullable = false,updatable = false)
-    private Date createdAt;
-
-    @UpdateTimestamp
-    @Column(name="updated_at")
-    private Date updatedAt;
+    public void setDependant(Dependant dependant) {
+        this.dependant = dependant;
+    }
 
 }
