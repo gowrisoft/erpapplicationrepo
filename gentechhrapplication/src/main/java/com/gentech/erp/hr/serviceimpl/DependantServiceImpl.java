@@ -1,7 +1,6 @@
 package com.gentech.erp.hr.serviceimpl;
 
 import com.gentech.erp.hr.dto.DependantDto;
-import com.gentech.erp.hr.dto.EmployeeDto;
 import com.gentech.erp.hr.entity.Dependant;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.exception.ResourceNotFoundException;
@@ -12,7 +11,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,8 +46,6 @@ public class DependantServiceImpl implements DependantService {
                 .orElseThrow(() -> new Exception("Dependent is not present with id "+ dependantId)), DependantDto.class);
     }
 
-
-
     @Override
     public DependantDto updateItem(DependantDto dependantsDto, Long id) throws Exception {
         Dependant dependant = dependantsRepository.findById(id)
@@ -69,24 +65,21 @@ public class DependantServiceImpl implements DependantService {
         dependantsRepository.deleteById(id);
     }
 
-
+ @Override
+public List<DependantDto> getDependantByEmployeeId(Long empId)  {
+    employeeRepository.findById(empId)
+            .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+    return dependantsRepository.findAllByEmployee_EmpId(empId).stream()
+            .map(dependant -> modelMapper.map(dependant, DependantDto.class)).collect(Collectors.toList());
+}
 
     @Override
-    public List<DependantDto> getDependantByEmployeeId(Long empId) throws Exception{
-        EmployeeDto dto= modelMapper.map(employeeRepository.findById(empId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found")), EmployeeDto.class);
-
-        List<DependantDto> dtolist=dependantsRepository.findAll().stream()
-                .map(dependant -> modelMapper.map(dependant, DependantDto.class)).collect(Collectors.toList());
-
-        List<DependantDto> sendList=new ArrayList<>();
-        for(DependantDto a:dtolist)
-        {
-            if(a.getEmployeeId() == dto.getEmployeeId())
-            {
-                sendList.add(a);
-            }
+    public List<DependantDto> getDependantByDependantId(Long dependantId) {
+        Dependant dependant = dependantsRepository.findByDependantId(dependantId);
+        if (dependant == null) {
+            throw new RuntimeException("Dependant not found for ID: " + dependantId);
         }
-        return sendList;
+        List<Dependant> dependants = dependantsRepository.findAllByEmployee_EmpId(dependant.getEmployee().getEmpId());
+        return dependants.stream().map(dep -> modelMapper.map(dep, DependantDto.class)).toList();
     }
 }

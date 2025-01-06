@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PayrollServiceImpl implements PayrollService {
@@ -76,13 +75,13 @@ public class PayrollServiceImpl implements PayrollService {
     @Override
     public List<PayrollDto> getPayrollByEmpId(Long emp_id) {
         return payrollRepository.findByEmployee_EmpId(emp_id)
-                .stream().map(payroll -> modelMapper.map(payroll, PayrollDto.class)).collect(Collectors.toList());
+                .stream().map(payroll -> modelMapper.map(payroll, PayrollDto.class)).toList();
     }
 
     @Override
     public List<PayrollDto> getAllPayrolls() {
         return payrollRepository.findAll()
-                .stream().map(payroll -> modelMapper.map(payroll, PayrollDto.class)).collect(Collectors.toList());
+                .stream().map(payroll -> modelMapper.map(payroll, PayrollDto.class)).toList();
     }
 
     @Override

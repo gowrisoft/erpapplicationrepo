@@ -33,7 +33,7 @@ public class MedicalEntriesController {
     }
 
     @GetMapping("/medicalentryid/{medicalEntryId}")
-    public ResponseEntity<MedicalEntriesDto> getMedicalEntryByMRno(@PathVariable Long medicalEntryId) throws Exception {
+    public ResponseEntity<MedicalEntriesDto> getMedicalEntryByMRno(@PathVariable Long medicalEntryId)  {
         MedicalEntriesDto medicalEntry = medicalEntriesService.getMedicalEntryById(medicalEntryId);
         return medicalEntry != null ? ResponseEntity.ok(medicalEntry) : ResponseEntity.notFound().build();
     }
@@ -43,7 +43,7 @@ public class MedicalEntriesController {
         return ResponseEntity.ok(medicalEntriesService.getMedicalEntryByeEmployeeId(employeeId));
     }
 
-    @PutMapping("/add")
+    @PutMapping("/update")
     public ResponseEntity<String> updateByid(
             @RequestParam Long dependantId,
             @RequestParam MultipartFile medicalFiles,
@@ -59,10 +59,9 @@ public class MedicalEntriesController {
         }
     }
 
-
-    @DeleteMapping("/delete/{medicalEntryId}")
+    @DeleteMapping("/{medicalEntryId}")
     public ResponseEntity<String> deleteItem(@PathVariable Long medicalEntryId) {
         medicalEntriesService.deleteItemById(medicalEntryId);
-        return new ResponseEntity<String>("Item with Id " + medicalEntryId + " was successfully deleted", HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>("Item with Id " + medicalEntryId + " was successfully deleted", HttpStatusCode.valueOf(200));
     }
 }
