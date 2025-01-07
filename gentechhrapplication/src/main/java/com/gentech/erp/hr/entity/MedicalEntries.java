@@ -24,6 +24,9 @@ public class MedicalEntries {
 
     private Double requestAmount;
 
+    @Enumerated(EnumType.STRING)
+    private MedicalEntryStatus status = MedicalEntryStatus.SUBMITTED;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
@@ -35,11 +38,14 @@ public class MedicalEntries {
     public MedicalEntries() {
     }
 
-    public MedicalEntries(Long medicalEntryId, Dependant dependant, byte[] medicalFiles, Double requestAmount, Date date, Date date2) {
+    public MedicalEntries(Long medicalEntryId, Dependant dependant, byte[] medicalFiles, Double requestAmount, MedicalEntryStatus status, Date createdAt, Date updatedAt) {
         this.medicalEntryId = medicalEntryId;
         this.dependant = dependant;
         this.medicalFiles = medicalFiles;
         this.requestAmount = requestAmount;
+        this.status = status != null ? status : MedicalEntryStatus.SUBMITTED; // Default if null
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Long getMedicalEntryId() {
@@ -70,6 +76,14 @@ public class MedicalEntries {
         this.requestAmount = requestAmount;
     }
 
+    public MedicalEntryStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(MedicalEntryStatus status) {
+        this.status = status;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -94,4 +108,10 @@ public class MedicalEntries {
         this.dependant = dependant;
     }
 
+    // Enum defined within the same file
+    public enum MedicalEntryStatus {
+        SUBMITTED,
+        REJECTED,
+        APPROVED
+    }
 }

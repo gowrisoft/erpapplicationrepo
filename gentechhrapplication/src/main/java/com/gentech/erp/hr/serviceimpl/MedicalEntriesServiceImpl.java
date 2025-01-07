@@ -84,5 +84,24 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
         return modelMapper.map(medicalEntriesRepository.save(medicalEntry), MedicalEntriesDto.class);
     }
 
+    @Override
+    public MedicalEntriesDto updateMedicalEntryStatus(Long medicalEntryId, String status) {
+        MedicalEntries medicalEntry = medicalEntriesRepository.findById(medicalEntryId)
+                .orElseThrow(() -> new RuntimeException("Medical Entry not found with medicalEntryId: " + medicalEntryId));
+        medicalEntry.setStatus(MedicalEntries.MedicalEntryStatus.valueOf(status));
+        return modelMapper.map(medicalEntriesRepository.save(medicalEntry), MedicalEntriesDto.class);
+    }
+
+    @Override
+    public List<MedicalEntriesDto> getAllMedicalEntryByStatus(String status) {
+        try {
+            MedicalEntries.MedicalEntryStatus enumStatus = MedicalEntries.MedicalEntryStatus.valueOf(status.toUpperCase());
+            return medicalEntriesRepository.findAllByStatus(enumStatus).stream()
+                    .map(medicalEntry -> modelMapper.map(medicalEntry, MedicalEntriesDto.class))
+                    .toList();
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid status value: " + status); // Handle invalid enum values
+        }
+    }
 
 }
