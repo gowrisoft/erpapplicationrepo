@@ -7,6 +7,7 @@ import com.gentech.erp.hr.exception.ResourceNotFoundException;
 import com.gentech.erp.hr.repository.ApprovedMedicalClaimRepository;
 import com.gentech.erp.hr.repository.MedicalEntriesRepository;
 import com.gentech.erp.hr.service.MedicalApprovalService;
+import com.gentech.erp.hr.service.MedicalEntriesService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,14 +27,18 @@ public class MedicalApprovalServiceImpl implements MedicalApprovalService {
     @Autowired
     ModelMapper modelMapper;
 
+    @Autowired
+    private MedicalEntriesService MedicalEntriesService;
+
     @Override
-    public ApprovedMedicalClaimDto approveMedicalEntry(Long MRno, Double approvedAmount) {
-        MedicalEntries medicalEntry = medicalEntriesRepository.findById(MRno)
-                .orElseThrow(() -> new ResourceNotFoundException("Medical entry not found with MRno: " + MRno));
+    public ApprovedMedicalClaimDto approveMedicalEntry(Long MedicalEntryId, Double approvedAmount) {
+        MedicalEntries medicalEntry = medicalEntriesRepository.findById(MedicalEntryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Medical entry not found with MedicalEntryId: " + MedicalEntryId));
         ApprovedMedicalClaim approvedClaim = new ApprovedMedicalClaim();
         approvedClaim.setMedicalEntry(medicalEntry);
         approvedClaim.setApprovedAmount(approvedAmount);
         approvedClaim.setApprovalDate(LocalDate.now());
+        MedicalEntriesService.updateMedicalEntryStatus(MedicalEntryId, "APPROVED");
         return modelMapper.map(approvedMedicalClaimRepository.save(approvedClaim), ApprovedMedicalClaimDto.class);
     }
 

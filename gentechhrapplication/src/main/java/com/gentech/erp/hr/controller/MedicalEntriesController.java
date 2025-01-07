@@ -64,4 +64,22 @@ public class MedicalEntriesController {
         medicalEntriesService.deleteItemById(medicalEntryId);
         return new ResponseEntity<>("Item with Id " + medicalEntryId + " was successfully deleted", HttpStatusCode.valueOf(200));
     }
+
+    @PostMapping("/update-status")
+    public ResponseEntity<String> updateStatus(
+            @RequestParam("medicalEntryId") Long id,
+            @RequestParam("status") String status
+    ) {
+        try {
+            medicalEntriesService.updateMedicalEntryStatus(id, status);
+            return ResponseEntity.status(HttpStatus.OK).body("Medical entry status updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating medical entry status: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntriesByStatus(@RequestParam String status) {
+        return ResponseEntity.ok(medicalEntriesService.getAllMedicalEntryByStatus(status));
+    }
 }

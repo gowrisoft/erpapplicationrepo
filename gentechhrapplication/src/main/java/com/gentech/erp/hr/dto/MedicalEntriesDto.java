@@ -8,6 +8,7 @@ public class MedicalEntriesDto {
     private Long dependantId;
     private byte[] medicalFiles;
     private Double requestAmount;
+    private String status;
     private Date createdAt;
     private Date updatedAt;
 
@@ -44,6 +45,14 @@ public class MedicalEntriesDto {
 
     public void setRequestAmount(Double requestAmount) {
         this.requestAmount = requestAmount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Date getCreatedAt() {
