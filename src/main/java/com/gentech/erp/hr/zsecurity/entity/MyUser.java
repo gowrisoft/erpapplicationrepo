@@ -1,35 +1,38 @@
 package com.gentech.erp.hr.zsecurity.entity;
-
+import com.gentech.erp.hr.entity.Employee;
 import jakarta.persistence.*;
 
 @Entity
 public class MyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Long id;
+    private Long userId;
     @Column(unique = true)
     private String username;
     private String password;
     private String role;
 
-    public MyUser() {
+    @OneToOne
+    @JoinColumn(nullable = false)
+    private Employee employee;
 
+    public MyUser() {
     }
 
-    public MyUser(String username, String password, String role) {
-        super();
+    public MyUser(Long userId, String username, String password, String role, Employee employee) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.employee = employee;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -54,5 +57,13 @@ public class MyUser {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

@@ -1,8 +1,10 @@
 package com.gentech.erp.hr.zsecurity.service;
 
 import com.gentech.erp.hr.dto.MyUserDto;
+import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.exception.EmptyUsernameException;
 import com.gentech.erp.hr.exception.UsernameAlreadyExistsException;
+import com.gentech.erp.hr.repository.EmployeeRepository;
 import com.gentech.erp.hr.zsecurity.entity.MyUser;
 import com.gentech.erp.hr.zsecurity.repository.MyUserRepository;
 import org.modelmapper.ModelMapper;
@@ -18,21 +20,31 @@ public class MyUserService {
     private MyUserRepository repository;
 
     @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ModelMapper modelMapper;
 
     public MyUserDto registerUser(MyUserDto userDto) {
-        MyUser user = modelMapper.map(userDto, MyUser.class);
-        if (!StringUtils.hasText(user.getUsername())) {
-            throw new EmptyUsernameException("Username cannot be empty");
-        }
-        if (repository.existsByUsername(user.getUsername())) {
+
+        if (repository.existsByUsername(userDto.getUsername())) {
             throw new UsernameAlreadyExistsException("Username already exists");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        repository.save(user);
-        return modelMapper.map(user, MyUserDto.class);
+
+        MyUser user = new MyUser();
+        user.setUsername(userDto.getUsername());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRole(userDto.getRole().toUpperCase());
+
+        if(userDto.getEmployeeId() != null) {
+            Employee employee = employeeRepository.findById(userDto.getEmployeeId())
+                    .orElseThrow(() -> new RuntimeException("Employee not found"));
+            user.setEmployee(employee);
+        }
+
+        return modelMapper.map(repository.save(user), MyUserDto.class);
     }
 }

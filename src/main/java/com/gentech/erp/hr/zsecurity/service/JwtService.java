@@ -1,8 +1,11 @@
 package com.gentech.erp.hr.zsecurity.service;
 
+import com.gentech.erp.hr.zsecurity.entity.MyUser;
+import com.gentech.erp.hr.zsecurity.repository.MyUserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +22,15 @@ public class JwtService {
     private static final String secret = "09C9CAD1E5F2EAD707158862AE481C8FB3ACB79257B09E25520D0E03F8C813B2310A6ACA1F9F1F2D892CA9AC30E5DE05A210704F7C55DFF5B0BA3486508AF4EA";
     private static final long validity = TimeUnit.MINUTES.toMillis(300);
 
+    @Autowired
+    private MyUserRepository myUserRepository;
+
     public String generateToken(UserDetails userDetails) {
+        MyUser user = myUserRepository.findByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
         Map<String, String> claims = new HashMap<>();
-        claims.put("issuer", "https://www.gentechacademy.com");
+        claims.put("employeeId", String.valueOf(user.getEmployee().getEmpId()));
 
         return Jwts.builder()
                 .claims(claims)
@@ -44,6 +53,17 @@ public class JwtService {
                 .parseSignedClaims(jwt)
                 .getPayload();
         return claims.getSubject();
+    }
+
+    public Long extractEmployeeId(String jwt) {
+        Object employeeId = Jwts.parser()
+                .verifyWith(generateKey())
+                .build()
+                .parseSignedClaims(jwt)
+                .getPayload()
+                .get("employeeId");
+
+        return Long.parseLong(employeeId.toString());
     }
 
     public boolean isTokenValid(String jwt) {

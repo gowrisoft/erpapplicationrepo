@@ -2,20 +2,21 @@ package com.gentech.erp.hr.dto;
 
 public class MyUserDto {
 
-    private Long id;
+    private Long userId;
     private String username;
     private String password;
     private String role;
+    private Long employeeId;
 
     public MyUserDto() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -40,5 +41,13 @@ public class MyUserDto {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 }
