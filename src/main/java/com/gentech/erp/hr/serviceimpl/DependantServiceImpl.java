@@ -25,6 +25,7 @@ public class DependantServiceImpl implements DependantService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
     @Override
     public DependantDto saveDependant(DependantDto dependantsDto) {
         Employee employee = employeeRepository.findById(dependantsDto.getEmployeeId())
@@ -43,13 +44,13 @@ public class DependantServiceImpl implements DependantService {
     @Override
     public DependantDto getDependantById(Long dependantId) throws Exception {
         return modelMapper.map(dependantsRepository.findById(dependantId)
-                .orElseThrow(() -> new Exception("Dependent is not present with id "+ dependantId)), DependantDto.class);
+                .orElseThrow(() -> new Exception("Dependent is not present with id " + dependantId)), DependantDto.class);
     }
 
     @Override
     public DependantDto updateItem(DependantDto dependantsDto, Long id) throws Exception {
         Dependant dependant = dependantsRepository.findById(id)
-                .orElseThrow(() -> new Exception("Dependent is not present with id "+ id));
+                .orElseThrow(() -> new Exception("Dependent is not present with id " + id));
         dependant.setDependantName(dependantsDto.getDependantName());
         dependant.setDependantAge(dependantsDto.getDependantAge());
         dependant.setRelationship(dependantsDto.getRelationship());
@@ -59,19 +60,19 @@ public class DependantServiceImpl implements DependantService {
 
     @Override
     public void deleteItemById(Long id) {
-        if(!dependantsRepository.existsById(id)){
-            throw new ResourceNotFoundException("Dependent is not present with id "+ id);
+        if (!dependantsRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Dependent is not present with id " + id);
         }
         dependantsRepository.deleteById(id);
     }
 
- @Override
-public List<DependantDto> getDependantByEmployeeId(Long empId)  {
-    employeeRepository.findById(empId)
-            .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
-    return dependantsRepository.findAllByEmployee_EmpId(empId).stream()
-            .map(dependant -> modelMapper.map(dependant, DependantDto.class)).collect(Collectors.toList());
-}
+    @Override
+    public List<DependantDto> getDependantByEmployeeId(Long empId) {
+        employeeRepository.findById(empId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+        return dependantsRepository.findAllByEmployee_EmpId(empId).stream()
+                .map(dependant -> modelMapper.map(dependant, DependantDto.class)).collect(Collectors.toList());
+    }
 
     @Override
     public List<DependantDto> getDependantByDependantId(Long dependantId) {

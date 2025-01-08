@@ -12,7 +12,7 @@ public class ApprovedMedicalClaim {
     private Long claimId;
 
     @OneToOne
-    @JoinColumn(name = "medical_entry_id",referencedColumnName = "medicalEntryId", nullable = false)
+    @JoinColumn(name = "medical_entry_id", referencedColumnName = "medicalEntryId", nullable = false)
     private MedicalEntries medicalEntry;
 
     @Column(nullable = false)

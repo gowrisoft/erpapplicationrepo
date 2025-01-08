@@ -73,19 +73,19 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 
     @Override
     public List<Integer> getLeaveApplicationIdByEmployeeId(long id) {
-        Employee employee=employeeRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Employee","Employee Id",id));
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee", "Employee Id", id));
         return leaveRepository.getLeaveIdByEmployeeId(id);
     }
 
     @Override
     public List<LeaveApplicationDto> getLeaveApplicationByEmployeeId(long id) {
-        Employee employee=employeeRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Employee","Employee id",id));
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee", "Employee id", id));
 
-        List<LeaveApplication> leaveApplication=leaveRepository.getLeavesByEmployeeId(id);
+        List<LeaveApplication> leaveApplication = leaveRepository.getLeavesByEmployeeId(id);
         return leaveApplication.stream()
-                .map((leaves)->LeaveApplicationMapper.mapLeaveToLeaveDto(leaves))
+                .map((leaves) -> LeaveApplicationMapper.mapLeaveToLeaveDto(leaves))
                 .toList();
     }
 

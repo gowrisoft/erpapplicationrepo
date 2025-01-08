@@ -17,9 +17,11 @@ public class Admin {
     private long adminPhone;
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SanctionLeave> sanctionLeaves;
+
     public Admin() {
 
     }
+
     public Admin(int adminId, String adminName, long adminPhone, List<SanctionLeave> sanctionLeaves) {
         super();
         this.adminId = adminId;

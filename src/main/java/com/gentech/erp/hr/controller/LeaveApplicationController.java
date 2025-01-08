@@ -31,18 +31,18 @@ public class LeaveApplicationController {
     }
 
     @GetMapping("/getLeaveIdByEmployeeId")
-    ResponseEntity<List<Integer>> getLeaveApplicationIdByEmployeeId(@RequestParam long id){
-        return new ResponseEntity<List<Integer>>(leaveService.getLeaveApplicationIdByEmployeeId(id),HttpStatusCode.valueOf(200));
+    ResponseEntity<List<Integer>> getLeaveApplicationIdByEmployeeId(@RequestParam long id) {
+        return new ResponseEntity<List<Integer>>(leaveService.getLeaveApplicationIdByEmployeeId(id), HttpStatusCode.valueOf(200));
     }
 
     @GetMapping("/getLeavesByEmployeeId")
-    ResponseEntity<List<LeaveApplicationDto>> getLeaveApplicationsByEmployeeId(@RequestParam long id){
-        return new ResponseEntity<List<LeaveApplicationDto>>(leaveService.getLeaveApplicationByEmployeeId(id),HttpStatusCode.valueOf(200));
+    ResponseEntity<List<LeaveApplicationDto>> getLeaveApplicationsByEmployeeId(@RequestParam long id) {
+        return new ResponseEntity<List<LeaveApplicationDto>>(leaveService.getLeaveApplicationByEmployeeId(id), HttpStatusCode.valueOf(200));
     }
 
     @GetMapping("/getAllLeaveDetails")
-    ResponseEntity<List<Object[]>> getLeaveDetails(){
-        return new ResponseEntity<List<Object[]>>(leaveService.getLeaveDetails(),HttpStatusCode.valueOf(200));
+    ResponseEntity<List<Object[]>> getLeaveDetails() {
+        return new ResponseEntity<List<Object[]>>(leaveService.getLeaveDetails(), HttpStatusCode.valueOf(200));
     }
 
     @DeleteMapping("/deleteLeaveById")

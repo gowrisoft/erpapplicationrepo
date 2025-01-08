@@ -1,7 +1,6 @@
 package com.gentech.erp.hr.dto;
 
 import java.util.Date;
-import com.gentech.erp.hr.entity.Dependant;
 
 public class MedicalEntriesDto {
     private Long medicalEntryId;

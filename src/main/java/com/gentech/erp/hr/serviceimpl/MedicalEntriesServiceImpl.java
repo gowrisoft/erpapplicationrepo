@@ -56,7 +56,7 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
 
     @Override
     public void deleteItemById(Long id) {
-        if(medicalEntriesRepository.existsById(id)) {
+        if (medicalEntriesRepository.existsById(id)) {
             medicalEntriesRepository.deleteById(id);
         } else {
             throw new RuntimeException("Medical Entry not found with ID: " + id);
