@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/v1/api")
 @RestController
-public class ContentController {
+public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -28,12 +28,12 @@ public class ContentController {
 
     @PostMapping("/authenticate")
     public String authenticateAndGetToken(@RequestBody LoginForm loginForm) {
-        Authentication authentication = authenticationManager.authenticate(
+        Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginForm.username(), loginForm.password()));
-        if (authentication.isAuthenticated()) {
+
+        if (auth.isAuthenticated()) {
             return jwtService.generateToken(myUserDetailsServiceImpl.loadUserByUsername(loginForm.username()));
-        } else {
-            throw new UsernameNotFoundException("Invalid Credentails!!!");
         }
+        throw new UsernameNotFoundException("Invalid Credentials!!!");
     }
 }

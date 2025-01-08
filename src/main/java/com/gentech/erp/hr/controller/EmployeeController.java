@@ -2,6 +2,7 @@ package com.gentech.erp.hr.controller;
 
 import com.gentech.erp.hr.dto.EmployeeDto;
 import com.gentech.erp.hr.service.EmployeeService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +39,15 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     ResponseEntity<String> deleteEmployeeById(@PathVariable long id) {
         return new ResponseEntity<>(employeeService.deleteEmployeeById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/profile")
+    ResponseEntity<EmployeeDto> getEmployeeProfile(HttpServletRequest request) {
+        Long employeeId = (Long) request.getAttribute("employeeId");
+        if (employeeId == null) {
+            throw new RuntimeException("Employee ID not found in token");
+        }
+
+        return new ResponseEntity<>(employeeService.getEmployeeById(employeeId), HttpStatus.OK);
     }
 }
