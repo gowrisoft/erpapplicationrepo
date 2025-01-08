@@ -1,6 +1,5 @@
 package com.gentech.erp.hr.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -15,7 +14,7 @@ public class Payroll {
     private Long payrollId;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id",referencedColumnName = "emp_id", nullable = false)
+    @JoinColumn(name = "employee_id", referencedColumnName = "emp_id", nullable = false)
     private Employee employee;
 
     @NotNull

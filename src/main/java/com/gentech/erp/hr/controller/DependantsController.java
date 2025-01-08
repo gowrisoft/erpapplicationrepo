@@ -39,7 +39,7 @@ public class DependantsController {
 
     @GetMapping("/dependant/employee/{id}")
     public ResponseEntity<List<DependantDto>> getDependantByEmployeeId(@PathVariable Long id) throws Exception {
-        return ResponseEntity.ok(depService.getDependantByEmployeeId(id))  ;
+        return ResponseEntity.ok(depService.getDependantByEmployeeId(id));
     }
 
     @GetMapping("/dependant/dependant/{id}")

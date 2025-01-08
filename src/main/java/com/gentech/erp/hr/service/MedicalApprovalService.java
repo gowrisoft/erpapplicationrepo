@@ -1,7 +1,6 @@
 package com.gentech.erp.hr.service;
 
 import com.gentech.erp.hr.dto.ApprovedMedicalClaimDto;
-import com.gentech.erp.hr.entity.ApprovedMedicalClaim;
 
 import java.util.List;
 

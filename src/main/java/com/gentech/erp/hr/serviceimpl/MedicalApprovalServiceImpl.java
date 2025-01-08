@@ -19,14 +19,11 @@ import java.util.List;
 public class MedicalApprovalServiceImpl implements MedicalApprovalService {
 
     @Autowired
+    ModelMapper modelMapper;
+    @Autowired
     private MedicalEntriesRepository medicalEntriesRepository;
-
     @Autowired
     private ApprovedMedicalClaimRepository approvedMedicalClaimRepository;
-
-    @Autowired
-    ModelMapper modelMapper;
-
     @Autowired
     private MedicalEntriesService MedicalEntriesService;
 
@@ -46,7 +43,7 @@ public class MedicalApprovalServiceImpl implements MedicalApprovalService {
     public List<ApprovedMedicalClaimDto> getApprovedMedicalClaimByEmployeeId(Long empId) {
         List<ApprovedMedicalClaim> approvedMedicalClaims = approvedMedicalClaimRepository.findByEmployeeEmpId(empId);
         return approvedMedicalClaims.stream().map(approvedMedicalClaim -> modelMapper.map
-                        (approvedMedicalClaim, ApprovedMedicalClaimDto.class)).toList();
+                (approvedMedicalClaim, ApprovedMedicalClaimDto.class)).toList();
     }
 
     @Override
@@ -58,6 +55,6 @@ public class MedicalApprovalServiceImpl implements MedicalApprovalService {
     @Override
     public List<ApprovedMedicalClaimDto> getAllApprovedMedicalClaims() {
         return approvedMedicalClaimRepository.findAll().stream().map(approvedMedicalClaim -> modelMapper.map
-                        (approvedMedicalClaim, ApprovedMedicalClaimDto.class)).toList();
+                (approvedMedicalClaim, ApprovedMedicalClaimDto.class)).toList();
     }
 }
