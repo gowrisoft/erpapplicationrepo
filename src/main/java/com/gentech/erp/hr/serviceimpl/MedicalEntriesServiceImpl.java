@@ -56,11 +56,13 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
 
     @Override
     public void deleteItemById(Long id) {
-        if (medicalEntriesRepository.existsById(id)) {
-            medicalEntriesRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Medical Entry not found with ID: " + id);
+        MedicalEntries medicalEntry = medicalEntriesRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Medical Entry not found with ID: " + id));
+
+        if (medicalEntry.getStatus() == MedicalEntries.MedicalEntryStatus.APPROVED) {
+            throw new RuntimeException("Deletion is not allowed for approved medical entries.");
         }
+        medicalEntriesRepository.deleteById(id);
     }
 
     @Override
@@ -78,6 +80,10 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
         MedicalEntries medicalEntry = medicalEntriesRepository.findById(medicalEntryId)
                 .orElseThrow(() -> new RuntimeException("Medical Entry not found with medicalEntryId: " + medicalEntryId));
 
+        if (medicalEntry.getStatus() == MedicalEntries.MedicalEntryStatus.APPROVED) {
+            throw new RuntimeException("Modifications are not allowed for approved medical entries.");
+        }
+
         medicalEntry.setDependant(dependant);
         medicalEntry.setMedicalFiles(medicalFiles.getBytes());
         medicalEntry.setRequestAmount(requestAmount);
@@ -88,6 +94,11 @@ public class MedicalEntriesServiceImpl implements MedicalEntriesService {
     public MedicalEntriesDto updateMedicalEntryStatus(Long medicalEntryId, String status) {
         MedicalEntries medicalEntry = medicalEntriesRepository.findById(medicalEntryId)
                 .orElseThrow(() -> new RuntimeException("Medical Entry not found with medicalEntryId: " + medicalEntryId));
+
+        if (medicalEntry.getStatus() == MedicalEntries.MedicalEntryStatus.APPROVED) {
+            throw new RuntimeException("Status change is not allowed for approved medical entries.");
+        }
+
         medicalEntry.setStatus(MedicalEntries.MedicalEntryStatus.valueOf(status));
         return modelMapper.map(medicalEntriesRepository.save(medicalEntry), MedicalEntriesDto.class);
     }
