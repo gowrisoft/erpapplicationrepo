@@ -25,5 +25,4 @@ public class PrintJoiningReportsController {
     public ResponseEntity<List<PrintJoiningReportsDto>> getAllPrintReportss() {
         return new ResponseEntity<List<PrintJoiningReportsDto>>(printService.getAllPrintReportss(), HttpStatus.OK);
     }
-
 }

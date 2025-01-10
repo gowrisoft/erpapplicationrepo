@@ -12,7 +12,7 @@ public class EmployeeDto {
     private long employeeId;
 
     @NotNull(message = "First name cannot be null")
-    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
+    @Size(min = 1, max = 50, message = "First name must be between 2 and 50 characters")
     private String firstName;
 
     @NotNull(message = "Last name cannot be null")

@@ -10,8 +10,8 @@ public class CompensatoryLeaveMapper {
                 compensatoryLeaveEntity.getCompensatoryLeaveId(),
                 compensatoryLeaveEntity.getLeaveDate(),
                 compensatoryLeaveEntity.getCompensatoryReason(),
-                compensatoryLeaveEntity.getApprovedBy(),
-                compensatoryLeaveEntity.getCompensatoryStatus(),
+                compensatoryLeaveEntity.getStartDate(),
+                compensatoryLeaveEntity.getEndDate(),
                 compensatoryLeaveEntity.getEmployee().getEmpId()
         );
         return compensatoryLeaveDto;
@@ -22,9 +22,10 @@ public class CompensatoryLeaveMapper {
                 compensatoryLeaveDto.getCompensatoryLeaveId(),
                 compensatoryLeaveDto.getLeaveDate(),
                 compensatoryLeaveDto.getCompensatoryReason(),
-                compensatoryLeaveDto.getApprovedBy(),
-                compensatoryLeaveDto.getCompensatoryStatus(),
+                compensatoryLeaveDto.getStartDate(),
+                compensatoryLeaveDto.getEndDate(),
                 employee,
+                null,
                 null
         );
         return compensatoryLeaveEntity;

@@ -26,13 +26,26 @@ public class AuthController {
     @Autowired
     private MyUserDetailsServiceImpl myUserDetailsServiceImpl;
 
-    @PostMapping("/authenticate")
-    public String authenticateAndGetToken(@RequestBody LoginForm loginForm) {
+    @PostMapping("/admin/authenticate")
+    public String authenticateAdmin(@RequestBody LoginForm loginForm) {
+        return authenticateUserWithRole(loginForm, "ROLE_ADMIN");
+    }
+
+    @PostMapping("/user/authenticate")
+    public String authenticateEmployee(@RequestBody LoginForm loginForm) {
+        return authenticateUserWithRole(loginForm, "ROLE_USER");
+    }
+
+    private String authenticateUserWithRole(LoginForm loginForm, String role) {
         Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginForm.username(), loginForm.password()));
 
         if (auth.isAuthenticated()) {
-            return jwtService.generateToken(myUserDetailsServiceImpl.loadUserByUsername(loginForm.username()));
+            if (auth.getAuthorities().stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(role))) {
+                return jwtService.generateToken(myUserDetailsServiceImpl.loadUserByUsername(loginForm.username()));
+            } else {
+                throw new UsernameNotFoundException("User does not have the required role: " + role);
+            }
         }
         throw new UsernameNotFoundException("Invalid Credentials!!!");
     }

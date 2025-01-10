@@ -1,24 +1,24 @@
 package com.gentech.erp.hr.dto;
 
-import com.gentech.erp.hr.entity.SanctionLeave;
 import com.gentech.erp.hr.entity.SanctionLeave.ApplicationStatus;
-
 import java.time.LocalDateTime;
 
 public class SanctionLeaveDto {
     private int sanctionId;
-    private SanctionLeave.ApplicationStatus applicationStatus;
+    private ApplicationStatus applicationStatus;
     private LocalDateTime sanctionDate;
-    private int leaveRequestId;
+    private Integer leaveRequestId; // Nullable
+    private Integer compensatoryLeaveId; // Nullable
     private int adminId;
 
-    public SanctionLeaveDto(int sanctionId, ApplicationStatus applicationStatus, LocalDateTime sanctionDate,
-                            int leaveRequestId, int adminId) {
-        super();
+    public SanctionLeaveDto() {}
+
+    public SanctionLeaveDto(int sanctionId, ApplicationStatus applicationStatus, LocalDateTime sanctionDate, Integer leaveRequestId, Integer compensatoryLeaveId, int adminId) {
         this.sanctionId = sanctionId;
         this.applicationStatus = applicationStatus;
         this.sanctionDate = sanctionDate;
         this.leaveRequestId = leaveRequestId;
+        this.compensatoryLeaveId = compensatoryLeaveId;
         this.adminId = adminId;
     }
 
@@ -30,11 +30,11 @@ public class SanctionLeaveDto {
         this.sanctionId = sanctionId;
     }
 
-    public SanctionLeave.ApplicationStatus getApplicationStatus() {
+    public ApplicationStatus getApplicationStatus() {
         return applicationStatus;
     }
 
-    public void setApplicationStatus(SanctionLeave.ApplicationStatus applicationStatus) {
+    public void setApplicationStatus(ApplicationStatus applicationStatus) {
         this.applicationStatus = applicationStatus;
     }
 
@@ -46,12 +46,20 @@ public class SanctionLeaveDto {
         this.sanctionDate = sanctionDate;
     }
 
-    public int getLeaveRequestId() {
+    public Integer getLeaveRequestId() {
         return leaveRequestId;
     }
 
-    public void setLeaveRequestId(int leaveRequestId) {
+    public void setLeaveRequestId(Integer leaveRequestId) {
         this.leaveRequestId = leaveRequestId;
+    }
+
+    public Integer getCompensatoryLeaveId() {
+        return compensatoryLeaveId;
+    }
+
+    public void setCompensatoryLeaveId(Integer compensatoryLeaveId) {
+        this.compensatoryLeaveId = compensatoryLeaveId;
     }
 
     public int getAdminId() {

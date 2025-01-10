@@ -35,10 +35,11 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) ->
-                requests.requestMatchers("/home/**", "/register/**", "/v1/api/authenticate",
+                requests.requestMatchers("/home/**", "/v1/api/register",
+                                "/v1/api/admin/authenticate", "/v1/api/user/authenticate",
                                 "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/user/**").hasRole("USER")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/v1/api/user/**").hasRole("USER")
+                        .requestMatchers("/v1/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated());
         http.csrf(csrf -> csrf.disable());
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()));

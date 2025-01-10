@@ -51,8 +51,6 @@ public class Employee {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LeaveApplication> leaveApplications;
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ModifyLeave> modifyLeaves;
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LeaveLedger> leaveLedgers;
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CompensatoryLeave> compensatoryLeaveEntities;
@@ -61,7 +59,7 @@ public class Employee {
 
     }
 
-    public Employee(long empId, String firstName, String lastName, String email, String phoneNumber, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, String empDesignation, List<LeaveApplication> leaveApplications, List<ModifyLeave> modifyLeaves, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities) {
+    public Employee(long empId, String firstName, String lastName, String email, String phoneNumber, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, String empDesignation, List<LeaveApplication> leaveApplications, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities) {
         this.empId = empId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -72,7 +70,6 @@ public class Employee {
         this.dateOfJoining = dateOfJoining;
         this.empDesignation = empDesignation;
         this.leaveApplications = leaveApplications;
-        this.modifyLeaves = modifyLeaves;
         this.leaveLedgers = leaveLedgers;
         this.compensatoryLeaveEntities = compensatoryLeaveEntities;
     }
@@ -155,14 +152,6 @@ public class Employee {
 
     public void setLeaveApplications(List<LeaveApplication> leaveApplications) {
         this.leaveApplications = leaveApplications;
-    }
-
-    public List<ModifyLeave> getModifyLeaves() {
-        return modifyLeaves;
-    }
-
-    public void setModifyLeaves(List<ModifyLeave> modifyLeaves) {
-        this.modifyLeaves = modifyLeaves;
     }
 
     public List<LeaveLedger> getLeaveLedgers() {

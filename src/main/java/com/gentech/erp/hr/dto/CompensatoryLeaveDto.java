@@ -1,26 +1,24 @@
 package com.gentech.erp.hr.dto;
-
-import com.gentech.erp.hr.entity.CompensatoryLeave;
-import com.gentech.erp.hr.entity.CompensatoryLeave.CompensatoryStatus;
-
 import java.sql.Date;
 
 public class CompensatoryLeaveDto {
     private int compensatoryLeaveId;
     private Date leaveDate;
     private String compensatoryReason;
-    private String approvedBy;
-    private CompensatoryLeave.CompensatoryStatus compensatoryStatus;
+    private Date startDate;
+    private Date endDate;
     private long empId;
 
-    public CompensatoryLeaveDto(int compensatoryLeaveId, Date leaveDate, String compensatoryReason, String approvedBy,
-                                CompensatoryStatus compensatoryStatus, long empId) {
-        super();
+    public CompensatoryLeaveDto(){
+
+    }
+
+    public CompensatoryLeaveDto(int compensatoryLeaveId, Date leaveDate, String compensatoryReason, Date startDate, Date endDate, long empId) {
         this.compensatoryLeaveId = compensatoryLeaveId;
         this.leaveDate = leaveDate;
         this.compensatoryReason = compensatoryReason;
-        this.approvedBy = approvedBy;
-        this.compensatoryStatus = compensatoryStatus;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.empId = empId;
     }
 
@@ -44,24 +42,24 @@ public class CompensatoryLeaveDto {
         return compensatoryReason;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
     public void setCompensatoryReason(String compensatoryReason) {
         this.compensatoryReason = compensatoryReason;
-    }
-
-    public String getApprovedBy() {
-        return approvedBy;
-    }
-
-    public void setApprovedBy(String approvedBy) {
-        this.approvedBy = approvedBy;
-    }
-
-    public CompensatoryLeave.CompensatoryStatus getCompensatoryStatus() {
-        return compensatoryStatus;
-    }
-
-    public void setCompensatoryStatus(CompensatoryLeave.CompensatoryStatus compensatoryStatus) {
-        this.compensatoryStatus = compensatoryStatus;
     }
 
     public long getEmpId() {

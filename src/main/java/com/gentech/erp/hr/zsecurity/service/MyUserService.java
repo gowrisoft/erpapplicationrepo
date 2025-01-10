@@ -42,6 +42,10 @@ public class MyUserService {
         if(userDto.getEmployeeId() != null) {
             Employee employee = employeeRepository.findById(userDto.getEmployeeId())
                     .orElseThrow(() -> new RuntimeException("Employee not found"));
+
+            if (repository.existsByEmployee(employee)) {
+                throw new IllegalArgumentException("Employee is already associated with a user");
+            }
             user.setEmployee(employee);
         }
 

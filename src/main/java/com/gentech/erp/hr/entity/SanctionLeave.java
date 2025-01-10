@@ -1,7 +1,6 @@
 package com.gentech.erp.hr.entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,29 +10,34 @@ public class SanctionLeave {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sanction_id")
     private int sanctionId;
+
     @Column(name = "application_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private ApplicationStatus applicationStatus;
+
     @Column(name = "sanction_date", nullable = false)
     private LocalDateTime sanctionDate;
+
     @OneToOne
-    @JoinColumn(name = "leave_req_id", referencedColumnName = "leave_req_id")
+    @JoinColumn(name = "leave_req_id", referencedColumnName = "leave_req_id", nullable = true)
     private LeaveApplication leaveApplication;
+
+    @OneToOne
+    @JoinColumn(name = "compensatory_leave_id", referencedColumnName = "compensatory_leave_id", nullable = true)
+    private CompensatoryLeave compensatoryLeave;
+
     @ManyToOne
-    @JoinColumn(name = "admin_id", referencedColumnName = "admin_id")
+    @JoinColumn(name = "admin_id", referencedColumnName = "admin_id", nullable = false)
     private Admin admin;
 
-    public SanctionLeave() {
+    public SanctionLeave() {}
 
-    }
-
-    public SanctionLeave(int sanctionId, ApplicationStatus applicationStatus, LocalDateTime sanctionDate,
-                         LeaveApplication leaveApplication, Admin admin) {
-        super();
+    public SanctionLeave(int sanctionId, ApplicationStatus applicationStatus, LocalDateTime sanctionDate, LeaveApplication leaveApplication, CompensatoryLeave compensatoryLeave, Admin admin) {
         this.sanctionId = sanctionId;
         this.applicationStatus = applicationStatus;
         this.sanctionDate = sanctionDate;
         this.leaveApplication = leaveApplication;
+        this.compensatoryLeave = compensatoryLeave;
         this.admin = admin;
     }
 
@@ -69,6 +73,14 @@ public class SanctionLeave {
         this.leaveApplication = leaveApplication;
     }
 
+    public CompensatoryLeave getCompensatoryLeave() {
+        return compensatoryLeave;
+    }
+
+    public void setCompensatoryLeave(CompensatoryLeave compensatoryLeave) {
+        this.compensatoryLeave = compensatoryLeave;
+    }
+
     public Admin getAdmin() {
         return admin;
     }
@@ -87,4 +99,3 @@ public class SanctionLeave {
         REJECTED
     }
 }
-
