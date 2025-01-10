@@ -2,6 +2,7 @@ package com.gentech.erp.hr.controller;
 
 import com.gentech.erp.hr.dto.MedicalEntriesDto;
 import com.gentech.erp.hr.service.MedicalEntriesService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -13,13 +14,13 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/api/medical-entry")
+@RequestMapping("/v1/api")
 public class MedicalEntriesController {
 
     @Autowired
     private MedicalEntriesService medicalEntriesService;
 
-    @PostMapping("/add")
+    @PostMapping("/medical-entry/add")
     public ResponseEntity<MedicalEntriesDto> addMedicalEntry(
             @RequestParam("dependantId") Long dependantId,
             @RequestParam("medicalFiles") MultipartFile medicalFiles,
@@ -32,18 +33,23 @@ public class MedicalEntriesController {
         return ResponseEntity.ok(medicalEntriesService.getAllMedicalEntries());
     }
 
-    @GetMapping("/medicalentryid/{medicalEntryId}")
+    @GetMapping("/medical-entry/medicalentryid/{medicalEntryId}")
     public ResponseEntity<MedicalEntriesDto> getMedicalEntryByMRno(@PathVariable Long medicalEntryId) {
         MedicalEntriesDto medicalEntry = medicalEntriesService.getMedicalEntryById(medicalEntryId);
         return medicalEntry != null ? ResponseEntity.ok(medicalEntry) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/employee/{employeeId}")
+    @GetMapping("/medical-entry/employee/{employeeId}")
     public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntriesByEmpId(@PathVariable Long employeeId) {
         return ResponseEntity.ok(medicalEntriesService.getMedicalEntryByeEmployeeId(employeeId));
     }
 
-    @PutMapping("/update")
+    @GetMapping("/user/medical-entry/employee")
+    public ResponseEntity<List<MedicalEntriesDto>> getMedicalEntriesByEmployeeId(HttpServletRequest request) {
+        return ResponseEntity.ok(medicalEntriesService.getMedicalEntryByeEmployeeId((Long) request.getAttribute("employeeId")));
+    }
+
+    @PutMapping("/medical-entry/update")
     public ResponseEntity<String> updateByid(
             @RequestParam Long dependantId,
             @RequestParam MultipartFile medicalFiles,
@@ -59,13 +65,13 @@ public class MedicalEntriesController {
         }
     }
 
-    @DeleteMapping("/{medicalEntryId}")
+    @DeleteMapping("/medical-entry/{medicalEntryId}")
     public ResponseEntity<String> deleteItem(@PathVariable Long medicalEntryId) {
         medicalEntriesService.deleteItemById(medicalEntryId);
         return new ResponseEntity<>("Item with Id " + medicalEntryId + " was successfully deleted", HttpStatusCode.valueOf(200));
     }
 
-    @PostMapping("/update-status")
+    @PostMapping("/medical-entry/update-status")
     public ResponseEntity<String> updateStatus(
             @RequestParam("medicalEntryId") Long id,
             @RequestParam("status") String status
@@ -78,7 +84,7 @@ public class MedicalEntriesController {
         }
     }
 
-    @GetMapping("/status")
+    @GetMapping("/medical-entry/status")
     public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntriesByStatus(@RequestParam String status) {
         return ResponseEntity.ok(medicalEntriesService.getAllMedicalEntryByStatus(status));
     }

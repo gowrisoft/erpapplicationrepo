@@ -2,6 +2,7 @@ package com.gentech.erp.hr.controller;
 
 import com.gentech.erp.hr.dto.DependantDto;
 import com.gentech.erp.hr.service.DependantService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,13 @@ public class DependantsController {
     @PostMapping("/dependant")
     public ResponseEntity<DependantDto> addDependant(@RequestBody DependantDto dependant) {
         DependantDto savedDependant = depService.saveDependant(dependant);
+        return ResponseEntity.ok(savedDependant);
+    }
+
+    @PostMapping("user/dependant")
+    public ResponseEntity<DependantDto> addDependantByEmployee(@RequestBody DependantDto dependantDto, HttpServletRequest request) {
+        dependantDto.setEmployeeId((Long) request.getAttribute("employeeId"));
+        DependantDto savedDependant = depService.saveDependant(dependantDto);
         return ResponseEntity.ok(savedDependant);
     }
 
@@ -40,6 +48,11 @@ public class DependantsController {
     @GetMapping("/dependant/employee/{id}")
     public ResponseEntity<List<DependantDto>> getDependantByEmployeeId(@PathVariable Long id) throws Exception {
         return ResponseEntity.ok(depService.getDependantByEmployeeId(id));
+    }
+
+    @GetMapping("user/dependant/employee")
+    public ResponseEntity<List<DependantDto>> getDependantByEmployee(HttpServletRequest request) throws Exception {
+        return ResponseEntity.ok(depService.getDependantByEmployeeId((Long) request.getAttribute("employeeId")));
     }
 
     @GetMapping("/dependant/dependant/{id}")
