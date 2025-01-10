@@ -2,11 +2,13 @@ package com.gentech.erp.hr.serviceimpl;
 
 import com.gentech.erp.hr.dto.SanctionLeaveDto;
 import com.gentech.erp.hr.entity.Admin;
+import com.gentech.erp.hr.entity.CompensatoryLeave;
 import com.gentech.erp.hr.entity.LeaveApplication;
 import com.gentech.erp.hr.entity.SanctionLeave;
 import com.gentech.erp.hr.exception.ResourceNotFoundException;
 import com.gentech.erp.hr.mapper.SanctionLeaveMapper;
 import com.gentech.erp.hr.repository.AdminRepository;
+import com.gentech.erp.hr.repository.CompensatoryLeaveRepository;
 import com.gentech.erp.hr.repository.LeaveApplicationRepository;
 import com.gentech.erp.hr.repository.SanctionLeaveRepository;
 import com.gentech.erp.hr.service.SanctionLeaveService;
@@ -20,30 +22,45 @@ import java.util.List;
 public class SanctionLeaveServiceImpl implements SanctionLeaveService {
     @Autowired
     private LeaveApplicationRepository leaveRepository;
+
     @Autowired
     private AdminRepository adminRepository;
+
+    @Autowired
+    private CompensatoryLeaveRepository compensatoryLeaveRepository;
+
     @Autowired
     private SanctionLeaveRepository sanctionLeaveRepository;
 
     @Override
     public SanctionLeaveDto addSanctionLeave(SanctionLeaveDto sanctionLeaveDto) {
-        LeaveApplication leaveApplication = leaveRepository.findById(sanctionLeaveDto.getLeaveRequestId()).
-                orElseThrow(() -> new ResourceNotFoundException("Reservation", "Id", sanctionLeaveDto.getSanctionId()));
+        LeaveApplication leaveApplication = null;
+        if (sanctionLeaveDto.getLeaveRequestId() != null) {
+            leaveApplication = leaveRepository.findById(sanctionLeaveDto.getLeaveRequestId())
+                    .orElseThrow(() -> new ResourceNotFoundException("LeaveApplication", "Id", sanctionLeaveDto.getLeaveRequestId()));
+        }
 
-        Admin admin = adminRepository.findById(sanctionLeaveDto.getAdminId()).
-                orElseThrow(() -> new ResourceNotFoundException("Reservation", "Id", sanctionLeaveDto.getAdminId()));
+        CompensatoryLeave compensatoryLeave = null;
+        if (sanctionLeaveDto.getCompensatoryLeaveId() != null) {
+            compensatoryLeave = compensatoryLeaveRepository.findById(sanctionLeaveDto.getCompensatoryLeaveId())
+                    .orElseThrow(() -> new ResourceNotFoundException("CompensatoryLeave", "Id", sanctionLeaveDto.getCompensatoryLeaveId()));
+        }
 
-        SanctionLeave sanctionLeave = SanctionLeaveMapper.mapSancDtoToSanc(sanctionLeaveDto, leaveApplication, admin);
+        Admin admin = adminRepository.findById(sanctionLeaveDto.getAdminId())
+                .orElseThrow(() -> new ResourceNotFoundException("Admin", "Id", sanctionLeaveDto.getAdminId()));
+
+        SanctionLeave sanctionLeave = SanctionLeaveMapper.mapSancDtoToSanc(sanctionLeaveDto, leaveApplication, compensatoryLeave, admin);
+
         sanctionLeaveRepository.save(sanctionLeave);
-        SanctionLeaveDto sanctionLeaveDto1 = SanctionLeaveMapper.mapSancToSancDto(sanctionLeave);
-        return sanctionLeaveDto1;
+
+        return SanctionLeaveMapper.mapSancToSancDto(sanctionLeave);
     }
 
     @Override
     public List<SanctionLeaveDto> getALlSanctionedLeaves() {
         return sanctionLeaveRepository.findAll()
                 .stream()
-                .map((sanctionedLeave) -> SanctionLeaveMapper.mapSancToSancDto(sanctionedLeave))
+                .map(SanctionLeaveMapper::mapSancToSancDto)
                 .toList();
     }
 
@@ -51,7 +68,6 @@ public class SanctionLeaveServiceImpl implements SanctionLeaveService {
     public SanctionLeaveDto getSanctionLeaveById(int id) {
         SanctionLeave sanctionLeave = sanctionLeaveRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Sanction Leave", "sanction leave id", id));
-
         return SanctionLeaveMapper.mapSancToSancDto(sanctionLeave);
     }
 
@@ -75,4 +91,3 @@ public class SanctionLeaveServiceImpl implements SanctionLeaveService {
         return "Sanction leave with sanction id : " + id + " is successfully deleted in the database";
     }
 }
-

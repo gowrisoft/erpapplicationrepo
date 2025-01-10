@@ -61,4 +61,19 @@ public class CompensatoryLeaveServiceImpl implements CompensatoryLeaveService {
         compensatoryLeaveRepository.deleteById(id);
         return "Compensatory Leave with compensatory leave id : " + id + " deleted successfully in the database";
     }
+
+    @Override
+    public CompensatoryLeaveDto updateCompensatoryLeave(int id,CompensatoryLeaveDto compensatoryLeaveDto) {
+        CompensatoryLeave compensatoryLeave=compensatoryLeaveRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Compensatory Leave", "Compensatory Leave id", id));
+
+        compensatoryLeave.setLeaveDate(compensatoryLeaveDto.getLeaveDate());
+        compensatoryLeave.setCompensatoryReason(compensatoryLeaveDto.getCompensatoryReason());
+        compensatoryLeave.setStartDate(compensatoryLeaveDto.getStartDate());
+        compensatoryLeave.setEndDate(compensatoryLeaveDto.getEndDate());
+
+        CompensatoryLeave updatedCompensatoryLeave=compensatoryLeaveRepository.save(compensatoryLeave);
+
+        return CompensatoryLeaveMapper.mapCompToCompDto(updatedCompensatoryLeave);
+    }
 }

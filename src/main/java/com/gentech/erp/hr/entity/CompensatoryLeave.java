@@ -15,31 +15,31 @@ public class CompensatoryLeave {
     private Date leaveDate;
     @Column(name = "compensatory_reason")
     private String compensatoryReason;
-    @Column(name = "approved_by")
-    private String approvedBy;
-    @Column(name = "compensatory_leave_status", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private CompensatoryStatus compensatoryStatus;
+    @Column(name = "start_date")
+    private Date startDate;
+    @Column(name = "end_date")
+    private Date endDate;
     @ManyToOne
     @JoinColumn(name = "emp_id", referencedColumnName = "emp_id", nullable = false)
     private Employee employee;
     @OneToOne(mappedBy = "compensatoryLeave", cascade = CascadeType.ALL, orphanRemoval = true)
     private LeaveLedger leaveLedger;
+    @OneToOne(mappedBy = "compensatoryLeave", cascade = CascadeType.ALL, orphanRemoval = true)
+    private SanctionLeave sanctionLeave;
 
     public CompensatoryLeave() {
 
     }
 
-    public CompensatoryLeave(int compensatoryLeaveId, Date leaveDate, String compensatoryReason, String approvedBy,
-                             CompensatoryStatus compensatoryStatus, Employee employee, LeaveLedger leaveLedger) {
-        super();
+    public CompensatoryLeave(int compensatoryLeaveId, Date leaveDate, String compensatoryReason, Date startDate, Date endDate, Employee employee, LeaveLedger leaveLedger, SanctionLeave sanctionLeave) {
         this.compensatoryLeaveId = compensatoryLeaveId;
         this.leaveDate = leaveDate;
         this.compensatoryReason = compensatoryReason;
-        this.approvedBy = approvedBy;
-        this.compensatoryStatus = compensatoryStatus;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.employee = employee;
         this.leaveLedger = leaveLedger;
+        this.sanctionLeave = sanctionLeave;
     }
 
     public int getCompensatoryLeaveId() {
@@ -66,20 +66,20 @@ public class CompensatoryLeave {
         this.compensatoryReason = compensatoryReason;
     }
 
-    public String getApprovedBy() {
-        return approvedBy;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setApprovedBy(String approvedBy) {
-        this.approvedBy = approvedBy;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public CompensatoryStatus getCompensatoryStatus() {
-        return compensatoryStatus;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setCompensatoryStatus(CompensatoryStatus compensatoryStatus) {
-        this.compensatoryStatus = compensatoryStatus;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Employee getEmployee() {
@@ -90,6 +90,14 @@ public class CompensatoryLeave {
         this.employee = employee;
     }
 
+    public SanctionLeave getSanctionLeave() {
+        return sanctionLeave;
+    }
+
+    public void setSanctionLeave(SanctionLeave sanctionLeave) {
+        this.sanctionLeave = sanctionLeave;
+    }
+
     public LeaveLedger getLeaveLedger() {
         return leaveLedger;
     }
@@ -98,10 +106,5 @@ public class CompensatoryLeave {
         this.leaveLedger = leaveLedger;
     }
 
-    public enum CompensatoryStatus {
-        APPROVED,
-        REJECTED,
-        PENDING
-    }
 }
 

@@ -26,8 +26,6 @@ public class LeaveApplication {
     @JoinColumn(name = "emp_id", nullable = false)
     private Employee employee;
     @OneToOne(mappedBy = "leaveApplication", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ModifyLeave modifyLeave;
-    @OneToOne(mappedBy = "leaveApplication", cascade = CascadeType.ALL, orphanRemoval = true)
     private SanctionLeave sanctionLeave;
     @OneToMany(mappedBy = "leaveApplication", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LeaveLedger> leaveLedgers;
@@ -36,10 +34,7 @@ public class LeaveApplication {
 
     }
 
-    public LeaveApplication(int leaveRequestId, Date startDate, Date endDate, String reason, String empName,
-                            String typeOfLeave, Employee employee, ModifyLeave modifyLeave, SanctionLeave sanctionLeave,
-                            List<LeaveLedger> leaveLedgers) {
-        super();
+    public LeaveApplication(int leaveRequestId, Date startDate, Date endDate, String reason, String empName, String typeOfLeave, Employee employee, SanctionLeave sanctionLeave, List<LeaveLedger> leaveLedgers) {
         this.leaveRequestId = leaveRequestId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -47,7 +42,6 @@ public class LeaveApplication {
         this.empName = empName;
         this.typeOfLeave = typeOfLeave;
         this.employee = employee;
-        this.modifyLeave = modifyLeave;
         this.sanctionLeave = sanctionLeave;
         this.leaveLedgers = leaveLedgers;
     }
@@ -106,14 +100,6 @@ public class LeaveApplication {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
-    }
-
-    public ModifyLeave getModifyLeave() {
-        return modifyLeave;
-    }
-
-    public void setModifyLeave(ModifyLeave modifyLeave) {
-        this.modifyLeave = modifyLeave;
     }
 
     public SanctionLeave getSanctionLeave() {

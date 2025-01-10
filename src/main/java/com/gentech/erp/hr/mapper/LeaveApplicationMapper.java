@@ -3,7 +3,6 @@ package com.gentech.erp.hr.mapper;
 import com.gentech.erp.hr.dto.LeaveApplicationDto;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.entity.LeaveApplication;
-import com.gentech.erp.hr.entity.ModifyLeave;
 import com.gentech.erp.hr.entity.SanctionLeave;
 
 public class LeaveApplicationMapper {
@@ -20,7 +19,7 @@ public class LeaveApplicationMapper {
         return leaveDto;
     }
 
-    public static LeaveApplication mapLeaveDtoToLeave(LeaveApplicationDto leaveDto, Employee employee, ModifyLeave modifyLeave, SanctionLeave sanctionLeave) {
+    public static LeaveApplication mapLeaveDtoToLeave(LeaveApplicationDto leaveDto, Employee employee, SanctionLeave sanctionLeave) {
         LeaveApplication leaveApplication = new LeaveApplication(
                 leaveDto.getLeaveRequestId(),
                 leaveDto.getStartDate(),
@@ -29,7 +28,6 @@ public class LeaveApplicationMapper {
                 leaveDto.getEmpName(),
                 leaveDto.getTypeOfLeave(),
                 employee,
-                modifyLeave,
                 sanctionLeave,
                 null
         );
