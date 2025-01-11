@@ -11,20 +11,20 @@ public class JoiningReportDto {
     private String status;
     private Date joiningDate;
     private Employee joiningEmployee;
-    private Employee adminId;
+    private Employee admin;
     private Employee reportingManager;
 
 
     public JoiningReportDto() {}
 
-    public JoiningReportDto(Long joiningId, String empName, String designation, String status, Date joiningDate, Employee joiningEmployee, Employee adminId, Employee reportingManager) {
+    public JoiningReportDto(Long joiningId, String empName, String designation, String status, Date joiningDate, Employee joiningEmployee, Employee admin, Employee reportingManager) {
         this.joiningId = joiningId;
         this.empName = empName;
         this.designation = designation;
         this.status = status;
         this.joiningDate = joiningDate;
         this.joiningEmployee = joiningEmployee;
-        this.adminId = adminId;
+        this.admin = admin;
         this.reportingManager = reportingManager;
     }
 
@@ -76,12 +76,12 @@ public class JoiningReportDto {
         this.joiningEmployee = joiningEmployee;
     }
 
-    public Employee getAdminId() {
-        return adminId;
+    public Employee getAdmin() {
+        return admin;
     }
 
-    public void setAdminId(Employee adminId) {
-        this.adminId = adminId;
+    public void setAdminId(Employee admin) {
+        this.admin = admin;
     }
 
     public Employee getReportingManager() {

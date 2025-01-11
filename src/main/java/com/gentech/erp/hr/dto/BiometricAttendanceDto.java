@@ -20,7 +20,6 @@ public class BiometricAttendanceDto {
 
     }
 
-
     public BiometricAttendanceDto(Long biometricId, LocalDate attendanceDate, LocalTime timeIn, LocalTime timeOut,
                                   BigDecimal totalHoursWorked, String dutyType, Employee employee) {
         super();
