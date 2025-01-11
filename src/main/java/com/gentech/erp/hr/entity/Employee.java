@@ -16,7 +16,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "emp_id")
-    private long empId;
+    private Long empId;
 
     @NotNull(message = "First name cannot be null")
     @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
@@ -59,7 +59,7 @@ public class Employee {
 
     }
 
-    public Employee(long empId, String firstName, String lastName, String email, String phoneNumber, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, String empDesignation, List<LeaveApplication> leaveApplications, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities) {
+    public Employee(Long empId, String firstName, String lastName, String email, String phoneNumber, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, String empDesignation, List<LeaveApplication> leaveApplications, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities) {
         this.empId = empId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -74,11 +74,11 @@ public class Employee {
         this.compensatoryLeaveEntities = compensatoryLeaveEntities;
     }
 
-    public long getEmpId() {
+    public Long getEmpId() {
         return empId;
     }
 
-    public void setEmpId(long empId) {
+    public void setEmpId(Long empId) {
         this.empId = empId;
     }
 

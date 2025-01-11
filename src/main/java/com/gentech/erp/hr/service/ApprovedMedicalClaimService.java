@@ -4,8 +4,9 @@ import com.gentech.erp.hr.dto.ApprovedMedicalClaimDto;
 
 import java.util.List;
 
-public interface MedicalApprovalService {
-    ApprovedMedicalClaimDto approveMedicalEntry(Long MRno, Double approvedAmount);
+public interface ApprovedMedicalClaimService {
+
+    ApprovedMedicalClaimDto approveMedicalEntry(Long MedicalEntryId, Double approvedAmount, Long adminId);
 
     List<ApprovedMedicalClaimDto> getApprovedMedicalClaimByEmployeeId(Long empId);
 

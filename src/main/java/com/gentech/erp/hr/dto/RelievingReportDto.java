@@ -1,7 +1,8 @@
 package com.gentech.erp.hr.dto;
 
 import com.gentech.erp.hr.entity.Employee;
-
+import com.gentech.erp.hr.entity.JoiningReport;
+import com.gentech.erp.hr.entity.Admin;
 import java.sql.Date;
 
 public class RelievingReportDto {
@@ -12,20 +13,8 @@ public class RelievingReportDto {
     private String reason;
     private String status;
     private Date relievingDate;
-
-    public RelievingReportDto() {
-
-    }
-
-    public RelievingReportDto(Long relievingId, String empName, String designation, Employee relievingEmployee, String reason, String status, Date relievingDate) {
-        this.relievingId = relievingId;
-        this.empName = empName;
-        this.designation = designation;
-        this.relievingEmployee = relievingEmployee;
-        this.reason = reason;
-        this.status = status;
-        this.relievingDate = relievingDate;
-    }
+    private Admin reladminId;
+    private JoiningReport relJoiningId;
 
     public Long getRelievingId() {
         return relievingId;
@@ -81,5 +70,36 @@ public class RelievingReportDto {
 
     public void setRelievingDate(Date relievingDate) {
         this.relievingDate = relievingDate;
+    }
+
+    public Admin getReladminId() {
+        return reladminId;
+    }
+
+    public void setReladminId(Admin reladminId) {
+        this.reladminId=reladminId;
+    }
+
+    public JoiningReport getRelJoiningId() {
+        return relJoiningId;
+    }
+
+    public void setRelJoiningId(JoiningReport relJoiningId) {
+        this.relJoiningId=relJoiningId;
+    }
+
+    public RelievingReportDto(){
+
+    }
+    public RelievingReportDto(Long relievingId, String empName, String designation, Employee relievingEmployee, String reason, String status, Date relievingDate,Admin reladminId,JoiningReport relJoiningId) {
+        this.relievingId = relievingId;
+        this.empName = empName;
+        this.designation = designation;
+        this.relievingEmployee = relievingEmployee;
+        this.reason = reason;
+        this.status = status;
+        this.relievingDate = relievingDate;
+        this.reladminId=reladminId;
+        this.relJoiningId=relJoiningId;
     }
 }

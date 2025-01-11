@@ -1,12 +1,11 @@
 package com.gentech.erp.hr.entity;
 
-import jakarta.persistence.*;
-
 import java.sql.Date;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tbl_print_relieving_report")
-public class PrintRelievingReports {
+public class PrintRelievingReports{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,13 +16,25 @@ public class PrintRelievingReports {
     @Column(name = "print_date")
     private Date printDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "print_Relieving_id", referencedColumnName = "relieving_id")
     private RelievingReport printRelievingId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "print_admin_id", referencedColumnName = "admin_id")
     private Admin printadminId;
+
+
+    @ManyToOne
+    @JoinColumn(name = "print_Joining_id", referencedColumnName = "joining_id")
+    private JoiningReport printJoiningId;
+
+    @ManyToOne
+    @JoinColumn(name = "print_emp_id", referencedColumnName = "Emp_id")
+    private Employee printempId;
+
+    @Column(name = "employee_name")
+    private String empName;
 
     @Column(name = "status")
     private String status;
@@ -33,20 +44,26 @@ public class PrintRelievingReports {
     }
 
 
-    public PrintRelievingReports(Date printDate, RelievingReport printRelievingId, Admin printadminId, String status) {
+    public PrintRelievingReports(Date printDate, RelievingReport printRelievingId, Admin printadminId, String status,JoiningReport printJoiningId,Employee printempId, String empName) {
         super();
         this.printDate = printDate;
         this.printRelievingId = printRelievingId;
         this.printadminId = printadminId;
         this.status = status;
+        this.printJoiningId=printJoiningId;
+        this.printempId=printempId;
+        this.empName= empName;
     }
 
-    public PrintRelievingReports(Long printId, Date printDate, RelievingReport printRelievingId, Admin printadminId, String status) {
+    public PrintRelievingReports(Long printId, Date printDate, RelievingReport printRelievingId, Admin printadminId, String status,JoiningReport printJoiningId,Employee printempId, String empName) {
         this.printId = printId;
         this.printDate = printDate;
         this.printRelievingId = printRelievingId;
         this.printadminId = printadminId;
         this.status = status;
+        this.printJoiningId=printJoiningId;
+        this.printempId=printempId;
+        this.empName= empName;
     }
 
     public Long getPrintId() {
@@ -89,4 +106,28 @@ public class PrintRelievingReports {
         this.status = status;
     }
 
+    public JoiningReport getPrintJoiningId()
+    {
+        return printJoiningId;
+    }
+
+    public void serPrintJoiningId(JoiningReport printJoiningId) {
+        this.printJoiningId=printJoiningId;
+    }
+
+    public Employee getPrintempId() {
+        return printempId;
+    }
+
+    public void setPrintempId(Employee printempId) {
+        this.printempId=printempId;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
 }

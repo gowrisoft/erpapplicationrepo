@@ -43,7 +43,6 @@ public class EmployeeController {
 
     @GetMapping("/user/employee/profile")
     ResponseEntity<EmployeeDto> getEmployeeProfile(HttpServletRequest request) {
-        Long employeeId = (Long) request.getAttribute("employeeId");
-        return new ResponseEntity<>(employeeService.getEmployeeById(employeeId), HttpStatus.OK);
+        return new ResponseEntity<>(employeeService.getEmployeeById((Long) request.getAttribute("employeeId")), HttpStatus.OK);
     }
 }

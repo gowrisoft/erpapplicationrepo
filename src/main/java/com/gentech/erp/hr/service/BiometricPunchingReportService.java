@@ -10,4 +10,11 @@ public interface BiometricPunchingReportService {
 
     List<BiometricPunchingReportDto> getAllBiometricPunchingReport();
 
+    void deleteBiometricPunchingReportById(Long id);
+
+    BiometricPunchingReportDto getBiometricPunchingReportById(Long id);
+
+    BiometricPunchingReportDto updateBiometricPunchingReport(Long id,BiometricPunchingReportDto biometricpunchingreportDto);
+
 }
+

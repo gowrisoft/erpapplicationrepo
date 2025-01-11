@@ -4,28 +4,31 @@ import com.gentech.erp.hr.dto.RelievingReportDto;
 import com.gentech.erp.hr.entity.RelievingReport;
 
 public class RelievingReportMapper {
-    public static RelievingReportDto mapRelReportToRelReportDto(RelievingReport relievingReport) {
-        RelievingReportDto relievingReportDto = new RelievingReportDto(
+    public static RelievingReportDto mapRelReportToRelReportDto(RelievingReport relievingReport){
+        RelievingReportDto relievingReportDto=new RelievingReportDto(
                 relievingReport.getRelievingId(),
                 relievingReport.getEmpName(),
                 relievingReport.getDesignation(),
                 relievingReport.getRelievingEmployee(),
                 relievingReport.getReason(),
                 relievingReport.getStatus(),
-                relievingReport.getRelievingDate()
+                relievingReport.getRelievingDate(),
+                relievingReport.getReladminId(),
+                relievingReport.getRelJoiningId()
         );
         return relievingReportDto;
     }
-
-    public static RelievingReport mapRelReportDtoToRelReport(RelievingReportDto relievingReportDto) {
-        RelievingReport relievingReport = new RelievingReport(
+    public static RelievingReport mapRelReportDtoToRelReport(RelievingReportDto relievingReportDto){
+        RelievingReport relievingReport=new RelievingReport(
                 relievingReportDto.getRelievingId(),
                 relievingReportDto.getEmpName(),
                 relievingReportDto.getDesignation(),
                 relievingReportDto.getRelievingEmployee(),
                 relievingReportDto.getReason(),
                 relievingReportDto.getStatus(),
-                relievingReportDto.getRelievingDate()
+                relievingReportDto.getRelievingDate(),
+                relievingReportDto.getReladminId(),
+                relievingReportDto.getRelJoiningId()
         );
         return relievingReport;
     }

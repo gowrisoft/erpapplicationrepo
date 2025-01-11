@@ -1,7 +1,6 @@
 package com.gentech.erp.hr.entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -21,14 +20,19 @@ public class ApprovedMedicalClaim {
     @Column(nullable = false)
     private LocalDate approvalDate;
 
-    public ApprovedMedicalClaim(Long claimId, MedicalEntries medicalEntry, Double approvedAmount, LocalDate approvalDate) {
+    @ManyToOne
+    @JoinColumn(name = "admin_id", nullable = false)
+    private Employee admin;
+
+    public ApprovedMedicalClaim() {
+    }
+
+    public ApprovedMedicalClaim(Long claimId, MedicalEntries medicalEntry, Double approvedAmount, LocalDate approvalDate, Employee admin) {
         this.claimId = claimId;
         this.medicalEntry = medicalEntry;
         this.approvedAmount = approvedAmount;
         this.approvalDate = approvalDate;
-    }
-
-    public ApprovedMedicalClaim() {
+        this.admin = admin;
     }
 
     public Long getClaimId() {
@@ -61,5 +65,13 @@ public class ApprovedMedicalClaim {
 
     public void setApprovalDate(LocalDate approvalDate) {
         this.approvalDate = approvalDate;
+    }
+
+    public Employee getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Employee admin) {
+        this.admin = admin;
     }
 }

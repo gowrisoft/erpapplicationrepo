@@ -1,12 +1,11 @@
 package com.gentech.erp.hr.entity;
 
-import jakarta.persistence.*;
-
 import java.sql.Date;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tbl_print_joining_report")
-public class PrintJoiningReports {
+public class PrintJoiningReports{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,35 +16,47 @@ public class PrintJoiningReports {
     @Column(name = "print_date")
     private Date printDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "print_joining_id", referencedColumnName = "joining_id")
     private JoiningReport printJoiningId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "print_admin_id", referencedColumnName = "admin_id")
     private Admin printadminId;
 
+    @ManyToOne
+    @JoinColumn(name = "print_emp_id", referencedColumnName = "Emp_id")
+    private Employee printempId;
+
     @Column(name = "status")
     private String status;
+
+    @Column(name = "employee_name")
+    private String empName;
 
     public PrintJoiningReports() {
 
     }
 
-    public PrintJoiningReports(Date printDate, JoiningReport printJoiningId, Admin printadminId, String status) {
+    public PrintJoiningReports(Date printDate, JoiningReport printJoiningId, Admin printadminId, String status,Employee printempId,String empName
+    ) {
         super();
         this.printDate = printDate;
         this.printJoiningId = printJoiningId;
         this.printadminId = printadminId;
         this.status = status;
+        this.printempId=printempId;
+        this.empName = empName;
     }
 
-    public PrintJoiningReports(Long printId, Date printDate, JoiningReport printJoiningId, Admin printadminId, String status) {
+    public PrintJoiningReports(Long printId, Date printDate, JoiningReport printJoiningId, Admin printadminId, String status,Employee printempId,String empName) {
         this.printId = printId;
         this.printDate = printDate;
         this.printJoiningId = printJoiningId;
         this.printadminId = printadminId;
         this.status = status;
+        this.printempId=printempId;
+        this.empName = empName;
     }
 
     public Long getPrintId() {
@@ -86,6 +97,22 @@ public class PrintJoiningReports {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Employee getPrintempId() {
+        return printempId;
+    }
+
+    public void setPrintempId(Employee printempId) {
+        this.printempId=printempId;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
 
 }
