@@ -27,12 +27,12 @@ public class SanctionLeave {
     private CompensatoryLeave compensatoryLeave;
 
     @ManyToOne
-    @JoinColumn(name = "admin_id", referencedColumnName = "admin_id", nullable = false)
-    private Admin admin;
+    @JoinColumn(name = "admin_id", nullable = false)
+    private Employee admin;
 
     public SanctionLeave() {}
 
-    public SanctionLeave(int sanctionId, ApplicationStatus applicationStatus, LocalDateTime sanctionDate, LeaveApplication leaveApplication, CompensatoryLeave compensatoryLeave, Admin admin) {
+    public SanctionLeave(int sanctionId, ApplicationStatus applicationStatus, LocalDateTime sanctionDate, LeaveApplication leaveApplication, CompensatoryLeave compensatoryLeave, Employee admin) {
         this.sanctionId = sanctionId;
         this.applicationStatus = applicationStatus;
         this.sanctionDate = sanctionDate;
@@ -81,11 +81,11 @@ public class SanctionLeave {
         this.compensatoryLeave = compensatoryLeave;
     }
 
-    public Admin getAdmin() {
+    public Employee getAdmin() {
         return admin;
     }
 
-    public void setAdmin(Admin admin) {
+    public void setAdmin(Employee admin) {
         this.admin = admin;
     }
 

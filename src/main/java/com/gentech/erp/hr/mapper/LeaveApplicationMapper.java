@@ -12,7 +12,6 @@ public class LeaveApplicationMapper {
                 leaveApplication.getStartDate(),
                 leaveApplication.getEndDate(),
                 leaveApplication.getReason(),
-                leaveApplication.getEmpName(),
                 leaveApplication.getTypeOfLeave(),
                 leaveApplication.getEmployee().getEmpId()
         );
@@ -25,7 +24,6 @@ public class LeaveApplicationMapper {
                 leaveDto.getStartDate(),
                 leaveDto.getEndDate(),
                 leaveDto.getReason(),
-                leaveDto.getEmpName(),
                 leaveDto.getTypeOfLeave(),
                 employee,
                 sanctionLeave,

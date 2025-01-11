@@ -9,11 +9,11 @@ public class SanctionLeaveDto {
     private LocalDateTime sanctionDate;
     private Integer leaveRequestId; // Nullable
     private Integer compensatoryLeaveId; // Nullable
-    private int adminId;
+    private Long adminId;
 
     public SanctionLeaveDto() {}
 
-    public SanctionLeaveDto(int sanctionId, ApplicationStatus applicationStatus, LocalDateTime sanctionDate, Integer leaveRequestId, Integer compensatoryLeaveId, int adminId) {
+    public SanctionLeaveDto(int sanctionId, ApplicationStatus applicationStatus, LocalDateTime sanctionDate, Integer leaveRequestId, Integer compensatoryLeaveId, Long adminId) {
         this.sanctionId = sanctionId;
         this.applicationStatus = applicationStatus;
         this.sanctionDate = sanctionDate;
@@ -62,11 +62,11 @@ public class SanctionLeaveDto {
         this.compensatoryLeaveId = compensatoryLeaveId;
     }
 
-    public int getAdminId() {
+    public Long getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(int adminId) {
+    public void setAdminId(Long adminId) {
         this.adminId = adminId;
     }
 }

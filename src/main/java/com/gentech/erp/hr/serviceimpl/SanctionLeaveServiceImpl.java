@@ -1,16 +1,10 @@
 package com.gentech.erp.hr.serviceimpl;
 
 import com.gentech.erp.hr.dto.SanctionLeaveDto;
-import com.gentech.erp.hr.entity.Admin;
-import com.gentech.erp.hr.entity.CompensatoryLeave;
-import com.gentech.erp.hr.entity.LeaveApplication;
-import com.gentech.erp.hr.entity.SanctionLeave;
+import com.gentech.erp.hr.entity.*;
 import com.gentech.erp.hr.exception.ResourceNotFoundException;
 import com.gentech.erp.hr.mapper.SanctionLeaveMapper;
-import com.gentech.erp.hr.repository.AdminRepository;
-import com.gentech.erp.hr.repository.CompensatoryLeaveRepository;
-import com.gentech.erp.hr.repository.LeaveApplicationRepository;
-import com.gentech.erp.hr.repository.SanctionLeaveRepository;
+import com.gentech.erp.hr.repository.*;
 import com.gentech.erp.hr.service.SanctionLeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +18,7 @@ public class SanctionLeaveServiceImpl implements SanctionLeaveService {
     private LeaveApplicationRepository leaveRepository;
 
     @Autowired
-    private AdminRepository adminRepository;
+    private EmployeeRepository adminRepository;
 
     @Autowired
     private CompensatoryLeaveRepository compensatoryLeaveRepository;
@@ -46,7 +40,7 @@ public class SanctionLeaveServiceImpl implements SanctionLeaveService {
                     .orElseThrow(() -> new ResourceNotFoundException("CompensatoryLeave", "Id", sanctionLeaveDto.getCompensatoryLeaveId()));
         }
 
-        Admin admin = adminRepository.findById(sanctionLeaveDto.getAdminId())
+        Employee admin = adminRepository.findById(sanctionLeaveDto.getAdminId())
                 .orElseThrow(() -> new ResourceNotFoundException("Admin", "Id", sanctionLeaveDto.getAdminId()));
 
         SanctionLeave sanctionLeave = SanctionLeaveMapper.mapSancDtoToSanc(sanctionLeaveDto, leaveApplication, compensatoryLeave, admin);
@@ -78,14 +72,6 @@ public class SanctionLeaveServiceImpl implements SanctionLeaveService {
                 .orElseThrow(() -> new ResourceNotFoundException("Sanction Leave", "Sanction Leave id", id));
         if (sanctionLeave == null) {
             return "Sanction leave with sanction id : " + id + " is not found in the database";
-        }
-        LeaveApplication leaveApplication = sanctionLeave.getLeaveApplication();
-        if (leaveApplication != null) {
-            leaveApplication.setSanctionLeave(null);
-        }
-        Admin admin = sanctionLeave.getAdmin();
-        if (admin != null) {
-            admin.getSanctionLeaves().remove(sanctionLeave);
         }
         sanctionLeaveRepository.delete(sanctionLeave);
         return "Sanction leave with sanction id : " + id + " is successfully deleted in the database";

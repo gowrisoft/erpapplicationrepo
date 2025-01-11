@@ -2,6 +2,7 @@ package com.gentech.erp.hr.controller;
 
 import com.gentech.erp.hr.dto.SanctionLeaveDto;
 import com.gentech.erp.hr.service.SanctionLeaveService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,9 @@ public class SanctionLeaveController {
     @Autowired
     private SanctionLeaveService sanctionLeaveService;
 
-    @PostMapping("/addSanctionLeave")
-    ResponseEntity<SanctionLeaveDto> addSanctionLeave(@RequestBody SanctionLeaveDto sanctionLeaveDto) {
+    @PostMapping("admin/addSanctionLeave")
+    ResponseEntity<SanctionLeaveDto> addSanctionLeave(@RequestBody SanctionLeaveDto sanctionLeaveDto, HttpServletRequest request) {
+        sanctionLeaveDto.setAdminId((long) request.getAttribute("employeeId"));
         return new ResponseEntity<SanctionLeaveDto>(sanctionLeaveService.addSanctionLeave(sanctionLeaveDto), HttpStatusCode.valueOf(200));
     }
 

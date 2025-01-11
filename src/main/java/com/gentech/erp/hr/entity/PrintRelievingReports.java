@@ -21,8 +21,8 @@ public class PrintRelievingReports{
     private RelievingReport printRelievingId;
 
     @ManyToOne
-    @JoinColumn(name = "print_admin_id", referencedColumnName = "admin_id")
-    private Admin printadminId;
+    @JoinColumn(name = "print_admin_id")
+    private Employee printadminId;
 
 
     @ManyToOne
@@ -40,11 +40,9 @@ public class PrintRelievingReports{
     private String status;
 
     public PrintRelievingReports() {
-
     }
 
-
-    public PrintRelievingReports(Date printDate, RelievingReport printRelievingId, Admin printadminId, String status,JoiningReport printJoiningId,Employee printempId, String empName) {
+    public PrintRelievingReports(Date printDate, RelievingReport printRelievingId, Employee printadminId, String status,JoiningReport printJoiningId,Employee printempId, String empName) {
         super();
         this.printDate = printDate;
         this.printRelievingId = printRelievingId;
@@ -55,7 +53,7 @@ public class PrintRelievingReports{
         this.empName= empName;
     }
 
-    public PrintRelievingReports(Long printId, Date printDate, RelievingReport printRelievingId, Admin printadminId, String status,JoiningReport printJoiningId,Employee printempId, String empName) {
+    public PrintRelievingReports(Long printId, Date printDate, RelievingReport printRelievingId, Employee printadminId, String status,JoiningReport printJoiningId,Employee printempId, String empName) {
         this.printId = printId;
         this.printDate = printDate;
         this.printRelievingId = printRelievingId;
@@ -90,11 +88,11 @@ public class PrintRelievingReports{
         this.printRelievingId = printRelievingId;
     }
 
-    public Admin getPrintadminId() {
+    public Employee getPrintadminId() {
         return printadminId;
     }
 
-    public void setPrintadminId(Admin printadminId) {
+    public void setPrintadminId(Employee printadminId) {
         this.printadminId = printadminId;
     }
 

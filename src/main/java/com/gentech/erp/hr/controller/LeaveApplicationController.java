@@ -2,6 +2,7 @@ package com.gentech.erp.hr.controller;
 
 import com.gentech.erp.hr.dto.LeaveApplicationDto;
 import com.gentech.erp.hr.service.LeaveApplicationService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,9 @@ public class LeaveApplicationController {
     @Autowired
     private LeaveApplicationService leaveService;
 
-    @PostMapping("/addLeave")
-    ResponseEntity<LeaveApplicationDto> applyLeave(@RequestBody LeaveApplicationDto leaveDto) {
+    @PostMapping("user/addLeave")
+    ResponseEntity<LeaveApplicationDto> applyLeave(@RequestBody LeaveApplicationDto leaveDto, HttpServletRequest request) {
+        leaveDto.setEmpId((long) request.getAttribute("employeeId"));
         return new ResponseEntity<LeaveApplicationDto>(leaveService.addLeave(leaveDto), HttpStatusCode.valueOf(200));
     }
 
@@ -38,6 +40,11 @@ public class LeaveApplicationController {
     @GetMapping("/getLeavesByEmployeeId")
     ResponseEntity<List<LeaveApplicationDto>> getLeaveApplicationsByEmployeeId(@RequestParam long id){
         return new ResponseEntity<List<LeaveApplicationDto>>(leaveService.getLeaveApplicationByEmployeeId(id),HttpStatusCode.valueOf(200));
+    }
+
+    @GetMapping("/user/getLeaves")
+    ResponseEntity<List<LeaveApplicationDto>> getLeavesByEmployeeId(HttpServletRequest request) {
+        return new ResponseEntity<List<LeaveApplicationDto>>(leaveService.getLeaveApplicationByEmployeeId((long) request.getAttribute("employeeId")), HttpStatusCode.valueOf(200));
     }
 
     @PutMapping("/updateLeaves")

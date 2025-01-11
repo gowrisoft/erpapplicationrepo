@@ -2,7 +2,6 @@ package com.gentech.erp.hr.dto;
 
 import java.sql.Date;
 
-import com.gentech.erp.hr.entity.Admin;
 import com.gentech.erp.hr.entity.Employee; // Import Employee entity
 
 public class JoiningReportDto {
@@ -12,28 +11,23 @@ public class JoiningReportDto {
     private String status;
     private Date joiningDate;
     private Employee joiningEmployee;
-    private Admin joinadminId;
+    private Employee adminId;
     private Employee reportingManager;
 
 
-    // Default constructor
     public JoiningReportDto() {}
 
-
-    public JoiningReportDto(Long joiningId, String empName, String designation, String status, Date joiningDate,
-                            Employee joiningEmployee,Admin joinadminId,Employee reportingManager) {
+    public JoiningReportDto(Long joiningId, String empName, String designation, String status, Date joiningDate, Employee joiningEmployee, Employee adminId, Employee reportingManager) {
         this.joiningId = joiningId;
         this.empName = empName;
         this.designation = designation;
         this.status = status;
         this.joiningDate = joiningDate;
         this.joiningEmployee = joiningEmployee;
-        this.joinadminId=joinadminId;
-        this.reportingManager=reportingManager;
-
+        this.adminId = adminId;
+        this.reportingManager = reportingManager;
     }
 
-    // Getters and Setters
     public Long getJoiningId() {
         return joiningId;
     }
@@ -82,12 +76,12 @@ public class JoiningReportDto {
         this.joiningEmployee = joiningEmployee;
     }
 
-    public Admin getJoinadminId() {
-        return joinadminId;
+    public Employee getAdminId() {
+        return adminId;
     }
 
-    public void setJoinadminId(Admin joinadminId) {
-        this.joinadminId=joinadminId;
+    public void setAdminId(Employee adminId) {
+        this.adminId = adminId;
     }
 
     public Employee getReportingManager() {
@@ -95,6 +89,6 @@ public class JoiningReportDto {
     }
 
     public void setReportingManager(Employee reportingManager) {
-        this.reportingManager=reportingManager;
+        this.reportingManager = reportingManager;
     }
 }

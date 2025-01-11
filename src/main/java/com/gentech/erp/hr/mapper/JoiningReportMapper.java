@@ -26,7 +26,7 @@ public class JoiningReportMapper {
                 joiningReportDto.getStatus(),
                 joiningReportDto.getJoiningDate(),
                 joiningReportDto.getJoiningEmployee(),
-                joiningReportDto.getJoinadminId(),
+                joiningReportDto.getAdminId(),
                 joiningReportDto.getReportingManager()
 
         );

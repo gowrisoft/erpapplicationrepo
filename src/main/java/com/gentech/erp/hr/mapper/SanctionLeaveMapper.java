@@ -1,10 +1,7 @@
 package com.gentech.erp.hr.mapper;
 
 import com.gentech.erp.hr.dto.SanctionLeaveDto;
-import com.gentech.erp.hr.entity.Admin;
-import com.gentech.erp.hr.entity.CompensatoryLeave;
-import com.gentech.erp.hr.entity.LeaveApplication;
-import com.gentech.erp.hr.entity.SanctionLeave;
+import com.gentech.erp.hr.entity.*;
 
 public class SanctionLeaveMapper {
     public static SanctionLeaveDto mapSancToSancDto(SanctionLeave sanctionLeave) {
@@ -21,11 +18,11 @@ public class SanctionLeaveMapper {
                 sanctionLeave.getSanctionDate(),
                 leaveRequestId,
                 compensatoryLeaveId,
-                sanctionLeave.getAdmin().getAdminId()
+                sanctionLeave.getAdmin().getEmpId()
         );
     }
 
-    public static SanctionLeave mapSancDtoToSanc(SanctionLeaveDto sanctionLeaveDto, LeaveApplication leaveApplication, CompensatoryLeave compensatoryLeave, Admin admin) {
+    public static SanctionLeave mapSancDtoToSanc(SanctionLeaveDto sanctionLeaveDto, LeaveApplication leaveApplication, CompensatoryLeave compensatoryLeave, Employee admin) {
         return new SanctionLeave(
                 sanctionLeaveDto.getSanctionId(),
                 sanctionLeaveDto.getApplicationStatus(),

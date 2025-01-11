@@ -22,8 +22,8 @@ public class RelievingReport {
     private Employee relievingEmployee;
 
     @ManyToOne
-    @JoinColumn(name = "verified_by_admin_id", referencedColumnName = "admin_id")
-    private Admin reladminId;
+    @JoinColumn(name = "verified_by_admin_id")
+    private Employee reladminId;
 
     @OneToOne
     @JoinColumn(name = "rel_joining_id", referencedColumnName = "joining_id")
@@ -96,11 +96,11 @@ public class RelievingReport {
         this.relievingDate = relievingDate;
     }
 
-    public Admin getReladminId() {
+    public Employee getReladminId() {
         return reladminId;
     }
 
-    public void setReladminId(Admin reladminId) {
+    public void setReladminId(Employee reladminId) {
         this.reladminId=reladminId;
     }
 
@@ -118,7 +118,7 @@ public class RelievingReport {
     public RelievingReport() {
     }
 
-    public RelievingReport(Long relievingId, String empName, String designation, Employee relievingEmployee, String reason, String status, Date relievingDate,Admin reladminId,JoiningReport relJoiningId) {
+    public RelievingReport(Long relievingId, String empName, String designation, Employee relievingEmployee, String reason, String status, Date relievingDate,Employee reladminId,JoiningReport relJoiningId) {
         this.relievingId = relievingId;
         this.empName = empName;
         this.designation = designation;
@@ -131,7 +131,7 @@ public class RelievingReport {
     }
 
     public RelievingReport(String empName, String designation, Employee relievingEmployee, Employee reportingManager,
-                           String status, Date relievingDate, String reason,Admin reladminId,JoiningReport relJoiningId) {
+                           String status, Date relievingDate, String reason,Employee reladminId,JoiningReport relJoiningId) {
         this.empName = empName;
         this.designation = designation;
         this.relievingEmployee = relievingEmployee;

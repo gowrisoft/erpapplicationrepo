@@ -7,18 +7,16 @@ public class LeaveApplicationDto {
     private Date startDate;
     private Date endDate;
     private String reason;
-    private String empName;
     private String typeOfLeave;
     private long empId;
 
-    public LeaveApplicationDto(int leaveRequestId, Date startDate, Date endDate, String reason, String empName,
+    public LeaveApplicationDto(int leaveRequestId, Date startDate, Date endDate, String reason,
                                String typeOfLeave, long empId) {
         super();
         this.leaveRequestId = leaveRequestId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.reason = reason;
-        this.empName = empName;
         this.typeOfLeave = typeOfLeave;
         this.empId = empId;
     }
@@ -53,14 +51,6 @@ public class LeaveApplicationDto {
 
     public void setReason(String reason) {
         this.reason = reason;
-    }
-
-    public String getEmpName() {
-        return empName;
-    }
-
-    public void setEmpName(String empName) {
-        this.empName = empName;
     }
 
     public String getTypeOfLeave() {
