@@ -10,4 +10,12 @@ public interface AttendanceService {
 
     List<AttendanceDto> getAllAttendance();
 
+    void deleteAttendanceById(Long id);
+
+    AttendanceDto getAttendanceById(Long id);
+
+    AttendanceDto updateAttendance(Long id,AttendanceDto attendanceDto);
+
+
+
 }

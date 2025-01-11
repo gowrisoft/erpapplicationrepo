@@ -1,8 +1,6 @@
 package com.gentech.erp.hr.entity;
-
-import jakarta.persistence.*;
-
 import java.sql.Date;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tbl_relieving_report")
@@ -19,9 +17,18 @@ public class RelievingReport {
     @Column(name = "designation")
     private String designation;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "relieving_emp_id", referencedColumnName = "Emp_id")
     private Employee relievingEmployee;
+
+    @ManyToOne
+    @JoinColumn(name = "verified_by_admin_id", referencedColumnName = "admin_id")
+    private Admin reladminId;
+
+    @OneToOne
+    @JoinColumn(name = "rel_joining_id", referencedColumnName = "joining_id")
+    private JoiningReport relJoiningId;
+
 
     @Column(name = "reason")
     private String reason;
@@ -32,30 +39,6 @@ public class RelievingReport {
     @Column(name = "relieving_date")
     private Date relievingDate;
 
-
-    // Constructors
-    public RelievingReport() {
-    }
-
-    public RelievingReport(Long relievingId, String empName, String designation, Employee relievingEmployee, String reason, String status, Date relievingDate) {
-        this.relievingId = relievingId;
-        this.empName = empName;
-        this.designation = designation;
-        this.relievingEmployee = relievingEmployee;
-        this.reason = reason;
-        this.status = status;
-        this.relievingDate = relievingDate;
-    }
-
-    public RelievingReport(String empName, String designation, Employee relievingEmployee, Employee reportingManager,
-                           String status, Date relievingDate, String reason) {
-        this.empName = empName;
-        this.designation = designation;
-        this.relievingEmployee = relievingEmployee;
-        this.reason = reason;
-        this.status = status;
-        this.relievingDate = relievingDate;
-    }
 
     public Long getRelievingId() {
         return relievingId;
@@ -111,5 +94,51 @@ public class RelievingReport {
 
     public void setRelievingDate(Date relievingDate) {
         this.relievingDate = relievingDate;
+    }
+
+    public Admin getReladminId() {
+        return reladminId;
+    }
+
+    public void setReladminId(Admin reladminId) {
+        this.reladminId=reladminId;
+    }
+
+    public JoiningReport getRelJoiningId() {
+        return relJoiningId;
+    }
+
+    public void setRelJoiningId(JoiningReport relJoiningId) {
+        this.relJoiningId=relJoiningId;
+    }
+
+
+
+    // Constructors
+    public RelievingReport() {
+    }
+
+    public RelievingReport(Long relievingId, String empName, String designation, Employee relievingEmployee, String reason, String status, Date relievingDate,Admin reladminId,JoiningReport relJoiningId) {
+        this.relievingId = relievingId;
+        this.empName = empName;
+        this.designation = designation;
+        this.relievingEmployee = relievingEmployee;
+        this.reason = reason;
+        this.status = status;
+        this.relievingDate = relievingDate;
+        this.reladminId=reladminId;
+        this.relJoiningId=relJoiningId;
+    }
+
+    public RelievingReport(String empName, String designation, Employee relievingEmployee, Employee reportingManager,
+                           String status, Date relievingDate, String reason,Admin reladminId,JoiningReport relJoiningId) {
+        this.empName = empName;
+        this.designation = designation;
+        this.relievingEmployee = relievingEmployee;
+        this.reason = reason;
+        this.status = status;
+        this.relievingDate = relievingDate;
+        this.reladminId=reladminId;
+        this.relJoiningId=relJoiningId;
     }
 }

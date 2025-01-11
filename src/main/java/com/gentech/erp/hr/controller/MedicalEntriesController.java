@@ -28,7 +28,7 @@ public class MedicalEntriesController {
         return ResponseEntity.ok(medicalEntriesService.saveMedicalEntry(dependantId, medicalFiles, requestAmount));
     }
 
-    @GetMapping
+    @GetMapping("/medical-entry")
     public ResponseEntity<List<MedicalEntriesDto>> getAllMedicalEntries() {
         return ResponseEntity.ok(medicalEntriesService.getAllMedicalEntries());
     }
@@ -56,7 +56,6 @@ public class MedicalEntriesController {
             @RequestParam Double requestAmount,
             @RequestParam("medicalEntryId") Long id
     ) {
-        System.out.println("medicalEntryId: " + id + ", Dependant ID: " + dependantId + ", Request Amount: " + requestAmount);
         try {
             medicalEntriesService.updateMedicalEntry(dependantId, medicalFiles, requestAmount, id);
             return ResponseEntity.status(HttpStatus.OK).body("Medical entry Edited successfully");

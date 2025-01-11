@@ -5,12 +5,10 @@ import java.time.LocalDate;
 public class ApprovedMedicalClaimDto {
 
     private Long claimId;
-
     private Long medicalEntryId;
-
     private Double approvedAmount;
-
     private LocalDate approvalDate;
+    private Long adminId;
 
     public ApprovedMedicalClaimDto() {
     }
@@ -45,5 +43,13 @@ public class ApprovedMedicalClaimDto {
 
     public void setApprovalDate(LocalDate approvalDate) {
         this.approvalDate = approvalDate;
+    }
+
+    public Long getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Long adminId) {
+        this.adminId = adminId;
     }
 }

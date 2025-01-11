@@ -1,10 +1,9 @@
 package com.gentech.erp.hr.dto;
 
-
-import com.gentech.erp.hr.entity.Employee;
-
 import java.sql.Date;
-// Import Employee entity
+
+import com.gentech.erp.hr.entity.Admin;
+import com.gentech.erp.hr.entity.Employee; // Import Employee entity
 
 public class JoiningReportDto {
     private Long joiningId;
@@ -12,22 +11,26 @@ public class JoiningReportDto {
     private String designation;
     private String status;
     private Date joiningDate;
-    private Employee joiningEmployee; // Add this field
-    private Employee reportingManagerId; // Add this field
+    private Employee joiningEmployee;
+    private Admin joinadminId;
+    private Employee reportingManager;
+
 
     // Default constructor
-    public JoiningReportDto() {
-    }
+    public JoiningReportDto() {}
 
-    // Constructor with all fields
-    public JoiningReportDto(Long joiningId, String empName, String designation, String status, Date joiningDate, Employee joiningEmployee, Employee reportingManagerId) {
+
+    public JoiningReportDto(Long joiningId, String empName, String designation, String status, Date joiningDate,
+                            Employee joiningEmployee,Admin joinadminId,Employee reportingManager) {
         this.joiningId = joiningId;
         this.empName = empName;
         this.designation = designation;
         this.status = status;
         this.joiningDate = joiningDate;
         this.joiningEmployee = joiningEmployee;
-        this.reportingManagerId = reportingManagerId;
+        this.joinadminId=joinadminId;
+        this.reportingManager=reportingManager;
+
     }
 
     // Getters and Setters
@@ -79,11 +82,19 @@ public class JoiningReportDto {
         this.joiningEmployee = joiningEmployee;
     }
 
-    public Employee getReportingManagerId() {
-        return reportingManagerId;
+    public Admin getJoinadminId() {
+        return joinadminId;
     }
 
-    public void setReportingManagerId(Employee reportingManagerId) {
-        this.reportingManagerId = reportingManagerId;
+    public void setJoinadminId(Admin joinadminId) {
+        this.joinadminId=joinadminId;
+    }
+
+    public Employee getReportingManager() {
+        return reportingManager;
+    }
+
+    public void setReportingManager(Employee reportingManager) {
+        this.reportingManager=reportingManager;
     }
 }

@@ -1,9 +1,9 @@
 package com.gentech.erp.hr.dto;
 
-import com.gentech.erp.hr.entity.Admin;
-import com.gentech.erp.hr.entity.JoiningReport;
-
 import java.sql.Date;
+import com.gentech.erp.hr.entity.Admin;
+import com.gentech.erp.hr.entity.Employee;
+import com.gentech.erp.hr.entity.JoiningReport;
 
 public class PrintJoiningReportsDto {
     private Long printId;
@@ -11,20 +11,9 @@ public class PrintJoiningReportsDto {
     private Date printDate;
     private JoiningReport printJoiningId;
     private Admin printadminId;
+    private Employee printempId;
+    private String empName;
 
-    public PrintJoiningReportsDto() {
-
-    }
-
-    public PrintJoiningReportsDto(Long printId, String status, Date printDate, JoiningReport printJoiningId,
-                                  Admin printadminId) {
-        super();
-        this.printId = printId;
-        this.status = status;
-        this.printDate = printDate;
-        this.printJoiningId = printJoiningId;
-        this.printadminId = printadminId;
-    }
 
     public Long getPrintId() {
         return printId;
@@ -64,6 +53,39 @@ public class PrintJoiningReportsDto {
 
     public void setPrintadminId(Admin printadminId) {
         this.printadminId = printadminId;
+    }
+
+    public Employee getPrintempId() {
+        return printempId;
+    }
+
+    public void setPrintempId(Employee printempId) {
+        this.printempId=printempId;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    public PrintJoiningReportsDto()
+    {
+
+    }
+
+    public PrintJoiningReportsDto(Long printId, String status, Date printDate, JoiningReport printJoiningId,
+                                  Admin printadminId,Employee printempId,String empName) {
+        super();
+        this.printId = printId;
+        this.status = status;
+        this.printDate = printDate;
+        this.printJoiningId = printJoiningId;
+        this.printadminId = printadminId;
+        this.printempId=printempId;
+        this.empName = empName;
     }
 
 }

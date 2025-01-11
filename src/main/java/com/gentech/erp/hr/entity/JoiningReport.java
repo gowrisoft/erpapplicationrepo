@@ -1,8 +1,6 @@
 package com.gentech.erp.hr.entity;
-
-import jakarta.persistence.*;
-
 import java.sql.Date;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tbl_joining_report")
@@ -25,41 +23,36 @@ public class JoiningReport {
     @Column(name = "joining_date")
     private Date joiningDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @OneToOne (cascade=CascadeType.ALL)
     @JoinColumn(name = "joining_emp_id", referencedColumnName = "Emp_id")
-    private Employee joiningEmployee; // One-to-One relationship for joining employee
+    private Employee joiningEmployee;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "reporting_manager_id", referencedColumnName = "Emp_id")
-    private Employee reportingManagerId; // Many-to-One relationship for reporting manager
+    @ManyToOne
+    @JoinColumn(name = "reporting_manager", referencedColumnName = "Emp_id")
+    private Employee reportingManager;
 
-    // Default Constructor
-    public JoiningReport() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "verified_by_admin_id", referencedColumnName = "admin_id")
+    private Admin joinadminId;
+
+
+    public JoiningReport() {}
+
 
     public JoiningReport(Long joiningId, String empName, String designation, String status, Date joiningDate,
-                         Employee joiningEmployee, Employee reportingManagerId) {
-        super();
+                         Employee joiningEmployee,Admin joinadminId,Employee reportingManager) {
         this.joiningId = joiningId;
         this.empName = empName;
         this.designation = designation;
         this.status = status;
         this.joiningDate = joiningDate;
         this.joiningEmployee = joiningEmployee;
-        this.reportingManagerId = reportingManagerId;
+        this.joinadminId=joinadminId;
+        this.reportingManager=reportingManager;
     }
 
-    public JoiningReport(String empName, String designation, String status, Date joiningDate, Employee joiningEmployee,
-                         Employee reportingManagerId) {
-        super();
-        this.empName = empName;
-        this.designation = designation;
-        this.status = status;
-        this.joiningDate = joiningDate;
-        this.joiningEmployee = joiningEmployee;
-        this.reportingManagerId = reportingManagerId;
-    }
-
+    // Getters and Setters
     public Long getJoiningId() {
         return joiningId;
     }
@@ -108,13 +101,19 @@ public class JoiningReport {
         this.joiningEmployee = joiningEmployee;
     }
 
-    public Employee getReportingManagerId() {
-        return reportingManagerId;
+    public Admin getJoinadminId() {
+        return joinadminId;
     }
 
-    public void setReportingManagerId(Employee reportingManagerId) {
-        this.reportingManagerId = reportingManagerId;
+    public void setJoinadminId(Admin joinadminId) {
+        this.joinadminId=joinadminId;
     }
 
+    public Employee getReportingManager() {
+        return reportingManager;
+    }
 
+    public void setReportingManager(Employee reportingManager) {
+        this.reportingManager=reportingManager;
+    }
 }

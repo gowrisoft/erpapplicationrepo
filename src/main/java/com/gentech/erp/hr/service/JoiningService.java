@@ -1,8 +1,8 @@
 package com.gentech.erp.hr.service;
 
+import java.util.List;
 import com.gentech.erp.hr.dto.JoiningReportDto;
 
-import java.util.List;
 
 public interface JoiningService {
 
@@ -10,4 +10,9 @@ public interface JoiningService {
 
     List<JoiningReportDto> getAllJoiningReports();
 
+    JoiningReportDto getJoiningReportById(Long id);
+
+    JoiningReportDto updateJoiningReport(Long id,JoiningReportDto joiningDto);
+
+    void deleteJoiningReportById(Long id);
 }

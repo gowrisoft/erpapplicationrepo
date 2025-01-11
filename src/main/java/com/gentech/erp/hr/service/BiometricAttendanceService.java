@@ -11,4 +11,11 @@ public interface BiometricAttendanceService {
 
     List<BiometricAttendanceDto> getAllBiometricAttendance();
 
+    void deleteBiometricAttendanceById(Long id);
+
+    BiometricAttendanceDto getBiometricAttendanceById(Long id);
+
+    BiometricAttendanceDto updateBiometricAttendance(Long id,BiometricAttendanceDto biometricAttendanceDto);
+
+
 }
