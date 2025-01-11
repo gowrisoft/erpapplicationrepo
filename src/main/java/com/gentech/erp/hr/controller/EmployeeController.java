@@ -16,27 +16,27 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @PostMapping("/employee/")
+    @PostMapping("/admin/employee/")
     ResponseEntity<EmployeeDto> addEmployee(@RequestBody EmployeeDto employeeDto) {
         return new ResponseEntity<>(employeeService.addEmployee(employeeDto), HttpStatus.OK);
     }
 
-    @GetMapping("/employee/all")
+    @GetMapping("/admin/employee/all")
     ResponseEntity<List<EmployeeDto>> getAllEmployees() {
         return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
     }
 
-    @GetMapping("/employee/{id}")
+    @GetMapping("/admin/employee/{id}")
     ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable long id) {
         return new ResponseEntity<>(employeeService.getEmployeeById(id), HttpStatus.OK);
     }
 
-    @PutMapping("/employee/{id}")
+    @PutMapping("/admin/employee/{id}")
     public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDto updatedEmployee) {
         return ResponseEntity.ok(employeeService.updateEmployee(id, updatedEmployee));
     }
 
-    @DeleteMapping("/employee/{id}")
+    @DeleteMapping("/admin/employee/{id}")
     ResponseEntity<String> deleteEmployeeById(@PathVariable long id) {
         return new ResponseEntity<>(employeeService.deleteEmployeeById(id), HttpStatus.OK);
     }

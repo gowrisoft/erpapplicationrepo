@@ -34,21 +34,21 @@ public class JoiningReport {
 
     @ManyToOne
     @JoinColumn(name = "verified_by_admin_id")
-    private Employee joinadminId;
+    private Employee admin;
 
 
     public JoiningReport() {}
 
 
     public JoiningReport(Long joiningId, String empName, String designation, String status, Date joiningDate,
-                         Employee joiningEmployee,Employee joinadminId,Employee reportingManager) {
+                         Employee joiningEmployee,Employee admin,Employee reportingManager) {
         this.joiningId = joiningId;
         this.empName = empName;
         this.designation = designation;
         this.status = status;
         this.joiningDate = joiningDate;
         this.joiningEmployee = joiningEmployee;
-        this.joinadminId=joinadminId;
+        this.admin=admin;
         this.reportingManager=reportingManager;
     }
 
@@ -101,12 +101,12 @@ public class JoiningReport {
         this.joiningEmployee = joiningEmployee;
     }
 
-    public Employee getJoinadminId() {
-        return joinadminId;
+    public Employee getAdmin() {
+        return admin;
     }
 
-    public void setJoinadminId(Employee joinadminId) {
-        this.joinadminId=joinadminId;
+    public void setAdmin(Employee admin) {
+        this.admin=admin;
     }
 
     public Employee getReportingManager() {

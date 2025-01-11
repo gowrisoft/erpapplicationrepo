@@ -16,13 +16,10 @@ import java.util.List;
 public class SanctionLeaveServiceImpl implements SanctionLeaveService {
     @Autowired
     private LeaveApplicationRepository leaveRepository;
-
     @Autowired
     private EmployeeRepository adminRepository;
-
     @Autowired
     private CompensatoryLeaveRepository compensatoryLeaveRepository;
-
     @Autowired
     private SanctionLeaveRepository sanctionLeaveRepository;
 

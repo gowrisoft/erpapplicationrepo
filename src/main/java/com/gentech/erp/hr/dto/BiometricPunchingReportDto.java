@@ -22,7 +22,6 @@ public class BiometricPunchingReportDto {
 
     }
 
-
     public BiometricPunchingReportDto(Integer reportId, Employee employee, String empName, LocalDate date,
                                       LocalTime timeIn, LocalTime timeOut, Integer numOfPunches, String location, String designation,
                                       BiometricAttendance biometricAttendance) {
