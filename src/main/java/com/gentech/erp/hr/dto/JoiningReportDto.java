@@ -2,7 +2,6 @@ package com.gentech.erp.hr.dto;
 
 import java.sql.Date;
 
-import com.gentech.erp.hr.entity.Admin;
 import com.gentech.erp.hr.entity.Employee; // Import Employee entity
 
 public class JoiningReportDto {
@@ -12,28 +11,23 @@ public class JoiningReportDto {
     private String status;
     private Date joiningDate;
     private Employee joiningEmployee;
-    private Admin joinadminId;
+    private Employee admin;
     private Employee reportingManager;
 
 
-    // Default constructor
     public JoiningReportDto() {}
 
-
-    public JoiningReportDto(Long joiningId, String empName, String designation, String status, Date joiningDate,
-                            Employee joiningEmployee,Admin joinadminId,Employee reportingManager) {
+    public JoiningReportDto(Long joiningId, String empName, String designation, String status, Date joiningDate, Employee joiningEmployee, Employee admin, Employee reportingManager) {
         this.joiningId = joiningId;
         this.empName = empName;
         this.designation = designation;
         this.status = status;
         this.joiningDate = joiningDate;
         this.joiningEmployee = joiningEmployee;
-        this.joinadminId=joinadminId;
-        this.reportingManager=reportingManager;
-
+        this.admin = admin;
+        this.reportingManager = reportingManager;
     }
 
-    // Getters and Setters
     public Long getJoiningId() {
         return joiningId;
     }
@@ -82,12 +76,12 @@ public class JoiningReportDto {
         this.joiningEmployee = joiningEmployee;
     }
 
-    public Admin getJoinadminId() {
-        return joinadminId;
+    public Employee getAdmin() {
+        return admin;
     }
 
-    public void setJoinadminId(Admin joinadminId) {
-        this.joinadminId=joinadminId;
+    public void setAdminId(Employee admin) {
+        this.admin = admin;
     }
 
     public Employee getReportingManager() {
@@ -95,6 +89,6 @@ public class JoiningReportDto {
     }
 
     public void setReportingManager(Employee reportingManager) {
-        this.reportingManager=reportingManager;
+        this.reportingManager = reportingManager;
     }
 }

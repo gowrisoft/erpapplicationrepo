@@ -12,7 +12,7 @@ public class JoiningReportMapper {
                 joiningReport.getStatus(),
                 joiningReport.getJoiningDate(),
                 joiningReport.getJoiningEmployee(),
-                joiningReport.getJoinadminId(),
+                joiningReport.getAdmin(),
                 joiningReport.getReportingManager()
 
         );
@@ -26,7 +26,7 @@ public class JoiningReportMapper {
                 joiningReportDto.getStatus(),
                 joiningReportDto.getJoiningDate(),
                 joiningReportDto.getJoiningEmployee(),
-                joiningReportDto.getJoinadminId(),
+                joiningReportDto.getAdmin(),
                 joiningReportDto.getReportingManager()
 
         );

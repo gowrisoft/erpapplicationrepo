@@ -22,7 +22,7 @@ public class Attendance {
     // Many-to-One relationship with Admin
     @ManyToOne
     @JoinColumn(name = "admin_id", nullable = false)
-    private Admin admin;
+    private Employee admin;
 
     // Many-to-One relationship with Employee
     @ManyToOne
@@ -38,7 +38,7 @@ public class Attendance {
     }
 
 
-    public Attendance(Long attendanceId, Date attendanceDate, String attendanceStatus, Admin admin, Employee employee) {
+    public Attendance(Long attendanceId, Date attendanceDate, String attendanceStatus, Employee admin, Employee employee) {
         super();
         this.attendanceId = attendanceId;
         this.attendanceDate = attendanceDate;
@@ -72,11 +72,11 @@ public class Attendance {
         this.attendanceStatus = attendanceStatus;
     }
 
-    public Admin getAdmin() {
+    public Employee getAdmin() {
         return admin;
     }
 
-    public void setAdmin(Admin admin) {
+    public void setAdmin(Employee admin) {
         this.admin = admin;
     }
 

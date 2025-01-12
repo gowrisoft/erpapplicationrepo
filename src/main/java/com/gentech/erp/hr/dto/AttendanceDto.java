@@ -1,6 +1,5 @@
 package com.gentech.erp.hr.dto;
 
-import com.gentech.erp.hr.entity.Admin;
 import com.gentech.erp.hr.entity.Employee;
 
 import java.sql.Date;
@@ -9,14 +8,14 @@ public class AttendanceDto {
     private Long attendanceId;
     private Date attendanceDate;
     private String attendanceStatus;
-    private Admin admin;
+    private Employee admin;
     private Employee employee;
 
     public AttendanceDto() {
 
     }
 
-    public AttendanceDto(Long attendanceId, Date attendanceDate, String attendanceStatus, Admin admin,
+    public AttendanceDto(Long attendanceId, Date attendanceDate, String attendanceStatus, Employee admin,
                          Employee employee) {
         super();
         this.attendanceId = attendanceId;
@@ -50,11 +49,11 @@ public class AttendanceDto {
         this.attendanceStatus = attendanceStatus;
     }
 
-    public Admin getAdmin() {
+    public Employee getAdmin() {
         return admin;
     }
 
-    public void setAdmin(Admin admin) {
+    public void setAdmin(Employee admin) {
         this.admin = admin;
     }
 

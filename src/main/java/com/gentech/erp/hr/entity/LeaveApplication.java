@@ -18,8 +18,6 @@ public class LeaveApplication {
     private Date endDate;
     @Column(name = "reason")
     private String reason;
-    @Column(name = "emp_name")
-    private String empName;
     @Column(name = "type_of_leave")
     private String typeOfLeave;
     @ManyToOne
@@ -31,15 +29,13 @@ public class LeaveApplication {
     private List<LeaveLedger> leaveLedgers;
 
     public LeaveApplication() {
-
     }
 
-    public LeaveApplication(int leaveRequestId, Date startDate, Date endDate, String reason, String empName, String typeOfLeave, Employee employee, SanctionLeave sanctionLeave, List<LeaveLedger> leaveLedgers) {
+    public LeaveApplication(int leaveRequestId, Date startDate, Date endDate, String reason, String typeOfLeave, Employee employee, SanctionLeave sanctionLeave, List<LeaveLedger> leaveLedgers) {
         this.leaveRequestId = leaveRequestId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.reason = reason;
-        this.empName = empName;
         this.typeOfLeave = typeOfLeave;
         this.employee = employee;
         this.sanctionLeave = sanctionLeave;
@@ -76,14 +72,6 @@ public class LeaveApplication {
 
     public void setReason(String reason) {
         this.reason = reason;
-    }
-
-    public String getEmpName() {
-        return empName;
-    }
-
-    public void setEmpName(String empName) {
-        this.empName = empName;
     }
 
     public String getTypeOfLeave() {

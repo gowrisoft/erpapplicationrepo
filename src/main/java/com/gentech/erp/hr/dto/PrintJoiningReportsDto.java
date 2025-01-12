@@ -1,7 +1,6 @@
 package com.gentech.erp.hr.dto;
 
 import java.sql.Date;
-import com.gentech.erp.hr.entity.Admin;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.entity.JoiningReport;
 
@@ -10,7 +9,7 @@ public class PrintJoiningReportsDto {
     private String status;
     private Date printDate;
     private JoiningReport printJoiningId;
-    private Admin printadminId;
+    private Employee printadminId;
     private Employee printempId;
     private String empName;
 
@@ -47,11 +46,11 @@ public class PrintJoiningReportsDto {
         this.printJoiningId = printJoiningId;
     }
 
-    public Admin getPrintadminId() {
+    public Employee getPrintadminId() {
         return printadminId;
     }
 
-    public void setPrintadminId(Admin printadminId) {
+    public void setPrintadminId(Employee printadminId) {
         this.printadminId = printadminId;
     }
 
@@ -77,7 +76,7 @@ public class PrintJoiningReportsDto {
     }
 
     public PrintJoiningReportsDto(Long printId, String status, Date printDate, JoiningReport printJoiningId,
-                                  Admin printadminId,Employee printempId,String empName) {
+                                  Employee printadminId,Employee printempId,String empName) {
         super();
         this.printId = printId;
         this.status = status;

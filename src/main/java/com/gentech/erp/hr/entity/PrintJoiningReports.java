@@ -21,8 +21,8 @@ public class PrintJoiningReports{
     private JoiningReport printJoiningId;
 
     @ManyToOne
-    @JoinColumn(name = "print_admin_id", referencedColumnName = "admin_id")
-    private Admin printadminId;
+    @JoinColumn(name = "print_admin_id")
+    private Employee printadminId;
 
     @ManyToOne
     @JoinColumn(name = "print_emp_id", referencedColumnName = "Emp_id")
@@ -38,7 +38,7 @@ public class PrintJoiningReports{
 
     }
 
-    public PrintJoiningReports(Date printDate, JoiningReport printJoiningId, Admin printadminId, String status,Employee printempId,String empName
+    public PrintJoiningReports(Date printDate, JoiningReport printJoiningId, Employee printadminId, String status,Employee printempId,String empName
     ) {
         super();
         this.printDate = printDate;
@@ -49,7 +49,7 @@ public class PrintJoiningReports{
         this.empName = empName;
     }
 
-    public PrintJoiningReports(Long printId, Date printDate, JoiningReport printJoiningId, Admin printadminId, String status,Employee printempId,String empName) {
+    public PrintJoiningReports(Long printId, Date printDate, JoiningReport printJoiningId, Employee printadminId, String status,Employee printempId,String empName) {
         this.printId = printId;
         this.printDate = printDate;
         this.printJoiningId = printJoiningId;
@@ -83,11 +83,11 @@ public class PrintJoiningReports{
         this.printJoiningId = printJoiningId;
     }
 
-    public Admin getPrintadminId() {
+    public Employee getPrintadminId() {
         return printadminId;
     }
 
-    public void setPrintadminId(Admin printadminId) {
+    public void setPrintadminId(Employee printadminId) {
         this.printadminId = printadminId;
     }
 

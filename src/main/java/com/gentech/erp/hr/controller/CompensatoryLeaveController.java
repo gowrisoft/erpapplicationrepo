@@ -2,6 +2,7 @@ package com.gentech.erp.hr.controller;
 
 import com.gentech.erp.hr.dto.CompensatoryLeaveDto;
 import com.gentech.erp.hr.service.CompensatoryLeaveService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,9 @@ public class CompensatoryLeaveController {
     @Autowired
     private CompensatoryLeaveService compensatoryLeaveService;
 
-    @PostMapping("/addCompensatoryLeave")
-    ResponseEntity<CompensatoryLeaveDto> addCompensatoryLeave(@RequestBody CompensatoryLeaveDto compensatoryLeaveDto) {
+    @PostMapping("user/addCompensatoryLeave")
+    ResponseEntity<CompensatoryLeaveDto> addCompensatoryLeave(@RequestBody CompensatoryLeaveDto compensatoryLeaveDto, HttpServletRequest request) {
+        compensatoryLeaveDto.setEmpId((long) request.getAttribute("employeeId"));
         return new ResponseEntity<CompensatoryLeaveDto>(compensatoryLeaveService.addCompensatoryLeave(compensatoryLeaveDto), HttpStatusCode.valueOf(200));
     }
 
