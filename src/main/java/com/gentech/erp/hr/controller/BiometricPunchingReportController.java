@@ -29,8 +29,7 @@ public class BiometricPunchingReportController {
     private BiometricPunchingReportService biometricpunchingreportService;
 
     @PostMapping("/biometricreport")
-    public ResponseEntity<BiometricPunchingReportDto> createBiometricPunchingReport(@RequestBody BiometricPunchingReportDto biometricpunchingreportDto)
-    {
+    public ResponseEntity<BiometricPunchingReportDto> createBiometricPunchingReport(@RequestBody BiometricPunchingReportDto biometricpunchingreportDto) {
         return new ResponseEntity<BiometricPunchingReportDto>(biometricpunchingreportService.createBiometricPunchingReport(biometricpunchingreportDto), HttpStatus.CREATED);
     }
 
