@@ -76,4 +76,5 @@ public class CompensatoryLeaveServiceImpl implements CompensatoryLeaveService {
 
         return CompensatoryLeaveMapper.mapCompToCompDto(updatedCompensatoryLeave);
     }
+
 }

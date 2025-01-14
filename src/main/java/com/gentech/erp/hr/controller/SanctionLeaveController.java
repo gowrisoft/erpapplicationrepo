@@ -22,7 +22,7 @@ public class SanctionLeaveController {
         return new ResponseEntity<SanctionLeaveDto>(sanctionLeaveService.addSanctionLeave(sanctionLeaveDto), HttpStatusCode.valueOf(200));
     }
 
-    @GetMapping("/getAllSanctionedLeaves")
+    @GetMapping("/admin/getAllSanctionedLeaves")
     ResponseEntity<List<SanctionLeaveDto>> getAllSanctionedLeaves() {
         return new ResponseEntity<List<SanctionLeaveDto>>(sanctionLeaveService.getALlSanctionedLeaves(), HttpStatusCode.valueOf(200));
     }
