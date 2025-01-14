@@ -1,94 +1,108 @@
 package com.gentech.erp.hr.dto;
 
 import java.sql.Date;
-
-import com.gentech.erp.hr.entity.Employee; // Import Employee entity
+import com.gentech.erp.hr.entity.Employee;
 
 public class JoiningReportDto {
     private Long joiningId;
-    private String empName;
+    private String firstName;
+    private String lastName;
     private String designation;
     private String status;
-    private Date joiningDate;
+    private Date dateOfJoining;
     private Employee joiningEmployee;
-    private Employee admin;
+    private Employee joinadminId;
     private Employee reportingManager;
 
 
+    // Default constructor
     public JoiningReportDto() {}
 
-    public JoiningReportDto(Long joiningId, String empName, String designation, String status, Date joiningDate, Employee joiningEmployee, Employee admin, Employee reportingManager) {
-        this.joiningId = joiningId;
-        this.empName = empName;
-        this.designation = designation;
-        this.status = status;
-        this.joiningDate = joiningDate;
-        this.joiningEmployee = joiningEmployee;
-        this.admin = admin;
-        this.reportingManager = reportingManager;
-    }
+    
+    public JoiningReportDto(Long joiningId,String firstName,String lastName,String designation, String status, Date dateOfJoining,Employee joiningEmployee, Employee reportingManager, Employee joinadminId) 
+    {
 
+		this.joiningId = joiningId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.designation = designation;
+		this.status = status;
+		this.dateOfJoining = dateOfJoining;
+		this.joiningEmployee = joiningEmployee;
+		this.reportingManager = reportingManager;
+		this.joinadminId = joinadminId;
+	}
+
+    // Getters and Setters
     public Long getJoiningId() {
-        return joiningId;
-    }
+		return joiningId;
+	}
 
-    public void setJoiningId(Long joiningId) {
-        this.joiningId = joiningId;
-    }
+	public void setJoiningId(Long joiningId) {
+		this.joiningId = joiningId;
+	}
 
-    public String getEmpName() {
-        return empName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getDesignation() {
-        return designation;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public String getDesignation() {
+		return designation;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
 
-    public Date getJoiningDate() {
-        return joiningDate;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setJoiningDate(Date joiningDate) {
-        this.joiningDate = joiningDate;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public Employee getJoiningEmployee() {
-        return joiningEmployee;
-    }
+	public Date getDateOfJoining() {
+		return dateOfJoining;
+	}
 
-    public void setJoiningEmployee(Employee joiningEmployee) {
-        this.joiningEmployee = joiningEmployee;
-    }
+	public void setDateOfJoining(Date dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
+	}
 
-    public Employee getAdmin() {
-        return admin;
-    }
+	public Employee getJoiningEmployee() {
+		return joiningEmployee;
+	}
 
-    public void setAdminId(Employee admin) {
-        this.admin = admin;
-    }
+	public void setJoiningEmployee(Employee joiningEmployee) {
+		this.joiningEmployee = joiningEmployee;
+	}
 
-    public Employee getReportingManager() {
-        return reportingManager;
-    }
+	public Employee getReportingManager() {
+		return reportingManager;
+	}
 
-    public void setReportingManager(Employee reportingManager) {
-        this.reportingManager = reportingManager;
-    }
+	public void setReportingManager(Employee reportingManager) {
+		this.reportingManager = reportingManager;
+	}
+
+	public Employee getJoinadminId() {
+		return joinadminId;
+	}
+
+	public void setJoinadminId(Employee joinadminId) {
+		this.joinadminId = joinadminId;
+	}
 }
