@@ -7,14 +7,15 @@ public class PrintJoiningReportsMapper {
     public static PrintJoiningReportsDto mapPrintJoinToPrintJoinDto(PrintJoiningReports printJoiningReports){
         PrintJoiningReportsDto printJoiningReportsDto = new PrintJoiningReportsDto(
                 printJoiningReports.getPrintId(),
-                printJoiningReports.getStatus(),
                 printJoiningReports.getPrintDate(),
                 printJoiningReports.getPrintJoiningId(),
                 printJoiningReports.getPrintadminId(),
                 printJoiningReports.getPrintempId(),
-                printJoiningReports.getEmpName()
-
-
+                printJoiningReports.getStatus(),
+                printJoiningReports.getFirstName(),
+                printJoiningReports.getLastName()
+                
+                
         );
         return printJoiningReportsDto;
     }
@@ -25,9 +26,10 @@ public class PrintJoiningReportsMapper {
                 printJoiningReportsDto.getPrintDate(),
                 printJoiningReportsDto.getPrintJoiningId(),
                 printJoiningReportsDto.getPrintadminId() ,
-                printJoiningReportsDto.getStatus(),
                 printJoiningReportsDto.getPrintempId(),
-                printJoiningReportsDto.getEmpName()
+                printJoiningReportsDto.getStatus(),
+                printJoiningReportsDto.getFirstName(),
+                printJoiningReportsDto.getLastName()
         );
         return printJoiningReports;
     }

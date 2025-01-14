@@ -11,80 +11,85 @@ public class PrintJoiningReportsDto {
     private JoiningReport printJoiningId;
     private Employee printadminId;
     private Employee printempId;
-    private String empName;
-
-
+    private String firstName;
+    private String lastName;
+    
+    
+    public PrintJoiningReportsDto(Long printId, Date printDate, JoiningReport printJoiningId, Employee printadminId,Employee printempId, String status,String firstName,String lastName) {
+		this.printId = printId;
+		this.printDate = printDate;
+		this.printJoiningId = printJoiningId;
+		this.printadminId = printadminId;
+		this.printempId = printempId;
+		this.status = status;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+    
     public Long getPrintId() {
-        return printId;
-    }
+		return printId;
+	}
 
-    public void setPrintId(Long printId) {
-        this.printId = printId;
-    }
+	public void setPrintId(Long printId) {
+		this.printId = printId;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public Date getPrintDate() {
+		return printDate;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public void setPrintDate(Date printDate) {
+		this.printDate = printDate;
+	}
 
-    public Date getPrintDate() {
-        return printDate;
-    }
+	public JoiningReport getPrintJoiningId() {
+		return printJoiningId;
+	}
 
-    public void setPrintDate(Date printDate) {
-        this.printDate = printDate;
-    }
+	public void setPrintJoiningId(JoiningReport printJoiningId) {
+		this.printJoiningId = printJoiningId;
+	}
 
-    public JoiningReport getPrintJoiningId() {
-        return printJoiningId;
-    }
+	public Employee getPrintadminId() {
+		return printadminId;
+	}
 
-    public void setPrintJoiningId(JoiningReport printJoiningId) {
-        this.printJoiningId = printJoiningId;
-    }
+	public void setPrintadminId(Employee printadminId) {
+		this.printadminId = printadminId;
+	}
 
-    public Employee getPrintadminId() {
-        return printadminId;
-    }
+	public Employee getPrintempId() {
+		return printempId;
+	}
 
-    public void setPrintadminId(Employee printadminId) {
-        this.printadminId = printadminId;
-    }
+	public void setPrintempId(Employee printempId) {
+		this.printempId = printempId;
+	}
 
-    public Employee getPrintempId() {
-        return printempId;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setPrintempId(Employee printempId) {
-        this.printempId=printempId;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public String getEmpName() {
-        return empName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public PrintJoiningReportsDto()
-    {
+	public String getLastName() {
+		return lastName;
+	}
 
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public PrintJoiningReportsDto(Long printId, String status, Date printDate, JoiningReport printJoiningId,
-                                  Employee printadminId,Employee printempId,String empName) {
-        super();
-        this.printId = printId;
-        this.status = status;
-        this.printDate = printDate;
-        this.printJoiningId = printJoiningId;
-        this.printadminId = printadminId;
-        this.printempId=printempId;
-        this.empName = empName;
-    }
+
 
 }
