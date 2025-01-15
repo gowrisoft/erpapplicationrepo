@@ -3,6 +3,7 @@ package com.gentech.erp.hr.controller;
 
 import com.gentech.erp.hr.dto.PayrollDto;
 import com.gentech.erp.hr.service.PayrollService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,11 @@ public class PayrollController {
     @GetMapping("/empId/{employeeId}")
     public ResponseEntity<List<PayrollDto>> getPayrollHistory(@PathVariable Long employeeId) {
         return ResponseEntity.ok(payrollService.getPayrollByEmpId(employeeId));
+    }
+
+    @GetMapping("/user/payroll")
+    public ResponseEntity<List<PayrollDto>> getPayrollHistory(HttpServletRequest request) {
+        return ResponseEntity.ok(payrollService.getPayrollByEmpId((Long) request.getAttribute("employeeId")));
     }
 
     @PostMapping
