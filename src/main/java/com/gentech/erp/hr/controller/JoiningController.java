@@ -29,6 +29,13 @@ public class JoiningController {
         return new ResponseEntity<>(joiningService.getAllJoiningReports(), HttpStatus.OK);
     }
 
+    @GetMapping("/admin/getJoiningReportByEmpId/{employeeId}")
+    public ResponseEntity<List<JoiningReportDto>> getJoiningReportByEmpId(@PathVariable Long employeeId) {
+        List<JoiningReportDto> reports = joiningService.getJoiningReportByEmpId(employeeId);
+        return new ResponseEntity<>(reports, HttpStatus.OK);
+    }
+
+    
     // Get Joining Report by ID
     @GetMapping("/admin/getJoiningReportById/{id}")
     public ResponseEntity<JoiningReportDto> getJoiningReportById(@PathVariable Long id) {

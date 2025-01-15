@@ -81,4 +81,10 @@ public class JoiningSeviceImpl implements JoiningService{
 	}
 
 
+	@Override
+	public List<JoiningReportDto> getJoiningReportByEmpId(Long employeeId) {
+		return joiningRepo.findByJoiningEmployee_EmpId(employeeId)
+				.stream().map(report -> JoiningReportMapper.mapJoinToJoinDto(report)).toList();
+	}
+
 }
