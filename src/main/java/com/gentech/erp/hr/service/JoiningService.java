@@ -15,4 +15,6 @@ public interface JoiningService {
     JoiningReportDto updateJoiningReport(Long id,JoiningReportDto joiningDto);
 
     void deleteJoiningReportById(Long id);
+    
+    List<JoiningReportDto> getJoiningReportByEmpId(Long employeeId);
 }

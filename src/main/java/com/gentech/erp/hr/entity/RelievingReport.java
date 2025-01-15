@@ -39,7 +39,7 @@ public class RelievingReport {
     @Column(name = "reason")
     private String reason;
 
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "VARCHAR(255) DEFAULT 'Pending' ")
     private String status;
 
     @Column(name = "relieving_date")

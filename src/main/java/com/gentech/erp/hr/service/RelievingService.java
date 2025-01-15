@@ -1,6 +1,7 @@
 package com.gentech.erp.hr.service;
 
 import java.util.List;
+
 import com.gentech.erp.hr.dto.RelievingReportDto;
 
 
@@ -15,5 +16,7 @@ public interface RelievingService {
     RelievingReportDto updateRelievingReport(Long id,RelievingReportDto relievingDto);
 
     void deleteRelievingReportById(Long id);
+    
+    List<RelievingReportDto> getRelievingReportByEmpId(Long employeeId);
 
 }

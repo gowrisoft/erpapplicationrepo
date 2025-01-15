@@ -66,5 +66,9 @@ public class RelievingServiceImpl implements RelievingService{
 		
 	}
 
-	
+	@Override
+	public List<RelievingReportDto> getRelievingReportByEmpId(Long employeeId) {
+		return relievingRepo.findByRelievingEmployee_EmpId(employeeId)
+				.stream().map(report -> RelievingReportMapper.mapRelReportToRelReportDto(report)).toList();
+	}
 }

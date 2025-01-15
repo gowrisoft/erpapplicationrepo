@@ -40,6 +40,12 @@ public class RelievingController {
 	    RelievingReportDto report = relievingService.getRelievingReportById( id);
 	    return new ResponseEntity<>(report, HttpStatusCode.valueOf(200));
 	}
+	
+	 @GetMapping("/admin/getRelievingReportByEmpId/{employeeId}")
+	    public ResponseEntity<List<RelievingReportDto>> getRelievingReportByEmpId(@PathVariable Long employeeId) {
+	        List<RelievingReportDto> reports = relievingService.getRelievingReportByEmpId(employeeId);
+	        return new ResponseEntity<>(reports, HttpStatus.OK);
+	    }
 		
 	@PutMapping("/admin/modRelievingReport/{id}")
 	public ResponseEntity<RelievingReportDto> updateRelievingReport(
