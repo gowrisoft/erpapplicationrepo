@@ -7,18 +7,20 @@ public class CompensatoryLeaveDto {
     private String compensatoryReason;
     private Date startDate;
     private Date endDate;
+    private String status;
     private long empId;
 
     public CompensatoryLeaveDto(){
 
     }
 
-    public CompensatoryLeaveDto(int compensatoryLeaveId, Date leaveDate, String compensatoryReason, Date startDate, Date endDate, long empId) {
+    public CompensatoryLeaveDto(int compensatoryLeaveId, Date leaveDate, String compensatoryReason, Date startDate, Date endDate, String status, long empId) {
         this.compensatoryLeaveId = compensatoryLeaveId;
         this.leaveDate = leaveDate;
         this.compensatoryReason = compensatoryReason;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.status = status;
         this.empId = empId;
     }
 
@@ -60,6 +62,14 @@ public class CompensatoryLeaveDto {
 
     public void setCompensatoryReason(String compensatoryReason) {
         this.compensatoryReason = compensatoryReason;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public long getEmpId() {

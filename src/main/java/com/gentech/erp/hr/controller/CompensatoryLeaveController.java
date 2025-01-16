@@ -27,6 +27,11 @@ public class CompensatoryLeaveController {
         return new ResponseEntity<List<CompensatoryLeaveDto>>(compensatoryLeaveService.getAllCompensatoryLeaves(), HttpStatusCode.valueOf(200));
     }
 
+    @GetMapping("/user/getAllCompensatoryLeave")
+    ResponseEntity<List<CompensatoryLeaveDto>> getAllCompensatoryLeave() {
+        return new ResponseEntity<List<CompensatoryLeaveDto>>(compensatoryLeaveService.getAllCompensatoryLeaves(), HttpStatusCode.valueOf(200));
+    }
+
     @GetMapping("/getCompensatoryLeaveById")
     ResponseEntity<CompensatoryLeaveDto> getCompensatoryLeaveById(@RequestParam int id) {
         return new ResponseEntity<CompensatoryLeaveDto>(compensatoryLeaveService.getAllCompensatoryLeaveById(id), HttpStatusCode.valueOf(200));

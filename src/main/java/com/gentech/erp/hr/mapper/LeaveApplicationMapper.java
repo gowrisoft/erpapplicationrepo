@@ -13,6 +13,7 @@ public class LeaveApplicationMapper {
                 leaveApplication.getEndDate(),
                 leaveApplication.getReason(),
                 leaveApplication.getTypeOfLeave(),
+                leaveApplication.getStatus(),
                 leaveApplication.getEmployee().getEmpId()
         );
         return leaveDto;
@@ -25,6 +26,7 @@ public class LeaveApplicationMapper {
                 leaveDto.getEndDate(),
                 leaveDto.getReason(),
                 leaveDto.getTypeOfLeave(),
+                leaveDto.getStatus(),
                 employee,
                 sanctionLeave,
                 null

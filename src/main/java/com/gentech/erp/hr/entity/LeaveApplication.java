@@ -20,6 +20,10 @@ public class LeaveApplication {
     private String reason;
     @Column(name = "type_of_leave")
     private String typeOfLeave;
+    @Column(name = "status", nullable = true, columnDefinition = "VARCHAR(255) DEFAULT 'PENDING'")
+    private String status;
+
+
     @ManyToOne
     @JoinColumn(name = "emp_id", nullable = false)
     private Employee employee;
@@ -31,12 +35,13 @@ public class LeaveApplication {
     public LeaveApplication() {
     }
 
-    public LeaveApplication(int leaveRequestId, Date startDate, Date endDate, String reason, String typeOfLeave, Employee employee, SanctionLeave sanctionLeave, List<LeaveLedger> leaveLedgers) {
+    public LeaveApplication(int leaveRequestId, Date startDate, Date endDate, String reason, String typeOfLeave, String status, Employee employee, SanctionLeave sanctionLeave, List<LeaveLedger> leaveLedgers) {
         this.leaveRequestId = leaveRequestId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.reason = reason;
         this.typeOfLeave = typeOfLeave;
+        this.status = status;
         this.employee = employee;
         this.sanctionLeave = sanctionLeave;
         this.leaveLedgers = leaveLedgers;
@@ -80,6 +85,14 @@ public class LeaveApplication {
 
     public void setTypeOfLeave(String typeOfLeave) {
         this.typeOfLeave = typeOfLeave;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Employee getEmployee() {

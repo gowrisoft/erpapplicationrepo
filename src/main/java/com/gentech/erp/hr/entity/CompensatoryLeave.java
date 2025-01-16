@@ -19,6 +19,10 @@ public class CompensatoryLeave {
     private Date startDate;
     @Column(name = "end_date")
     private Date endDate;
+    @Column(name = "status", nullable = true, columnDefinition = "VARCHAR(255) DEFAULT 'PENDING'")
+    private String status;
+
+
     @ManyToOne
     @JoinColumn(name = "emp_id", referencedColumnName = "emp_id", nullable = false)
     private Employee employee;
@@ -31,12 +35,13 @@ public class CompensatoryLeave {
 
     }
 
-    public CompensatoryLeave(int compensatoryLeaveId, Date leaveDate, String compensatoryReason, Date startDate, Date endDate, Employee employee, LeaveLedger leaveLedger, SanctionLeave sanctionLeave) {
+    public CompensatoryLeave(int compensatoryLeaveId, Date leaveDate, String compensatoryReason, Date startDate, Date endDate, String status, Employee employee, LeaveLedger leaveLedger, SanctionLeave sanctionLeave) {
         this.compensatoryLeaveId = compensatoryLeaveId;
         this.leaveDate = leaveDate;
         this.compensatoryReason = compensatoryReason;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.status = status;
         this.employee = employee;
         this.leaveLedger = leaveLedger;
         this.sanctionLeave = sanctionLeave;
@@ -80,6 +85,14 @@ public class CompensatoryLeave {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Employee getEmployee() {
