@@ -1,6 +1,5 @@
 package com.gentech.erp.hr.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,42 +19,46 @@ import com.gentech.erp.hr.dto.AttendanceDto;
 import com.gentech.erp.hr.service.AttendanceService;
 
 @RestController
-@RequestMapping("/api/v1")
-@CrossOrigin("*")
+@RequestMapping("/v1/api")
 
 public class AttendanceController {
 
-    @Autowired
-    private AttendanceService attendanceService;
+	@Autowired
+	private AttendanceService attendanceService;
 
-    @PostMapping("/attendance")
-    public ResponseEntity<AttendanceDto> createAttendance(@RequestBody AttendanceDto attendanceDto) {
-        return new ResponseEntity<AttendanceDto>(attendanceService.createAttendance(attendanceDto), HttpStatus.CREATED);
-    }
+	@PostMapping("/attendance")
+	public ResponseEntity<AttendanceDto> createAttendance(@RequestBody AttendanceDto attendanceDto) {
+		return new ResponseEntity<AttendanceDto>(attendanceService.createAttendance(attendanceDto), HttpStatus.CREATED);
+	}
 
-    @GetMapping("/attendances")
-    public ResponseEntity<List<AttendanceDto>> getAllAttendance() {
-        return new ResponseEntity<List<AttendanceDto>>(attendanceService.getAllAttendance(), HttpStatus.OK);
-    }
+	@GetMapping("/attendances")
+	public ResponseEntity<List<AttendanceDto>> getAllAttendance() {
+		return new ResponseEntity<List<AttendanceDto>>(attendanceService.getAllAttendance(), HttpStatus.OK);
+	}
 
-    @DeleteMapping("/delattendance/{id}")
-    public ResponseEntity<String> deleteAttendance(@PathVariable Long id) {
-        attendanceService.deleteAttendanceById(id);
-        return new ResponseEntity<>("Attendance record deleted successfully", HttpStatus.OK);
-    }
+	@DeleteMapping("/delattendance/{id}")
+	public ResponseEntity<String> deleteAttendance(@PathVariable Long id) {
+		attendanceService.deleteAttendanceById(id);
+		return new ResponseEntity<>("Attendance record deleted successfully", HttpStatus.OK);
+	}
 
-    @GetMapping("/getAttendanceById/{id}")
-    public ResponseEntity<AttendanceDto> getJoiningReportById(@PathVariable Long id) {
-        AttendanceDto attendance = attendanceService.getAttendanceById(id);
-        return new ResponseEntity<>(attendance, HttpStatus.OK);
-    }
+	@GetMapping("/getAttendanceById/{id}")
+	public ResponseEntity<AttendanceDto> getJoiningReportById(@PathVariable Long id) {
+		AttendanceDto attendance = attendanceService.getAttendanceById(id);
+		return new ResponseEntity<>(attendance, HttpStatus.OK);
+	}
 
-    // Modify Joining Report
-    @PutMapping("/modattendance/{id}")
-    public ResponseEntity<AttendanceDto> updateJoiningReport(@PathVariable Long id,
-                                                             @RequestBody AttendanceDto attendanceDto) {
-        AttendanceDto updatedAttendance = attendanceService.updateAttendance(id, attendanceDto);
-        return new ResponseEntity<>(updatedAttendance, HttpStatus.OK);
+	// Modify Joining Report
+	@PutMapping("/modattendance/{id}")
+	public ResponseEntity<AttendanceDto> updateJoiningReport(@PathVariable Long id,
+			@RequestBody AttendanceDto attendanceDto) {
+		AttendanceDto updatedAttendance = attendanceService.updateAttendance(id, attendanceDto);
+		return new ResponseEntity<>(updatedAttendance, HttpStatus.OK);
+	}
+	
+	@GetMapping("/attendances/employee/{employeeId}")
+    public ResponseEntity<List<AttendanceDto>> getAttendanceByEmployeeId(@PathVariable Long employeeId) {
+        List<AttendanceDto> attendances = attendanceService.getAttendanceByEmployeeId(employeeId);
+        return new ResponseEntity<>(attendances, HttpStatus.OK);
     }
 }
-

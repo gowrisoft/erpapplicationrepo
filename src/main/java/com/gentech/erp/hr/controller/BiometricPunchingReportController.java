@@ -1,6 +1,5 @@
 package com.gentech.erp.hr.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gentech.erp.hr.dto.AttendanceDto;
 import com.gentech.erp.hr.dto.BiometricPunchingReportDto;
+import com.gentech.erp.hr.entity.BiometricPunchingReport;
 import com.gentech.erp.hr.service.BiometricPunchingReportService;
 
 @RestController
@@ -25,39 +26,39 @@ import com.gentech.erp.hr.service.BiometricPunchingReportService;
 
 public class BiometricPunchingReportController {
 
-    @Autowired
-    private BiometricPunchingReportService biometricpunchingreportService;
+	@Autowired
+	private BiometricPunchingReportService biometricpunchingreportService;
+	
+	@PostMapping("/biometricreport")
+	public ResponseEntity<BiometricPunchingReportDto> createBiometricPunchingReport(@RequestBody BiometricPunchingReportDto biometricpunchingreportDto)
+	{
+		return new ResponseEntity<BiometricPunchingReportDto>(biometricpunchingreportService.createBiometricPunchingReport(biometricpunchingreportDto), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/biometricreports")
+	public ResponseEntity<List<BiometricPunchingReportDto>> getAllBiometricPunchingReport()
+	{
+		return new ResponseEntity<List<BiometricPunchingReportDto>>(biometricpunchingreportService.getAllBiometricPunchingReport(), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/delbiometricreport/{id}")
+	public ResponseEntity<String> deleteBiometricPunchingReportById(@PathVariable Long id) {
+		biometricpunchingreportService.deleteBiometricPunchingReportById(id);
+		return new ResponseEntity<>("BiometricPunchingReport record deleted successfully", HttpStatus.OK);
+	}
 
-    @PostMapping("/biometricreport")
-    public ResponseEntity<BiometricPunchingReportDto> createBiometricPunchingReport(@RequestBody BiometricPunchingReportDto biometricpunchingreportDto) {
-        return new ResponseEntity<BiometricPunchingReportDto>(biometricpunchingreportService.createBiometricPunchingReport(biometricpunchingreportDto), HttpStatus.CREATED);
-    }
+	@GetMapping("/getbiometricreportById/{id}")
+	public ResponseEntity<BiometricPunchingReportDto> getBiometricPunchingReportById(@PathVariable Long id) {
+		BiometricPunchingReportDto biometricPunchingReport = biometricpunchingreportService.getBiometricPunchingReportById(id);
+		return new ResponseEntity<>(biometricPunchingReport, HttpStatus.OK);
+	}
 
-    @GetMapping("/biometricreports")
-    public ResponseEntity<List<BiometricPunchingReportDto>> getAllBiometricPunchingReport()
-    {
-        return new ResponseEntity<List<BiometricPunchingReportDto>>(biometricpunchingreportService.getAllBiometricPunchingReport(), HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delbiometricreport/{id}")
-    public ResponseEntity<String> deleteBiometricPunchingReportById(@PathVariable Long id) {
-        biometricpunchingreportService.deleteBiometricPunchingReportById(id);
-        return new ResponseEntity<>("BiometricPunchingReport record deleted successfully", HttpStatus.OK);
-    }
-
-    @GetMapping("/getbiometricreportById/{id}")
-    public ResponseEntity<BiometricPunchingReportDto> getBiometricPunchingReportById(@PathVariable Long id) {
-        BiometricPunchingReportDto biometricPunchingReport = biometricpunchingreportService.getBiometricPunchingReportById(id);
-        return new ResponseEntity<>(biometricPunchingReport, HttpStatus.OK);
-    }
-
-    // Modify Joining Report
-    @PutMapping("/modbiometricreport/{id}")
-    public ResponseEntity<BiometricPunchingReportDto> updateBiometricPunchingReport(@PathVariable Long id,
-                                                                                    @RequestBody BiometricPunchingReportDto biometricpunchingreportDto) {
-        BiometricPunchingReportDto updatedBiometricPunchingReport = biometricpunchingreportService.updateBiometricPunchingReport(id, biometricpunchingreportDto);
-        return new ResponseEntity<>(updatedBiometricPunchingReport, HttpStatus.OK);
-    }
-
+	// Modify Joining Report
+	@PutMapping("/modbiometricreport/{id}")
+	public ResponseEntity<BiometricPunchingReportDto> updateBiometricPunchingReport(@PathVariable Long id,
+			@RequestBody BiometricPunchingReportDto biometricpunchingreportDto) {
+		BiometricPunchingReportDto updatedBiometricPunchingReport = biometricpunchingreportService.updateBiometricPunchingReport(id, biometricpunchingreportDto);
+		return new ResponseEntity<>(updatedBiometricPunchingReport, HttpStatus.OK);
+	}
+	
 }
-

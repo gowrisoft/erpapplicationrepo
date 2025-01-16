@@ -1,10 +1,17 @@
 package com.gentech.erp.hr.entity;
 
-import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tbl_biometric_attendance")
@@ -32,33 +39,33 @@ public class BiometricAttendance {
 
     // Relationship with Employee (Many BiometricAttendance records for one Employee)
     @ManyToOne
-    @JoinColumn(name = "emp_id", nullable = false)
+    @JoinColumn(name = "emp_id",nullable = false)
     private Employee employee;
 
     // Relationship with BiometricPunchingReport (Many BiometricAttendance records map to one BiometricPunchingReport)
-
+    
     public BiometricAttendance() {
-
+    	
     }
-
-    public BiometricAttendance(Long biometricId, LocalDate attendanceDate, LocalTime timeIn, LocalTime timeOut,
-                               BigDecimal totalHoursWorked, String dutyType, Employee employee) {
-        super();
-        this.biometricId = biometricId;
-        this.attendanceDate = attendanceDate;
-        this.timeIn = timeIn;
-        this.timeOut = timeOut;
-        this.totalHoursWorked = totalHoursWorked;
-        this.dutyType = dutyType;
-        this.employee = employee;
-    }
-
+    
     // Getters and Setters
     public Long getBiometricId() {
         return biometricId;
     }
 
-    public void setBiometricId(Long biometricId) {
+    public BiometricAttendance(Long biometricId, LocalDate attendanceDate, LocalTime timeIn, LocalTime timeOut,
+			BigDecimal totalHoursWorked, String dutyType, Employee employee) {
+		super();
+		this.biometricId = biometricId;
+		this.attendanceDate = attendanceDate;
+		this.timeIn = timeIn;
+		this.timeOut = timeOut;
+		this.totalHoursWorked = totalHoursWorked;
+		this.dutyType = dutyType;
+		this.employee = employee;
+	}
+
+	public void setBiometricId(Long biometricId) {
         this.biometricId = biometricId;
     }
 
@@ -109,4 +116,5 @@ public class BiometricAttendance {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
 }

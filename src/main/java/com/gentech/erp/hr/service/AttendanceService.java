@@ -16,6 +16,6 @@ public interface AttendanceService {
 
     AttendanceDto updateAttendance(Long id,AttendanceDto attendanceDto);
 
-
+    List<AttendanceDto> getAttendanceByEmployeeId(Long employeeId);
 
 }
