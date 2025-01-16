@@ -2,6 +2,7 @@ package com.gentech.erp.hr.controller;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class AttendanceController {
 		return new ResponseEntity<AttendanceDto>(attendanceService.createAttendance(attendanceDto), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/attendances")
+	@GetMapping("/admin/attendances")
 	public ResponseEntity<List<AttendanceDto>> getAllAttendance() {
 		return new ResponseEntity<List<AttendanceDto>>(attendanceService.getAllAttendance(), HttpStatus.OK);
 	}
@@ -61,4 +62,10 @@ public class AttendanceController {
         List<AttendanceDto> attendances = attendanceService.getAttendanceByEmployeeId(employeeId);
         return new ResponseEntity<>(attendances, HttpStatus.OK);
     }
+
+	@GetMapping("/user/attendances")
+	public ResponseEntity<List<AttendanceDto>> getAttendanceOfEmployee(HttpServletRequest request) {
+		List<AttendanceDto> attendances = attendanceService.getAttendanceByEmployeeId((Long) request.getAttribute("employeeId"));
+		return new ResponseEntity<>(attendances, HttpStatus.OK);
+	}
 }

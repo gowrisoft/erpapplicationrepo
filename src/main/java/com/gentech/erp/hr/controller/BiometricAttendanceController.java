@@ -2,6 +2,7 @@ package com.gentech.erp.hr.controller;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,7 +67,11 @@ public class BiometricAttendanceController {
         List<BiometricAttendanceDto> bioattendances = biometricattendanceService.getBiometricAttendanceByEmployeeId(employeeId);
         return new ResponseEntity<>(bioattendances, HttpStatus.OK);
     }
-	
 
+	@GetMapping("/user/bioattendances")
+	public ResponseEntity<List<BiometricAttendanceDto>> getBiometricAttendanceOfEmployee(HttpServletRequest request) {
+		List<BiometricAttendanceDto> bioattendances = biometricattendanceService.getBiometricAttendanceByEmployeeId((Long) request.getAttribute("employeeId"));
+		return new ResponseEntity<>(bioattendances, HttpStatus.OK);
+	}
 	
 }
