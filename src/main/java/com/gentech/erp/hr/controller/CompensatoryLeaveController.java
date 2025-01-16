@@ -16,13 +16,13 @@ public class CompensatoryLeaveController {
     @Autowired
     private CompensatoryLeaveService compensatoryLeaveService;
 
-    @PostMapping("user/addCompensatoryLeave")
+    @PostMapping("/user/addCompensatoryLeave")
     ResponseEntity<CompensatoryLeaveDto> addCompensatoryLeave(@RequestBody CompensatoryLeaveDto compensatoryLeaveDto, HttpServletRequest request) {
         compensatoryLeaveDto.setEmpId((long) request.getAttribute("employeeId"));
         return new ResponseEntity<CompensatoryLeaveDto>(compensatoryLeaveService.addCompensatoryLeave(compensatoryLeaveDto), HttpStatusCode.valueOf(200));
     }
 
-    @GetMapping("/getAllCompensatoryLeave")
+    @GetMapping("/admin/getAllCompensatoryLeave")
     ResponseEntity<List<CompensatoryLeaveDto>> getAllCompensatoryLeaves() {
         return new ResponseEntity<List<CompensatoryLeaveDto>>(compensatoryLeaveService.getAllCompensatoryLeaves(), HttpStatusCode.valueOf(200));
     }
@@ -37,9 +37,8 @@ public class CompensatoryLeaveController {
         return new ResponseEntity<CompensatoryLeaveDto>(compensatoryLeaveService.updateCompensatoryLeave(id, compensatoryLeaveDto), HttpStatusCode.valueOf(200));
     }
 
-    @DeleteMapping("/deleteCompensatoryLeaveById")
+    @DeleteMapping("/admin/deleteCompensatoryLeaveById")
     ResponseEntity<String> deleteCompensatoryLeaveById(@RequestParam int id) {
         return new ResponseEntity<String>(compensatoryLeaveService.deleteCompensatoryLeaveById(id), HttpStatusCode.valueOf(200));
     }
 }
-

@@ -6,14 +6,15 @@ public class PrintRelievingReportsMapper {
     public static PrintRelievingReportsDto mapPrintRelToPrintRelDto(PrintRelievingReports printRelievingReports){
         PrintRelievingReportsDto printRelievingReportsDto = new PrintRelievingReportsDto(
                 printRelievingReports.getPrintId(),
-                printRelievingReports.getStatus(),
                 printRelievingReports.getPrintDate(),
                 printRelievingReports.getPrintRelievingId(),
                 printRelievingReports.getPrintadminId(),// Ensure this field is included
                 printRelievingReports.getPrintJoiningId(),
                 printRelievingReports.getPrintempId(),
-                printRelievingReports.getEmpName()
-
+                printRelievingReports.getFirstName(),
+                printRelievingReports.getLastName(),
+                printRelievingReports.getStatus()
+                
         );
         return printRelievingReportsDto;
     }
@@ -24,11 +25,12 @@ public class PrintRelievingReportsMapper {
                 printRelievingReportsDto.getPrintDate(),
                 printRelievingReportsDto.getPrintRelievingId(),
                 printRelievingReportsDto.getPrintadminId(), // Make sure this is passed here
-                printRelievingReportsDto.getStatus(),
                 printRelievingReportsDto.getPrintJoiningId(),
                 printRelievingReportsDto.getPrintempId(),
-                printRelievingReportsDto.getEmpName()
-
+                printRelievingReportsDto.getFirstName(),
+                printRelievingReportsDto.getLastName(),
+                printRelievingReportsDto.getStatus()
+                
         );
         return printRelievingReports;
     }

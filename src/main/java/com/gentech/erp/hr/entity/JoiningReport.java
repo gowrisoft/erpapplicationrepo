@@ -1,6 +1,8 @@
 package com.gentech.erp.hr.entity;
 import java.sql.Date;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tbl_joining_report")
@@ -11,8 +13,13 @@ public class JoiningReport {
     @Column(name = "joining_id")
     private Long joiningId;
 
-    @Column(name = "employee_name")
-    private String empName;
+    @NotNull(message = "First name cannot be null")
+    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
+    private String firstName;
+
+    @NotNull(message = "Last name cannot be null")
+    @Size(min = 1, max = 50, message = "Last name must be between 2 and 50 characters")
+    private String lastName;
 
     @Column(name = "designation")
     private String designation;
@@ -20,100 +27,112 @@ public class JoiningReport {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "joining_date")
-    private Date joiningDate;
-
-
-    @OneToOne (cascade=CascadeType.ALL)
-    @JoinColumn(name = "joining_emp_id", referencedColumnName = "Emp_id")
+    @NotNull(message = "Date of joining cannot be null")
+    @Column(nullable = false)
+    private Date dateOfJoining;
+    
+    @OneToOne 
+    @JoinColumn(name = "joining_emp_id", referencedColumnName = "emp_id")
     private Employee joiningEmployee;
-
+    
     @ManyToOne
-    @JoinColumn(name = "reporting_manager", referencedColumnName = "Emp_id")
+    @JoinColumn(name = "reporting_manager", referencedColumnName = "emp_id")
     private Employee reportingManager;
-
+    
     @ManyToOne
-    @JoinColumn(name = "verified_by_admin_id")
-    private Employee admin;
+    @JoinColumn(name = "verified_by_admin_id", referencedColumnName = "emp_id")
+    private Employee joinadminId;
 
-
-    public JoiningReport() {}
-
-
-    public JoiningReport(Long joiningId, String empName, String designation, String status, Date joiningDate,
-                         Employee joiningEmployee,Employee admin,Employee reportingManager) {
-        this.joiningId = joiningId;
-        this.empName = empName;
-        this.designation = designation;
-        this.status = status;
-        this.joiningDate = joiningDate;
-        this.joiningEmployee = joiningEmployee;
-        this.admin=admin;
-        this.reportingManager=reportingManager;
+   
+    public JoiningReport() 
+    {	
+    	
     }
 
-    // Getters and Setters
-    public Long getJoiningId() {
-        return joiningId;
-    }
+    public JoiningReport(Long joiningId,String firstName,String lastName,String designation, String status, Date dateOfJoining,Employee joiningEmployee, Employee reportingManager, Employee joinadminId) 
+    {
 
-    public void setJoiningId(Long joiningId) {
-        this.joiningId = joiningId;
-    }
+		this.joiningId = joiningId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.designation = designation;
+		this.status = status;
+		this.dateOfJoining = dateOfJoining;
+		this.joiningEmployee = joiningEmployee;
+		this.reportingManager = reportingManager;
+		this.joinadminId = joinadminId;
+	}
 
-    public String getEmpName() {
-        return empName;
-    }
+	public Long getJoiningId() {
+		return joiningId;
+	}
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
-    }
+	public void setJoiningId(Long joiningId) {
+		this.joiningId = joiningId;
+	}
 
-    public String getDesignation() {
-        return designation;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public Date getJoiningDate() {
-        return joiningDate;
-    }
+	public String getDesignation() {
+		return designation;
+	}
 
-    public void setJoiningDate(Date joiningDate) {
-        this.joiningDate = joiningDate;
-    }
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
 
-    public Employee getJoiningEmployee() {
-        return joiningEmployee;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setJoiningEmployee(Employee joiningEmployee) {
-        this.joiningEmployee = joiningEmployee;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public Employee getAdmin() {
-        return admin;
-    }
+	public Date getDateOfJoining() {
+		return dateOfJoining;
+	}
 
-    public void setAdmin(Employee admin) {
-        this.admin=admin;
-    }
+	public void setDateOfJoining(Date dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
+	}
 
-    public Employee getReportingManager() {
-        return reportingManager;
-    }
+	public Employee getJoiningEmployee() {
+		return joiningEmployee;
+	}
 
-    public void setReportingManager(Employee reportingManager) {
-        this.reportingManager=reportingManager;
-    }
+	public void setJoiningEmployee(Employee joiningEmployee) {
+		this.joiningEmployee = joiningEmployee;
+	}
+
+	public Employee getReportingManager() {
+		return reportingManager;
+	}
+
+	public void setReportingManager(Employee reportingManager) {
+		this.reportingManager = reportingManager;
+	}
+
+	public Employee getJoinadminId() {
+		return joinadminId;
+	}
+
+	public void setJoinadminId(Employee joinadminId) {
+		this.joinadminId = joinadminId;
+	}
+
 }

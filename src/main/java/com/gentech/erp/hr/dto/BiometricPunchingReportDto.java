@@ -41,7 +41,25 @@ public class BiometricPunchingReportDto {
 		this.biometricAttendance = biometricAttendance;
 	}
 
+<<<<<<< HEAD
 
+=======
+    public BiometricPunchingReportDto(Integer reportId, Employee employee, String empName, LocalDate date,
+                                      LocalTime timeIn, LocalTime timeOut, Integer numOfPunches, String location, String designation,
+                                      BiometricAttendance biometricAttendance) {
+        super();
+        this.reportId = reportId;
+        this.employee = employee;
+        this.empName = empName;
+        this.date = date;
+        this.timeIn = timeIn;
+        this.timeOut = timeOut;
+        this.numOfPunches = numOfPunches;
+        this.location = location;
+        this.designation = designation;
+        this.biometricAttendance = biometricAttendance;
+    }
+>>>>>>> 767faba71ca97fa5c58827e0435a9f608bcc8c65
 
 	public Integer getReportId() {
 		return reportId;

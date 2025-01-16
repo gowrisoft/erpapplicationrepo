@@ -7,28 +7,32 @@ public class RelievingReportMapper {
     public static RelievingReportDto mapRelReportToRelReportDto(RelievingReport relievingReport){
         RelievingReportDto relievingReportDto=new RelievingReportDto(
                 relievingReport.getRelievingId(),
-                relievingReport.getEmpName(),
+                relievingReport.getFirstName(),
+                relievingReport.getLastName(),
                 relievingReport.getDesignation(),
                 relievingReport.getRelievingEmployee(),
+                relievingReport.getReladminId(),
+                relievingReport.getRelJoiningId(),
                 relievingReport.getReason(),
                 relievingReport.getStatus(),
-                relievingReport.getRelievingDate(),
-                relievingReport.getReladminId(),
-                relievingReport.getRelJoiningId()
+                relievingReport.getRelievingDate()
+              
+                
         );
         return relievingReportDto;
     }
     public static RelievingReport mapRelReportDtoToRelReport(RelievingReportDto relievingReportDto){
         RelievingReport relievingReport=new RelievingReport(
-                relievingReportDto.getRelievingId(),
-                relievingReportDto.getEmpName(),
+        		relievingReportDto.getRelievingId(),
+                relievingReportDto.getFirstName(),
+                relievingReportDto.getLastName(),
                 relievingReportDto.getDesignation(),
                 relievingReportDto.getRelievingEmployee(),
+                relievingReportDto.getReladminId(),
+                relievingReportDto.getRelJoiningId(),
                 relievingReportDto.getReason(),
                 relievingReportDto.getStatus(),
-                relievingReportDto.getRelievingDate(),
-                relievingReportDto.getReladminId(),
-                relievingReportDto.getRelJoiningId()
+                relievingReportDto.getRelievingDate()
         );
         return relievingReport;
     }

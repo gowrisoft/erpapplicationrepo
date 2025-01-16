@@ -18,47 +18,46 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gentech.erp.hr.service.PrintRelievingService;
 
 @RestController
-@RequestMapping("/api/v1")
-@CrossOrigin("*")
+@RequestMapping("v1/api") 
 public class PrintRelievingController {
-
-    @Autowired
-    private PrintRelievingService printService;
-
-    @PostMapping("/rprint")
-    public ResponseEntity<PrintRelievingReportsDto> createPrintReports(@RequestBody PrintRelievingReportsDto printDto)
-    {
-        return new ResponseEntity<PrintRelievingReportsDto>(printService.createPrintReports(printDto), HttpStatus.CREATED);
-    }
-
-    @GetMapping("/rprints")
-    public ResponseEntity<List<PrintRelievingReportsDto>> getAllPrintReports()
-    {
-        return new ResponseEntity<List<PrintRelievingReportsDto>>(printService.getAllPrintReports(), HttpStatus.OK);
-    }
-
-    @GetMapping("/PrintRelievingReportById/{id}")
-    public ResponseEntity<PrintRelievingReportsDto> getPrintRelievingReportById(@PathVariable Long id) {
-        PrintRelievingReportsDto reportPrintRelieving = printService.getPrintRelievingReportById( id);
-        return new ResponseEntity<>(reportPrintRelieving, HttpStatusCode.valueOf(200));
-    }
-
-    @PutMapping("/PrintRelievingReport/{id}")
-    public ResponseEntity<PrintRelievingReportsDto> updatePrintRelievingReport(
-            @PathVariable Long id,
-            @RequestBody PrintRelievingReportsDto printJoiningDto) {
-        PrintRelievingReportsDto updatedReport = printService.updatePrintRelievingReport(id, printJoiningDto);
-        return new ResponseEntity<>(updatedReport, HttpStatus.OK);
-    }
-
-
-    @DeleteMapping("/delPrintRelievingReport/{id}")
-    public ResponseEntity<String> deletePrintRelievingReportById(@PathVariable Long id) {
-        printService.deletePrintRelievingReportById(id);
-        return new ResponseEntity<>(
-                "The Relieving Report with ID " + id + " has been successfully marked as deleted.",
-                HttpStatus.OK
-        );
-    }
-
+	
+	@Autowired
+	private PrintRelievingService printService;
+	
+	@PostMapping("/admin/addPrintRelievingReport")
+	public ResponseEntity<PrintRelievingReportsDto> createPrintReports(@RequestBody PrintRelievingReportsDto printDto)
+	{
+		return new ResponseEntity<PrintRelievingReportsDto>(printService.createPrintReports(printDto), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/admin/rprints")
+	public ResponseEntity<List<PrintRelievingReportsDto>> getAllPrintReports()
+	{
+		return new ResponseEntity<List<PrintRelievingReportsDto>>(printService.getAllPrintReports(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/admin/getPrintRelievingReportById/{id}")
+	public ResponseEntity<PrintRelievingReportsDto> getPrintRelievingReportById(@PathVariable Long id) {
+	    PrintRelievingReportsDto reportPrintRelieving = printService.getPrintRelievingReportById( id);
+	    return new ResponseEntity<>(reportPrintRelieving, HttpStatusCode.valueOf(200));
+	}
+	
+	@PutMapping("/admin/modPrintRelievingReport/{id}")
+	public ResponseEntity<PrintRelievingReportsDto> updatePrintRelievingReport(
+	        @PathVariable Long id,
+	        @RequestBody PrintRelievingReportsDto printJoiningDto) {
+	    PrintRelievingReportsDto updatedReport = printService.updatePrintRelievingReport(id, printJoiningDto);
+	    return new ResponseEntity<>(updatedReport, HttpStatus.OK);
+	}
+	
+	
+	@DeleteMapping("admin/delPrintRelievingReport/{id}")
+	public ResponseEntity<String> deletePrintRelievingReportById(@PathVariable Long id) {
+	    printService.deletePrintRelievingReportById(id);
+	    return new ResponseEntity<>(
+	        "The Relieving Report with ID " + id + " has been successfully marked as deleted.",
+	        HttpStatus.OK
+	    );
+	}
+	
 }

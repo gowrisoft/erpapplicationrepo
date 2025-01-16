@@ -7,28 +7,30 @@ public class JoiningReportMapper {
     public static JoiningReportDto mapJoinToJoinDto(JoiningReport joiningReport){
         JoiningReportDto joiningReportDto=new JoiningReportDto(
                 joiningReport.getJoiningId(),
-                joiningReport.getEmpName(),
+                joiningReport.getFirstName(),
+                joiningReport.getLastName(),
                 joiningReport.getDesignation(),
                 joiningReport.getStatus(),
-                joiningReport.getJoiningDate(),
+                joiningReport.getDateOfJoining(),
                 joiningReport.getJoiningEmployee(),
-                joiningReport.getAdmin(),
+                joiningReport.getJoinadminId(),
                 joiningReport.getReportingManager()
-
+                
         );
         return joiningReportDto;//here order of DTO layer matters
     }
     public static JoiningReport mapJoinDtoToJoin(JoiningReportDto joiningReportDto){
         JoiningReport joiningReport=new JoiningReport(
                 joiningReportDto.getJoiningId(),
-                joiningReportDto.getEmpName(),
+                joiningReportDto.getFirstName(),
+                joiningReportDto.getLastName(),
                 joiningReportDto.getDesignation(),
                 joiningReportDto.getStatus(),
-                joiningReportDto.getJoiningDate(),
+                joiningReportDto.getDateOfJoining(),
                 joiningReportDto.getJoiningEmployee(),
-                joiningReportDto.getAdmin(),
+                joiningReportDto.getJoinadminId(),
                 joiningReportDto.getReportingManager()
-
+                
         );
         return joiningReport;//here order of Entity layer matters
     }
