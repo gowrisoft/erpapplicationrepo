@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,12 +28,12 @@ public class AttendanceController {
 
 	@PostMapping("/attendance")
 	public ResponseEntity<AttendanceDto> createAttendance(@RequestBody AttendanceDto attendanceDto) {
-		return new ResponseEntity<AttendanceDto>(attendanceService.createAttendance(attendanceDto), HttpStatus.CREATED);
+		return new ResponseEntity<>(attendanceService.createAttendance(attendanceDto), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/attendances")
+	@GetMapping("/admin/attendances")
 	public ResponseEntity<List<AttendanceDto>> getAllAttendance() {
-		return new ResponseEntity<List<AttendanceDto>>(attendanceService.getAllAttendance(), HttpStatus.OK);
+		return new ResponseEntity<>(attendanceService.getAllAttendance(), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delattendance/{id}")
