@@ -32,7 +32,7 @@ public class AttendanceController {
 		return new ResponseEntity<AttendanceDto>(attendanceService.createAttendance(attendanceDto), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/admin/attendances")
+	@GetMapping("/attendances")
 	public ResponseEntity<List<AttendanceDto>> getAllAttendance() {
 		return new ResponseEntity<List<AttendanceDto>>(attendanceService.getAllAttendance(), HttpStatus.OK);
 	}
