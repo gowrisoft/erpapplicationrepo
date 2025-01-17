@@ -2,6 +2,7 @@ package com.gentech.erp.hr.controller;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gentech.erp.hr.dto.BiometricAttendanceDto;
@@ -28,16 +28,16 @@ public class BiometricAttendanceController {
 	@Autowired
 	private BiometricAttendanceService biometricattendanceService;
 	
-	@PostMapping("/bioattendance")
+	@PostMapping("/user/bioattendance")
 	public ResponseEntity<BiometricAttendanceDto> createBiometricAttendance(@RequestBody BiometricAttendanceDto biometricattendanceDto)
 	{
-		return new ResponseEntity<BiometricAttendanceDto>(biometricattendanceService.createBiometricAttendance(biometricattendanceDto), HttpStatus.CREATED);
+		return new ResponseEntity<>(biometricattendanceService.createBiometricAttendance(biometricattendanceDto), HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/bioattendances")
+	@GetMapping("/admin/bioattendances")
 	public ResponseEntity<List<BiometricAttendanceDto>> getAllBiometricAttendance()
 	{
-		return new ResponseEntity<List<BiometricAttendanceDto>>(biometricattendanceService.getAllBiometricAttendance(), HttpStatus.OK);
+		return new ResponseEntity<>(biometricattendanceService.getAllBiometricAttendance(), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delbioattendance/{id}")
@@ -61,12 +61,16 @@ public class BiometricAttendanceController {
 	}
 	
 
-	@GetMapping("/bioattendances/employee/{employeeId}")
+	@GetMapping("/admin/bioattendances/employee/{employeeId}")
     public ResponseEntity<List<BiometricAttendanceDto>> getBiometricAttendanceByEmployeeId(@PathVariable Long employeeId) {
         List<BiometricAttendanceDto> bioattendances = biometricattendanceService.getBiometricAttendanceByEmployeeId(employeeId);
         return new ResponseEntity<>(bioattendances, HttpStatus.OK);
     }
-	
 
+	@GetMapping("/user/bioattendances")
+	public ResponseEntity<List<BiometricAttendanceDto>> getBiometricAttendanceOfEmployee(HttpServletRequest request) {
+		List<BiometricAttendanceDto> bioattendances = biometricattendanceService.getBiometricAttendanceByEmployeeId((Long) request.getAttribute("employeeId"));
+		return new ResponseEntity<>(bioattendances, HttpStatus.OK);
+	}
 	
 }
