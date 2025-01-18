@@ -35,6 +35,11 @@ public class PrintJoiningReportsController {
 		return new ResponseEntity<List<PrintJoiningReportsDto>>(printService.getAllPrintReportss(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/admin/getPrintJoiningReportByEmpId/{employeeId}")
+    public ResponseEntity<List<PrintJoiningReportsDto>> getPrintJoiningReportByEmpId(@PathVariable Long employeeId) {
+        List<PrintJoiningReportsDto> reports = printService.getPrintJoiningReportByEmpId(employeeId);
+        return new ResponseEntity<>(reports, HttpStatus.OK);
+    }
 
 	@GetMapping("/admin/getPrintJoiningReportById/{id}")
 	public ResponseEntity<PrintJoiningReportsDto> getPrintJoiningReportById(@PathVariable Long id) {

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +34,12 @@ public class PrintRelievingController {
 	{
 		return new ResponseEntity<List<PrintRelievingReportsDto>>(printService.getAllPrintReports(), HttpStatus.OK);
 	}
+	
+	@GetMapping("/admin/getPrintRelievingReportByEmpId/{employeeId}")
+    public ResponseEntity<List<PrintRelievingReportsDto>> getPrintRelievingReportByEmpId(@PathVariable Long employeeId) {
+        List<PrintRelievingReportsDto> reports = printService.getPrintRelievingReportByEmpId(employeeId);
+        return new ResponseEntity<>(reports, HttpStatus.OK);
+    }
 	
 	@GetMapping("/admin/getPrintRelievingReportById/{id}")
 	public ResponseEntity<PrintRelievingReportsDto> getPrintRelievingReportById(@PathVariable Long id) {

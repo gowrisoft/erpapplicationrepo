@@ -65,5 +65,12 @@ public PrintJoiningReportsDto updatePrintJoiningReport(Long id, PrintJoiningRepo
 		printRepo.deleteById(id);
 		
 	}
+
+@Override
+public List<PrintJoiningReportsDto> getPrintJoiningReportByEmpId(Long employeeId) {
+	// TODO Auto-generated method stub
+	return printRepo.findByPrintempId_EmpId(employeeId)
+			.stream().map(report -> PrintJoiningReportsMapper.mapPrintJoinToPrintJoinDto(report)).toList();
+}
 	
 }

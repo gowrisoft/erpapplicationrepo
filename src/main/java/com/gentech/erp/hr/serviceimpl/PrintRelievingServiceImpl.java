@@ -3,6 +3,7 @@ package com.gentech.erp.hr.serviceimpl;
 import java.util.List;
 
 import com.gentech.erp.hr.dto.PrintRelievingReportsDto;
+import com.gentech.erp.hr.mapper.PrintJoiningReportsMapper;
 import com.gentech.erp.hr.mapper.PrintRelievingReportsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,5 +68,11 @@ public PrintRelievingReportsDto updatePrintRelievingReport(Long id, PrintRelievi
 		printRepo.deleteById(id);
 		
 	}
+
+@Override
+public List<PrintRelievingReportsDto> getPrintRelievingReportByEmpId(Long employeeId) {
+	return printRepo.findByPrintempId_EmpId(employeeId)
+			.stream().map(report ->PrintRelievingReportsMapper.mapPrintRelToPrintRelDto(report)).toList();
+}
 
 }
