@@ -71,9 +71,11 @@ public class CompensatoryLeaveServiceImpl implements CompensatoryLeaveService {
         compensatoryLeave.setCompensatoryReason(compensatoryLeaveDto.getCompensatoryReason());
         compensatoryLeave.setStartDate(compensatoryLeaveDto.getStartDate());
         compensatoryLeave.setEndDate(compensatoryLeaveDto.getEndDate());
+        compensatoryLeave.setStatus(compensatoryLeaveDto.getStatus());
 
         CompensatoryLeave updatedCompensatoryLeave=compensatoryLeaveRepository.save(compensatoryLeave);
 
         return CompensatoryLeaveMapper.mapCompToCompDto(updatedCompensatoryLeave);
     }
+
 }

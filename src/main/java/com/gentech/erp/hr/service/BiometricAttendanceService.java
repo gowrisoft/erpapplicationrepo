@@ -17,5 +17,6 @@ public interface BiometricAttendanceService {
 
     BiometricAttendanceDto updateBiometricAttendance(Long id,BiometricAttendanceDto biometricAttendanceDto);
 
+	List<BiometricAttendanceDto> getBiometricAttendanceByEmployeeId(Long employeeId);
 
 }

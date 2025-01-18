@@ -19,7 +19,7 @@ public class JoiningController {
 
     // Create Joining Report
     @PostMapping("/admin/addJoiningReport")
-    public ResponseEntity<JoiningReportDto> createJoiningReport(@RequestBody JoiningReportDto joiningDto, HttpServletRequest request) {
+    public ResponseEntity<JoiningReportDto> createJoiningReport(@RequestBody JoiningReportDto joiningDto) {
         return new ResponseEntity<>(joiningService.createJoiningReport(joiningDto), HttpStatus.CREATED);
     }
 
@@ -35,7 +35,12 @@ public class JoiningController {
         return new ResponseEntity<>(reports, HttpStatus.OK);
     }
 
-    
+    @GetMapping("/user/getJoiningReport")
+    public ResponseEntity<List<JoiningReportDto>> getUserJoiningReport(HttpServletRequest request) {
+        List<JoiningReportDto> reports = joiningService.getJoiningReportByEmpId((Long) request.getAttribute("employeeId"));
+        return new ResponseEntity<>(reports, HttpStatus.OK);
+    }
+
     // Get Joining Report by ID
     @GetMapping("/admin/getJoiningReportById/{id}")
     public ResponseEntity<JoiningReportDto> getJoiningReportById(@PathVariable Long id) {

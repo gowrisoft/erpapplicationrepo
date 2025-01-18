@@ -2,6 +2,7 @@ package com.gentech.erp.hr.controller;
 
 import java.util.List;
 import com.gentech.erp.hr.dto.RelievingReportDto;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -46,6 +47,12 @@ public class RelievingController {
 	        List<RelievingReportDto> reports = relievingService.getRelievingReportByEmpId(employeeId);
 	        return new ResponseEntity<>(reports, HttpStatus.OK);
 	    }
+
+	@GetMapping("/user/getRelievingReport")
+	public ResponseEntity<List<RelievingReportDto>> getUserRelievingReport(HttpServletRequest request) {
+		List<RelievingReportDto> reports = relievingService.getRelievingReportByEmpId((Long) request.getAttribute("employeeId"));
+		return new ResponseEntity<>(reports, HttpStatus.OK);
+	}
 		
 	@PutMapping("/admin/modRelievingReport/{id}")
 	public ResponseEntity<RelievingReportDto> updateRelievingReport(
@@ -54,8 +61,7 @@ public class RelievingController {
 	    RelievingReportDto updatedReport = relievingService.updateRelievingReport(id, relievingDto);
 	    return new ResponseEntity<>(updatedReport, HttpStatus.OK);
 	}
-	
-	
+
 	@DeleteMapping("/admin/delRelievingReport/{id}")
 	public ResponseEntity<String> deleteRelievingReportById(@PathVariable Long id) {
 	    relievingService.deleteRelievingReportById(id);
@@ -64,8 +70,5 @@ public class RelievingController {
 	        HttpStatus.OK
 	    );
 	}
-	
-	
 
-	
 }

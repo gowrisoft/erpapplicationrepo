@@ -1,14 +1,21 @@
 package com.gentech.erp.hr.entity;
 
-import jakarta.persistence.*;
-
 import java.sql.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tbl_attendance")
 public class Attendance {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "attendance_id")
     private Long attendanceId;
@@ -19,72 +26,55 @@ public class Attendance {
     @Column(name = "attendance_status")
     private String attendanceStatus;
 
-    // Many-to-One relationship with Admin
-    @ManyToOne
-    @JoinColumn(name = "admin_id", nullable = false)
-    private Employee admin;
 
     // Many-to-One relationship with Employee
     @ManyToOne
-    @JoinColumn(name = "emp_id", nullable = false)
+    @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
     private Employee employee;
 
     public Attendance() {
     }
 
-    public Attendance(Date attendanceDate, String attendanceStatus) {
-        this.attendanceDate = attendanceDate;
-        this.attendanceStatus = attendanceStatus;
-    }
+	public Attendance(Long attendanceId, Date attendanceDate, String attendanceStatus,
+			Employee employee) {
+		super();
+		this.attendanceId = attendanceId;
+		this.attendanceDate = attendanceDate;
+		this.attendanceStatus = attendanceStatus;
+		this.employee = employee;
+	}
 
+	public Long getAttendanceId() {
+		return attendanceId;
+	}
 
-    public Attendance(Long attendanceId, Date attendanceDate, String attendanceStatus, Employee admin, Employee employee) {
-        super();
-        this.attendanceId = attendanceId;
-        this.attendanceDate = attendanceDate;
-        this.attendanceStatus = attendanceStatus;
-        this.admin = admin;
-        this.employee = employee;
-    }
+	public void setAttendanceId(Long attendanceId) {
+		this.attendanceId = attendanceId;
+	}
 
-    // Getters and Setters
-    public Long getAttendanceId() {
-        return attendanceId;
-    }
+	public Date getAttendanceDate() {
+		return attendanceDate;
+	}
 
-    public void setAttendanceId(Long attendanceId) {
-        this.attendanceId = attendanceId;
-    }
+	public void setAttendanceDate(Date attendanceDate) {
+		this.attendanceDate = attendanceDate;
+	}
 
-    public Date getAttendanceDate() {
-        return attendanceDate;
-    }
+	public String getAttendanceStatus() {
+		return attendanceStatus;
+	}
 
-    public void setAttendanceDate(Date attendanceDate) {
-        this.attendanceDate = attendanceDate;
-    }
+	public void setAttendanceStatus(String attendanceStatus) {
+		this.attendanceStatus = attendanceStatus;
+	}
 
-    public String getAttendanceStatus() {
-        return attendanceStatus;
-    }
+	public Employee getEmployee() {
+		return employee;
+	}
 
-    public void setAttendanceStatus(String attendanceStatus) {
-        this.attendanceStatus = attendanceStatus;
-    }
-
-    public Employee getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Employee admin) {
-        this.admin = admin;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+    
+    
 }
