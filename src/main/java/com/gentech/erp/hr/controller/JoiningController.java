@@ -1,10 +1,12 @@
 package com.gentech.erp.hr.controller;
 
 import com.gentech.erp.hr.dto.JoiningReportDto;
+import com.gentech.erp.hr.dto.LeaveApplicationDto;
 import com.gentech.erp.hr.service.JoiningService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +29,11 @@ public class JoiningController {
     @GetMapping("/admin/reports")
     public ResponseEntity<List<JoiningReportDto>> getAllJoiningReports() {
         return new ResponseEntity<>(joiningService.getAllJoiningReports(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/user/getJoiningReportByEmp")
+    ResponseEntity<List<JoiningReportDto>> getJoiningReportByEmpId(HttpServletRequest request) {
+        return new ResponseEntity<List<JoiningReportDto>>(joiningService.getJoiningReportByEmpId((long) request.getAttribute("employeeId")), HttpStatusCode.valueOf(200));
     }
 
     @GetMapping("/admin/getJoiningReportByEmpId/{employeeId}")

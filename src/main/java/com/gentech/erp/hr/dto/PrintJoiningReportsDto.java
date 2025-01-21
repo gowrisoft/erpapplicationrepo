@@ -1,29 +1,32 @@
 package com.gentech.erp.hr.dto;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.entity.JoiningReport;
 
 public class PrintJoiningReportsDto {
     private Long printId;
-    private String status;
+    private BigDecimal baseSalary;
     private Date printDate;
     private JoiningReport printJoiningId;
     private Employee printadminId;
     private Employee printempId;
     private String firstName;
     private String lastName;
+    private String designation;
     
     
-    public PrintJoiningReportsDto(Long printId, Date printDate, JoiningReport printJoiningId, Employee printadminId,Employee printempId, String status,String firstName,String lastName) {
+    public PrintJoiningReportsDto(Long printId, Date printDate, JoiningReport printJoiningId, Employee printadminId,Employee printempId, BigDecimal baseSalary,String firstName,String lastName,String designation) {
 		this.printId = printId;
 		this.printDate = printDate;
 		this.printJoiningId = printJoiningId;
 		this.printadminId = printadminId;
 		this.printempId = printempId;
-		this.status = status;
+		this.baseSalary=baseSalary;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.designation = designation;
 	}
     
     public Long getPrintId() {
@@ -66,12 +69,12 @@ public class PrintJoiningReportsDto {
 		this.printempId = printempId;
 	}
 
-	public String getStatus() {
-		return status;
+	public BigDecimal getBaseSalary() {
+		return baseSalary;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setBaseSalary(BigDecimal baseSalary) {
+		this.baseSalary = baseSalary;
 	}
 
 	public String getFirstName() {
@@ -90,6 +93,12 @@ public class PrintJoiningReportsDto {
 		this.lastName = lastName;
 	}
 
+	public String getDesignation() {
+		return designation;
+	}
 
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
 
 }

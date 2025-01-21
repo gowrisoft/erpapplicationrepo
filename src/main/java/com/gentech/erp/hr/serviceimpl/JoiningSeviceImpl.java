@@ -58,7 +58,7 @@ public class JoiningSeviceImpl implements JoiningService{
 	    existingReport.setFirstName(joiningDto.getFirstName());
 	    existingReport.setLastName(joiningDto.getLastName());
 	    existingReport.setDesignation(joiningDto.getDesignation());
-	    existingReport.setStatus(joiningDto.getStatus());
+	    existingReport.setBaseSalary(joiningDto.getBaseSalary());
 	    existingReport.setDateOfJoining(joiningDto.getDateOfJoining());
 
 

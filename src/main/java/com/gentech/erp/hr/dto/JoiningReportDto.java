@@ -1,5 +1,6 @@
 package com.gentech.erp.hr.dto;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import com.gentech.erp.hr.entity.Employee;
 
@@ -8,7 +9,7 @@ public class JoiningReportDto {
     private String firstName;
     private String lastName;
     private String designation;
-    private String status;
+    private BigDecimal baseSalary;
     private Date dateOfJoining;
     private Employee joiningEmployee;
     private Employee joinadminId;
@@ -19,14 +20,14 @@ public class JoiningReportDto {
     public JoiningReportDto() {}
 
     
-    public JoiningReportDto(Long joiningId,String firstName,String lastName,String designation, String status, Date dateOfJoining,Employee joiningEmployee, Employee reportingManager, Employee joinadminId) 
+    public JoiningReportDto(Long joiningId,String firstName,String lastName,String designation, BigDecimal baseSalary, Date dateOfJoining,Employee joiningEmployee, Employee reportingManager, Employee joinadminId) 
     {
 
 		this.joiningId = joiningId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.designation = designation;
-		this.status = status;
+		this.baseSalary = baseSalary;
 		this.dateOfJoining = dateOfJoining;
 		this.joiningEmployee = joiningEmployee;
 		this.reportingManager = reportingManager;
@@ -66,12 +67,12 @@ public class JoiningReportDto {
 		this.designation = designation;
 	}
 
-	public String getStatus() {
-		return status;
+	public BigDecimal getBaseSalary() {
+		return baseSalary;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setBaseSalary(BigDecimal baseSalary) {
+		this.baseSalary = baseSalary;
 	}
 
 	public Date getDateOfJoining() {

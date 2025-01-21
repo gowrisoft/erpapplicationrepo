@@ -46,7 +46,8 @@ public PrintJoiningReportsDto updatePrintJoiningReport(Long id, PrintJoiningRepo
 
     // Update the fields of the existing entity with values from the DTO
     existingReport.setPrintId(id); // Ensure the ID is preserved
-    existingReport.setStatus(printDto.getStatus());
+    existingReport.setBaseSalary(printDto.getBaseSalary());
+    existingReport.setDesignation(printDto.getDesignation()); 
     existingReport.setPrintDate(printDto.getPrintDate());
     existingReport.setPrintJoiningId(printDto.getPrintJoiningId());
     existingReport.setPrintadminId(printDto.getPrintadminId());
