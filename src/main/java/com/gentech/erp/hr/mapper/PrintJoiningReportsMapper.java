@@ -11,9 +11,10 @@ public class PrintJoiningReportsMapper {
                 printJoiningReports.getPrintJoiningId(),
                 printJoiningReports.getPrintadminId(),
                 printJoiningReports.getPrintempId(),
-                printJoiningReports.getStatus(),
+                printJoiningReports.getBaseSalary(),
                 printJoiningReports.getFirstName(),
-                printJoiningReports.getLastName()
+                printJoiningReports.getLastName(),
+                printJoiningReports.getDesignation()
                 
                 
         );
@@ -27,9 +28,10 @@ public class PrintJoiningReportsMapper {
                 printJoiningReportsDto.getPrintJoiningId(),
                 printJoiningReportsDto.getPrintadminId() ,
                 printJoiningReportsDto.getPrintempId(),
-                printJoiningReportsDto.getStatus(),
+                printJoiningReportsDto.getBaseSalary(),
                 printJoiningReportsDto.getFirstName(),
-                printJoiningReportsDto.getLastName()
+                printJoiningReportsDto.getLastName(),
+                printJoiningReportsDto.getDesignation()
         );
         return printJoiningReports;
     }

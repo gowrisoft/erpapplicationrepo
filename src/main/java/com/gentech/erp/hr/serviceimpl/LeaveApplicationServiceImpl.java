@@ -112,6 +112,10 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
             leaveApplication.setTypeOfLeave(leaveDto.getTypeOfLeave());
         }
 
+        if (leaveDto.getStatus() != null) {
+            leaveApplication.setStatus(leaveDto.getStatus());
+        }
+
         // Debug: Check updated values before save
         System.out.println("Updated Leave Application: " + leaveApplication);
 

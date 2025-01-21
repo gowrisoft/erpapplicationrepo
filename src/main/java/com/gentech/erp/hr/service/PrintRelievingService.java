@@ -15,5 +15,7 @@ public interface PrintRelievingService {
     PrintRelievingReportsDto updatePrintRelievingReport(Long id,PrintRelievingReportsDto printDto);
 
     void deletePrintRelievingReportById(Long id);
+    
+    List<PrintRelievingReportsDto> getPrintRelievingReportByEmpId(Long employeeId);
 
 }

@@ -1,4 +1,5 @@
 package com.gentech.erp.hr.entity;
+import java.math.BigDecimal;
 import java.sql.Date;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -24,8 +25,9 @@ public class JoiningReport {
     @Column(name = "designation")
     private String designation;
 
-    @Column(name = "status")
-    private String status;
+    @NotNull(message = "Base salary cannot be null")
+    @Column(nullable = false) // Ensures database-level constraint
+    private BigDecimal baseSalary;
 
     @NotNull(message = "Date of joining cannot be null")
     @Column(nullable = false)
@@ -49,14 +51,14 @@ public class JoiningReport {
     	
     }
 
-    public JoiningReport(Long joiningId,String firstName,String lastName,String designation, String status, Date dateOfJoining,Employee joiningEmployee, Employee reportingManager, Employee joinadminId) 
+    public JoiningReport(Long joiningId,String firstName,String lastName,String designation, BigDecimal baseSalary, Date dateOfJoining,Employee joiningEmployee, Employee reportingManager, Employee joinadminId) 
     {
 
 		this.joiningId = joiningId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.designation = designation;
-		this.status = status;
+		this.baseSalary=baseSalary;
 		this.dateOfJoining = dateOfJoining;
 		this.joiningEmployee = joiningEmployee;
 		this.reportingManager = reportingManager;
@@ -95,12 +97,12 @@ public class JoiningReport {
 		this.designation = designation;
 	}
 
-	public String getStatus() {
-		return status;
+	public BigDecimal getBaseSalary() {
+		return baseSalary;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setBaseSalary(BigDecimal baseSalary) {
+		this.baseSalary = baseSalary;
 	}
 
 	public Date getDateOfJoining() {

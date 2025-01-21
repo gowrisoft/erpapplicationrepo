@@ -1,5 +1,6 @@
 package com.gentech.erp.hr.entity;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -30,8 +31,9 @@ public class PrintJoiningReports{
     @JoinColumn(name = "print_emp_id", referencedColumnName = "emp_id")
     private Employee printempId;
     
-    @Column(name = "status")
-    private String status;
+    @NotNull(message = "Base salary cannot be null")
+    @Column(nullable = false) // Ensures database-level constraint
+    private BigDecimal baseSalary;
     
     @NotNull(message = "First name cannot be null")
     @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
@@ -41,19 +43,23 @@ public class PrintJoiningReports{
     @Size(min = 1, max = 50, message = "Last name must be between 2 and 50 characters")
     private String lastName;
     
+    @Column(name = "designation")
+    private String designation;
+    
     public PrintJoiningReports() {
     	
     }
     
-	public PrintJoiningReports(Long printId, Date printDate, JoiningReport printJoiningId, Employee printadminId,Employee printempId, String status,String firstName,String lastName) {
+	public PrintJoiningReports(Long printId, Date printDate, JoiningReport printJoiningId, Employee printadminId,Employee printempId, BigDecimal baseSalary,String firstName,String lastName,String designation) {
 		this.printId = printId;
 		this.printDate = printDate;
 		this.printJoiningId = printJoiningId;
 		this.printadminId = printadminId;
 		this.printempId = printempId;
-		this.status = status;
+		this.baseSalary=baseSalary;;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.designation = designation;
 	}
 
 	public Long getPrintId() {
@@ -96,12 +102,12 @@ public class PrintJoiningReports{
 		this.printempId = printempId;
 	}
 
-	public String getStatus() {
-		return status;
+	public BigDecimal getBaseSalary() {
+		return baseSalary;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setBaseSalary(BigDecimal baseSalary) {
+		this.baseSalary = baseSalary;
 	}
 
 	public String getFirstName() {
@@ -118,6 +124,14 @@ public class PrintJoiningReports{
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 
 }

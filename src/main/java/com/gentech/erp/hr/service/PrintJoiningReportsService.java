@@ -15,5 +15,7 @@ public interface PrintJoiningReportsService {
     PrintJoiningReportsDto updatePrintJoiningReport(Long id,PrintJoiningReportsDto printDto);
 
     void deletePrintJoiningReportById(Long id);
+    
+    List<PrintJoiningReportsDto> getPrintJoiningReportByEmpId(Long employeeId);
 
 }
