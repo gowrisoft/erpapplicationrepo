@@ -21,12 +21,7 @@ public class BiometricPunchingReportDto {
     public BiometricPunchingReportDto() {
 
     }
-<<<<<<< HEAD
-    
-    
-=======
 
->>>>>>> b22efec5982bd6b917ae85feed96feda510d4dd3
     public BiometricPunchingReportDto(Integer reportId, Employee employee, String empName, LocalDate date,
                                       LocalTime timeIn, LocalTime timeOut, Integer numOfPunches, String location, String designation,
                                       BiometricAttendance biometricAttendance) {
