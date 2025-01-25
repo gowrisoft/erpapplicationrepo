@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "leave_ledger")
 public class LeaveLedger {
@@ -30,12 +33,15 @@ public class LeaveLedger {
     private String processedBy;
     @ManyToOne
     @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
+    @JsonIgnore
     private Employee employee;
     @ManyToOne
     @JoinColumn(name = "leave_req_id", referencedColumnName = "leave_req_id")
+    @JsonIgnore
     private LeaveApplication leaveApplication;
     @OneToOne
     @JoinColumn(name = "compensatory_leave_id", referencedColumnName = "compensatory_leave_id", nullable = false)
+    @JsonIgnore
     private CompensatoryLeave compensatoryLeave;
 
     public LeaveLedger() {

@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "apply_leave")
 public class LeaveApplication {
@@ -26,10 +30,15 @@ public class LeaveApplication {
 
     @ManyToOne
     @JoinColumn(name = "emp_id", nullable = false)
+    @JsonIgnore 
     private Employee employee;
+    
     @OneToOne(mappedBy = "leaveApplication", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private SanctionLeave sanctionLeave;
+    
     @OneToMany(mappedBy = "leaveApplication", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<LeaveLedger> leaveLedgers;
 
     public LeaveApplication() {

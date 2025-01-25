@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "compensatory_leave")
 public class CompensatoryLeave {
@@ -24,11 +28,15 @@ public class CompensatoryLeave {
 
 
     @ManyToOne
+    
     @JoinColumn(name = "emp_id", referencedColumnName = "emp_id", nullable = false)
+    @JsonIgnore
     private Employee employee;
     @OneToOne(mappedBy = "compensatoryLeave", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private LeaveLedger leaveLedger;
     @OneToOne(mappedBy = "compensatoryLeave", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private SanctionLeave sanctionLeave;
 
     public CompensatoryLeave() {

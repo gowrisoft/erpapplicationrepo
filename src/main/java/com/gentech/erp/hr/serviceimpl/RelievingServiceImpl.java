@@ -50,6 +50,7 @@ public class RelievingServiceImpl implements RelievingService{
   existingReport.setReason(relievingDto.getReason());
   existingReport.setStatus(relievingDto.getStatus());
   existingReport.setRelievingDate(relievingDto.getRelievingDate());
+  existingReport.setReladminId(relievingDto.getReladminId());
 
   // Save the updated report
   RelievingReport updatedReport = relievingRepo.save(existingReport);

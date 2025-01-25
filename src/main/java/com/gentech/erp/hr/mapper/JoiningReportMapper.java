@@ -13,8 +13,9 @@ public class JoiningReportMapper {
                 joiningReport.getBaseSalary(),
                 joiningReport.getDateOfJoining(),
                 joiningReport.getJoiningEmployee(),
-                joiningReport.getJoinadminId(),
-                joiningReport.getReportingManager()
+                joiningReport.getReportingManager(),
+                joiningReport.getJoinadminId()
+                
                 
         );
         return joiningReportDto;//here order of DTO layer matters
@@ -28,8 +29,9 @@ public class JoiningReportMapper {
                 joiningReportDto.getBaseSalary(),
                 joiningReportDto.getDateOfJoining(),
                 joiningReportDto.getJoiningEmployee(),
-                joiningReportDto.getJoinadminId(),
-                joiningReportDto.getReportingManager()
+                joiningReportDto.getReportingManager(),
+                joiningReportDto.getJoinadminId()
+                
                 
         );
         return joiningReport;//here order of Entity layer matters

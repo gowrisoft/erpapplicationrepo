@@ -40,23 +40,17 @@ public class PrintJoiningReportsServiceImpl implements PrintJoiningReportsServic
 
 @Override
 public PrintJoiningReportsDto updatePrintJoiningReport(Long id, PrintJoiningReportsDto printDto) {
-    // Fetch the existing report from the database
-    PrintJoiningReports existingReport = printRepo.findById(id).orElseThrow(() -> 
-        new ResourceNotFoundException("Print Joining Report", "Print ID", id));
-
-    // Update the fields of the existing entity with values from the DTO
-    existingReport.setPrintId(id); // Ensure the ID is preserved
+    
+    PrintJoiningReports existingReport = printRepo.findById(id).orElseThrow(() -> // Fetch the existing report from the database
+        new ResourceNotFoundException("Print Joining Report", "Print ID", id));  
+    existingReport.setPrintId(id); // Ensure the ID is preserved  // Update the fields of the existing entity with values from the DTO
     existingReport.setBaseSalary(printDto.getBaseSalary());
     existingReport.setDesignation(printDto.getDesignation()); 
     existingReport.setPrintDate(printDto.getPrintDate());
     existingReport.setPrintJoiningId(printDto.getPrintJoiningId());
     existingReport.setPrintadminId(printDto.getPrintadminId());
-
-    // Save the updated entity
-    PrintJoiningReports updatedReport = printRepo.save(existingReport);
-
-    // Map the updated entity back to a DTO and return it
-    return PrintJoiningReportsMapper.mapPrintJoinToPrintJoinDto(updatedReport);
+    PrintJoiningReports updatedReport = printRepo.save(existingReport);  // Save the updated entity
+    return PrintJoiningReportsMapper.mapPrintJoinToPrintJoinDto(updatedReport);   // Map the updated entity back to a DTO and return it
 }
 
 @Override
@@ -69,7 +63,6 @@ public PrintJoiningReportsDto updatePrintJoiningReport(Long id, PrintJoiningRepo
 
 @Override
 public List<PrintJoiningReportsDto> getPrintJoiningReportByEmpId(Long employeeId) {
-	// TODO Auto-generated method stub
 	return printRepo.findByPrintempId_EmpId(employeeId)
 			.stream().map(report -> PrintJoiningReportsMapper.mapPrintJoinToPrintJoinDto(report)).toList();
 }

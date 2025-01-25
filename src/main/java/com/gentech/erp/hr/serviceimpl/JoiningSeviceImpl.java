@@ -60,13 +60,11 @@ public class JoiningSeviceImpl implements JoiningService{
 	    existingReport.setDesignation(joiningDto.getDesignation());
 	    existingReport.setBaseSalary(joiningDto.getBaseSalary());
 	    existingReport.setDateOfJoining(joiningDto.getDateOfJoining());
+	    existingReport.setJoinadminId(joiningDto.getJoinadminId());
+	    existingReport.setReportingManager(joiningDto.getReportingManager());
+	    existingReport.setJoiningEmployee(joiningDto.getJoiningEmployee());
 
 
-	    if (joiningDto.getJoiningEmployee() != null && joiningDto.getJoiningEmployee().getEmpId() != null) {
-	        Employee joiningEmployee = employeeRepo.findById(joiningDto.getJoiningEmployee().getEmpId())
-	                .orElseThrow(() -> new ResourceNotFoundException("Employee", "Emp ID", joiningDto.getJoiningEmployee().getEmpId()));
-	        existingReport.setJoiningEmployee(joiningEmployee);
-	    }
 
 	    JoiningReport updatedReport = joiningRepo.save(existingReport);
 	    return JoiningReportMapper.mapJoinToJoinDto(updatedReport);

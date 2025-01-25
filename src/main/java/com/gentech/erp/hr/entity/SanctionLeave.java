@@ -3,6 +3,9 @@ package com.gentech.erp.hr.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "sanction_leave")
 public class SanctionLeave {
@@ -19,14 +22,17 @@ public class SanctionLeave {
     private LocalDateTime sanctionDate;
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "leave_req_id", referencedColumnName = "leave_req_id", nullable = true)
     private LeaveApplication leaveApplication;
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "compensatory_leave_id", referencedColumnName = "compensatory_leave_id", nullable = true)
     private CompensatoryLeave compensatoryLeave;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "admin_id", nullable = false)
     private Employee admin;
 
