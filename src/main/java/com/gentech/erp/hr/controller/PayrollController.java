@@ -13,19 +13,19 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/api/payroll")
+@RequestMapping("/v1/api")
 public class PayrollController {
 
     @Autowired
     private PayrollService payrollService;
 
-    @PostMapping("/calculate")
+    @PostMapping("/admin/payroll/calculate")
     public ResponseEntity<PayrollDto> calculatePayroll(@RequestParam Long employeeId,
                                                        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate salaryDate) {
         return ResponseEntity.ok(payrollService.calculatePayroll(employeeId, salaryDate));
     }
 
-    @GetMapping("/empId/{employeeId}")
+    @GetMapping("/admin/payroll/empId/{employeeId}")
     public ResponseEntity<List<PayrollDto>> getPayrollHistory(@PathVariable Long employeeId) {
         return ResponseEntity.ok(payrollService.getPayrollByEmpId(employeeId));
     }
@@ -35,27 +35,27 @@ public class PayrollController {
         return ResponseEntity.ok(payrollService.getPayrollByEmpId((Long) request.getAttribute("employeeId")));
     }
 
-    @PostMapping
+    @PostMapping("/admin/payroll")
     public ResponseEntity<PayrollDto> createPayroll(@RequestBody PayrollDto payrollDto) {
         return ResponseEntity.ok(payrollService.createPayroll(payrollDto));
     }
 
-    @GetMapping("/all")
+    @GetMapping("/admin/payroll/all")
     public ResponseEntity<List<PayrollDto>> getAllPayrolls() {
         return ResponseEntity.ok(payrollService.getAllPayrolls());
     }
 
-    @GetMapping("/payrollId/{payrollId}")
+    @GetMapping("/admin/payroll/payrollId/{payrollId}")
     public ResponseEntity<PayrollDto> getPayroll(@PathVariable Long payrollId) {
         return ResponseEntity.ok(payrollService.getPayrollById(payrollId));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/payroll/{id}")
     public ResponseEntity<PayrollDto> updatePayroll(@PathVariable Long id, @RequestBody PayrollDto updatedPayroll) {
         return ResponseEntity.ok(payrollService.updatePayroll(id, updatedPayroll));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/payroll/{id}")
     public ResponseEntity<Void> deletePayroll(@PathVariable Long id) {
         payrollService.deletePayroll(id);
         return ResponseEntity.noContent().build();

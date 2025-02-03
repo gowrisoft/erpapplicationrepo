@@ -1,6 +1,7 @@
 package com.gentech.erp.hr.serviceimpl;
 
 import com.gentech.erp.hr.dto.EmployeeDto;
+import com.gentech.erp.hr.dto.EmployeeUserDTO;
 import com.gentech.erp.hr.entity.Employee;
 import com.gentech.erp.hr.exception.ResourceNotFoundException;
 import com.gentech.erp.hr.repository.EmployeeRepository;
@@ -67,6 +68,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepository.deleteById(id);
         return String.format("Employee with employee ID %d deleted successfully from the database", id);
+    }
+
+    @Override
+    public List<EmployeeUserDTO> getAllEmployeesForUser() {
+        return employeeRepository.findAll().stream().map(employee -> modelMapper.map(employee, EmployeeUserDTO.class)).toList();
     }
 
 }
