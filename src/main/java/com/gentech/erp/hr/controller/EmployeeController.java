@@ -1,6 +1,7 @@
 package com.gentech.erp.hr.controller;
 
 import com.gentech.erp.hr.dto.EmployeeDto;
+import com.gentech.erp.hr.dto.EmployeeUserDTO;
 import com.gentech.erp.hr.service.EmployeeService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,10 @@ public class EmployeeController {
     @GetMapping("/user/employee/profile")
     ResponseEntity<EmployeeDto> getEmployeeProfile(HttpServletRequest request) {
         return new ResponseEntity<>(employeeService.getEmployeeById((Long) request.getAttribute("employeeId")), HttpStatus.OK);
+    }
+
+    @GetMapping("/user/employee/all")
+    ResponseEntity<List<EmployeeUserDTO>> getAllEmployeesForUser() {
+        return new ResponseEntity<>(employeeService.getAllEmployeesForUser(), HttpStatus.OK);
     }
 }
