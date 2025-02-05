@@ -75,6 +75,7 @@ public class Dependant {
     public enum RelationshipType {
         SPOUSE,
         CHILD,
-        PARENT
+        PARENT,
+        SELF
     }
 }
