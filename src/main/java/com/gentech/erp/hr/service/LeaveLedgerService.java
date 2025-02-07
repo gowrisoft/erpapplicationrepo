@@ -13,5 +13,17 @@ public interface LeaveLedgerService {
 
     Integer getLeaveBalanceByEmployeeIdInLeaveLedger(long empId);
 
+    List<LeaveLedgerDto> getLeaveLedgersWithLeaveApplication();
+
+    List<LeaveLedgerDto> getLeaveLedgersWithCompensatoryLeave();
+
+    LeaveLedgerDto updateLeaveLedger(int id, LeaveLedgerDto leaveLedgerDto);
+
+    LeaveLedgerDto updateLeaveLedgerByLeaveRequestId(int id, LeaveLedgerDto leaveLedgerDto);
+
+    LeaveLedgerDto updateLeaveLedgerByCompensatoryLeaveId(int id, LeaveLedgerDto leaveLedgerDto);
+
+    List<LeaveLedgerDto> getAllLeaveLedgerByEmployeeId(long empId);
+
     String deleteLeaveLedgerById(int id);
 }

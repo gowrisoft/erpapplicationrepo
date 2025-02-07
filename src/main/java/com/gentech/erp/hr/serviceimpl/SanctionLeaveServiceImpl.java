@@ -26,7 +26,7 @@ public class SanctionLeaveServiceImpl implements SanctionLeaveService {
     @Override
     public SanctionLeaveDto addSanctionLeave(SanctionLeaveDto sanctionLeaveDto) {
         LeaveApplication leaveApplication = null;
-        if (sanctionLeaveDto.getLeaveRequestId() != null) {
+        if (sanctionLeaveDto.getLeaveRequestId()!=null) {
             leaveApplication = leaveRepository.findById(sanctionLeaveDto.getLeaveRequestId())
                     .orElseThrow(() -> new ResourceNotFoundException("LeaveApplication", "Id", sanctionLeaveDto.getLeaveRequestId()));
         }

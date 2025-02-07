@@ -5,10 +5,6 @@ import jakarta.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name = "apply_leave")
 public class LeaveApplication {
@@ -30,21 +26,16 @@ public class LeaveApplication {
 
     @ManyToOne
     @JoinColumn(name = "emp_id", nullable = false)
-    @JsonIgnore 
     private Employee employee;
-    
     @OneToOne(mappedBy = "leaveApplication", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private SanctionLeave sanctionLeave;
-    
-    @OneToMany(mappedBy = "leaveApplication", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private List<LeaveLedger> leaveLedgers;
+    @OneToOne(mappedBy = "leaveApplication", cascade = CascadeType.ALL, orphanRemoval = true)
+    private LeaveLedger leaveLedger;
 
     public LeaveApplication() {
     }
 
-    public LeaveApplication(int leaveRequestId, Date startDate, Date endDate, String reason, String typeOfLeave, String status, Employee employee, SanctionLeave sanctionLeave, List<LeaveLedger> leaveLedgers) {
+    public LeaveApplication(int leaveRequestId, Date startDate, Date endDate, String reason, String typeOfLeave, String status, Employee employee, SanctionLeave sanctionLeave, LeaveLedger leaveLedger) {
         this.leaveRequestId = leaveRequestId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -53,7 +44,7 @@ public class LeaveApplication {
         this.status = status;
         this.employee = employee;
         this.sanctionLeave = sanctionLeave;
-        this.leaveLedgers = leaveLedgers;
+        this.leaveLedger = leaveLedger;
     }
 
     public int getLeaveRequestId() {
@@ -120,11 +111,11 @@ public class LeaveApplication {
         this.sanctionLeave = sanctionLeave;
     }
 
-    public List<LeaveLedger> getLeaveLedgers() {
-        return leaveLedgers;
+    public LeaveLedger getLeaveLedger() {
+        return leaveLedger;
     }
 
-    public void setLeaveLedgers(List<LeaveLedger> leaveLedgers) {
-        this.leaveLedgers = leaveLedgers;
+    public void setLeaveLedger(LeaveLedger leaveLedger) {
+        this.leaveLedger = leaveLedger;
     }
 }

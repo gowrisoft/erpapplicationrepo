@@ -11,6 +11,8 @@ public interface CompensatoryLeaveService {
 
     CompensatoryLeaveDto getAllCompensatoryLeaveById(int id);
 
+    List<CompensatoryLeaveDto> getCompensatoryLeaveByEmployeeId(long id);
+
     String deleteCompensatoryLeaveById(int id);
 
     CompensatoryLeaveDto updateCompensatoryLeave(int id,CompensatoryLeaveDto compensatoryLeaveDto);
