@@ -3,6 +3,7 @@ package com.gentech.erp.hr.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
@@ -37,6 +38,15 @@ public class Employee {
     @Size(min = 10, max = 15, message = "Phone number must be between 10 and 15 characters")
     private String phoneNumber;
 
+    @NotNull(message = "Gender cannot be null")
+    @Size(min = 4, max = 6, message = "Gender must be between 4 and 6 characters long")
+    @Pattern(regexp = "Male|Female|Other", message = "Gender must be Male, Female, or Other")
+    private String gender;
+
+    @NotNull(message = "Date of Birth cannot be null")
+    @Column(nullable = false)
+    private LocalDate dateOfBirth;
+
     @NotNull(message = "Base salary cannot be null")
     @Column(nullable = false) // Ensures database-level constraint
     private BigDecimal baseSalary;
@@ -65,12 +75,14 @@ public class Employee {
 
     }
 
-    public Employee(Long empId, String firstName, String lastName, String email, String phoneNumber, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, String empDesignation, List<LeaveApplication> leaveApplications, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities) {
+    public Employee(Long empId, String firstName, String lastName, String email, String phoneNumber, String gender, LocalDate dateOfBirth, BigDecimal baseSalary, BigDecimal allowances, LocalDate dateOfJoining, String empDesignation, List<LeaveApplication> leaveApplications, List<LeaveLedger> leaveLedgers, List<CompensatoryLeave> compensatoryLeaveEntities) {
         this.empId = empId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
         this.baseSalary = baseSalary;
         this.allowances = allowances;
         this.dateOfJoining = dateOfJoining;
@@ -118,6 +130,22 @@ public class Employee {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public BigDecimal getBaseSalary() {
