@@ -35,7 +35,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) ->
-                requests.requestMatchers("/home/**", "/v1/api/register",
+                requests.requestMatchers("/v1/api/auth/**", "/v1/api/register",
                                 "/v1/api/admin/authenticate", "/v1/api/user/authenticate",
                                 "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/v1/api/user/**").hasRole("USER")

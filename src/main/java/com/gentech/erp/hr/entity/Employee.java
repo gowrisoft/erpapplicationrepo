@@ -32,6 +32,7 @@ public class Employee {
 
     @NotNull(message = "Email cannot be null")
     @Email(message = "Invalid email format")
+    @Column(unique = true)
     private String email;
 
     @NotNull(message = "Phone number cannot be null")
