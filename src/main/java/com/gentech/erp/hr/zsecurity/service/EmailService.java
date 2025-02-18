@@ -16,7 +16,7 @@ public class EmailService {
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(email);
-        mailMessage.setSubject("Verify Your Email");
+        mailMessage.setSubject("Verify Your Email within 24 hours");
         mailMessage.setText("Click the link to verify your email: " + verificationUrl);
 
         mailSender.send(mailMessage);
