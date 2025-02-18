@@ -16,15 +16,19 @@ public class MyUser {
     @JoinColumn(nullable = false)
     private Employee employee;
 
+    @Column(nullable = false)
+    private boolean isVerified = false;
+
     public MyUser() {
     }
 
-    public MyUser(Long userId, String username, String password, String role, Employee employee) {
+    public MyUser(Long userId, String username, String password, String role, Employee employee, boolean isVerified) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.role = role;
         this.employee = employee;
+        this.isVerified = isVerified;
     }
 
     public Long getUserId() {
@@ -65,5 +69,13 @@ public class MyUser {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 }

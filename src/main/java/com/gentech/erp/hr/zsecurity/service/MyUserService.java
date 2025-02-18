@@ -2,7 +2,6 @@ package com.gentech.erp.hr.zsecurity.service;
 
 import com.gentech.erp.hr.dto.MyUserDto;
 import com.gentech.erp.hr.entity.Employee;
-import com.gentech.erp.hr.exception.EmptyUsernameException;
 import com.gentech.erp.hr.exception.UsernameAlreadyExistsException;
 import com.gentech.erp.hr.repository.EmployeeRepository;
 import com.gentech.erp.hr.zsecurity.entity.MyUser;
@@ -11,7 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MyUserService {
@@ -28,6 +27,13 @@ public class MyUserService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Transactional
     public MyUserDto registerUser(MyUserDto userDto) {
 
         if (repository.existsByUsername(userDto.getUsername())) {
@@ -48,7 +54,11 @@ public class MyUserService {
             }
             user.setEmployee(employee);
         }
+        MyUser myUser = repository.save(user);
 
-        return modelMapper.map(repository.save(user), MyUserDto.class);
+        String verificationToken = jwtService.generateVerificationToken(user.getEmployee().getEmail());
+        emailService.sendVerificationEmail(user.getEmployee().getEmail(), verificationToken);
+
+        return modelMapper.map(myUser, MyUserDto.class);
     }
 }

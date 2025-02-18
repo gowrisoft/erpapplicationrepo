@@ -18,27 +18,18 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
     private MyUserRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+         public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+             MyUser existingUser = repository.findByUsername(username)
+                     .orElseThrow(() -> new UsernameNotFoundException("The User " + username + " has not found in database"));
 
-        Optional<MyUser> user = repository.findByUsername(username);
-        MyUser existingUser = user.get();
-        if (user.isPresent()) {
-            return User.builder()
-                    .username(existingUser.getUsername())
-                    .password(existingUser.getPassword())
-                    .roles(getRoles(existingUser))
-                    .build();
-        } else {
-            throw new UsernameNotFoundException("The User " + username + " has not found in database");
-        }
-    }
+             return User.builder()
+                     .username(existingUser.getUsername())
+                     .password(existingUser.getPassword())
+                     .roles(getRoles(existingUser))
+                     .build();
+         }
 
     public String[] getRoles(MyUser user) {
-        if (user.getRole() == null) {
-            return new String[]{"USER"};
-        } else {
             return user.getRole().split(",");
-        }
     }
-
 }
