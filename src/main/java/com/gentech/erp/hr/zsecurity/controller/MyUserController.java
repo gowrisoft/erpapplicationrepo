@@ -5,6 +5,7 @@ import com.gentech.erp.hr.zsecurity.entity.MyUser;
 import com.gentech.erp.hr.zsecurity.repository.MyUserRepository;
 import com.gentech.erp.hr.zsecurity.service.JwtService;
 import com.gentech.erp.hr.zsecurity.service.MyUserService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class MyUserController {
     }
 
     @GetMapping("/auth/verify-email")
-    public ResponseEntity<String> verifyEmail(@RequestParam String token) {
+    public ResponseEntity<String> verifyEmail(@RequestParam String token, HttpServletResponse response) {
         try{
             String email = jwtService.getEmailFromVerificationToken(token);
             Optional<MyUser> myUser = myUserRepository.findByEmployee_Email(email);
@@ -44,9 +45,18 @@ public class MyUserController {
             user.setVerified(true);
             myUserRepository.save(user);
 
+            response.sendRedirect("http://localhost:3000/login");
+
             return ResponseEntity.ok("Email verified successfully! You can now log in.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Invalid or expired token.");
         }
     }
 }
+
+
+
+
+
+
+
