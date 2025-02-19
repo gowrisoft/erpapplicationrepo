@@ -1,11 +1,7 @@
 package com.gentech.erp.hr.entity;
 
 import jakarta.persistence.*;
-
 import java.sql.Date;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "leave_ledger")
@@ -14,51 +10,50 @@ public class LeaveLedger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ledger_id")
     private int ledgerId;
-    @Column(name = "leave_accrued")
-    private int leaveAccrued;
-    @Column(name = "date")
-    private Date date;
+
+    @Column(name = "leave_accrued",columnDefinition = "int default 100")
+    private Integer leaveAccrued;
+
     @Column(name = "leave_type")
     private String leaveType;
+
     @Column(name = "leave_used")
     private int leaveUsed;
+
     @Column(name = "leave_balance")
     private int leaveBalance;
-    @Column(name = "remarks")
-    private String remarks;
+
     @Column(name = "application_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private LeaveStatus status;
+
     @Column(name = "processed_by")
     private String processedBy;
+
     @ManyToOne
     @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
-    @JsonIgnore
     private Employee employee;
-    @ManyToOne
-    @JoinColumn(name = "leave_req_id", referencedColumnName = "leave_req_id")
-    @JsonIgnore
-    private LeaveApplication leaveApplication;
+
     @OneToOne
-    @JoinColumn(name = "compensatory_leave_id", referencedColumnName = "compensatory_leave_id", nullable = false)
-    @JsonIgnore
+    @JoinColumn(name = "leave_req_id", referencedColumnName = "leave_req_id", nullable=true)
+    private LeaveApplication leaveApplication;
+
+    @OneToOne
+    @JoinColumn(name = "compensatory_leave_id", referencedColumnName = "compensatory_leave_id", nullable = true)
     private CompensatoryLeave compensatoryLeave;
 
+    // No-argument constructor
     public LeaveLedger() {
-
     }
 
-    public LeaveLedger(int ledgerId, int leaveAccrued, Date date, String leaveType, int leaveUsed, int leaveBalance,
-                       String remarks, LeaveStatus status, String processedBy, Employee employee,
-                       LeaveApplication leaveApplication, CompensatoryLeave compensatoryLeave) {
-        super();
+    // All-argument constructor
+
+    public LeaveLedger(int ledgerId, Integer leaveAccrued, String leaveType, int leaveUsed, int leaveBalance, LeaveStatus status, String processedBy, Employee employee, LeaveApplication leaveApplication, CompensatoryLeave compensatoryLeave) {
         this.ledgerId = ledgerId;
         this.leaveAccrued = leaveAccrued;
-        this.date = date;
         this.leaveType = leaveType;
         this.leaveUsed = leaveUsed;
         this.leaveBalance = leaveBalance;
-        this.remarks = remarks;
         this.status = status;
         this.processedBy = processedBy;
         this.employee = employee;
@@ -66,6 +61,7 @@ public class LeaveLedger {
         this.compensatoryLeave = compensatoryLeave;
     }
 
+    // Getter and Setter methods
     public int getLedgerId() {
         return ledgerId;
     }
@@ -74,20 +70,12 @@ public class LeaveLedger {
         this.ledgerId = ledgerId;
     }
 
-    public int getLeaveAccrued() {
+    public Integer getLeaveAccrued() {
         return leaveAccrued;
     }
 
-    public void setLeaveAccrued(int leaveAccrued) {
+    public void setLeaveAccrued(Integer leaveAccrued) {
         this.leaveAccrued = leaveAccrued;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getLeaveType() {
@@ -112,14 +100,6 @@ public class LeaveLedger {
 
     public void setLeaveBalance(int leaveBalance) {
         this.leaveBalance = leaveBalance;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
     }
 
     public LeaveStatus getStatus() {
@@ -162,10 +142,10 @@ public class LeaveLedger {
         this.compensatoryLeave = compensatoryLeave;
     }
 
+    // Enum for Leave Status
     public enum LeaveStatus {
-        ACTIVE,
-        CLOSED,
+        APPROVED,
+        REJECTED,
         PENDING
     }
 }
-

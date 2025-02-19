@@ -8,32 +8,38 @@ import com.gentech.erp.hr.entity.LeaveLedger;
 
 public class LeaveLedgerMapper {
     public static LeaveLedgerDto mapLedgerToLedgerDto(LeaveLedger leaveLedger) {
-        LeaveLedgerDto leaveLedgerDto = new LeaveLedgerDto(
+        // Add null-safety checks
+        Integer leaveRequestId = leaveLedger.getLeaveApplication() != null
+                ? leaveLedger.getLeaveApplication().getLeaveRequestId()
+                : null;
+        Integer compensatoryLeaveId = leaveLedger.getCompensatoryLeave() != null
+                ? leaveLedger.getCompensatoryLeave().getCompensatoryLeaveId()
+                : null;
+
+        // Create and return the DTO
+        return new LeaveLedgerDto(
                 leaveLedger.getLedgerId(),
                 leaveLedger.getLeaveAccrued(),
-                leaveLedger.getDate(),
                 leaveLedger.getLeaveType(),
                 leaveLedger.getLeaveUsed(),
                 leaveLedger.getLeaveBalance(),
-                leaveLedger.getRemarks(),
                 leaveLedger.getStatus(),
                 leaveLedger.getProcessedBy(),
                 leaveLedger.getEmployee().getEmpId(),
-                leaveLedger.getLeaveApplication().getLeaveRequestId(),
-                leaveLedger.getCompensatoryLeave().getCompensatoryLeaveId()
+                leaveRequestId,
+                compensatoryLeaveId
         );
-        return leaveLedgerDto;
     }
 
-    public static LeaveLedger mapLedgerDtoToLedger(LeaveLedgerDto leaveLedgerDto, Employee employee, LeaveApplication leaveApplication, CompensatoryLeave compensatoryLeaveEntity) {
+    public static LeaveLedger mapLedgerDtoToLedger(LeaveLedgerDto leaveLedgerDto, Employee employee,
+                                                   LeaveApplication leaveApplication,
+                                                   CompensatoryLeave compensatoryLeaveEntity) {
         LeaveLedger leaveLedger = new LeaveLedger(
                 leaveLedgerDto.getLedgerId(),
-                leaveLedgerDto.getLeaveAccrued(),
-                leaveLedgerDto.getDate(),
+                leaveLedgerDto.getLeaveAccrued() != null ? leaveLedgerDto.getLeaveAccrued() : 100, // Pass null if no value provided
                 leaveLedgerDto.getLeaveType(),
                 leaveLedgerDto.getLeaveUsed(),
                 leaveLedgerDto.getLeaveBalance(),
-                leaveLedgerDto.getRemarks(),
                 leaveLedgerDto.getStatus(),
                 leaveLedgerDto.getProcessedBy(),
                 employee,
@@ -42,4 +48,5 @@ public class LeaveLedgerMapper {
         );
         return leaveLedger;
     }
+
 }

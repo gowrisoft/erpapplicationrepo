@@ -7,29 +7,22 @@ import java.sql.Date;
 
 public class LeaveLedgerDto {
     private int ledgerId;
-    private int leaveAccrued;
-    private Date date;
+    private Integer leaveAccrued;
     private String leaveType;
     private int leaveUsed;
     private int leaveBalance;
-    private String remarks;
     private LeaveLedger.LeaveStatus status;
     private String processedBy;
     private long empId;
-    private int leaveRequestId;
-    private int compensatoryLeaveId;
+    private Integer leaveRequestId;
+    private Integer compensatoryLeaveId;
 
-    public LeaveLedgerDto(int ledgerId, int leaveAccrued, Date date, String leaveType, int leaveUsed, int leaveBalance,
-                          String remarks, LeaveStatus status, String processedBy, long empId, int leaveRequestId,
-                          int compensatoryLeaveId) {
-        super();
+    public LeaveLedgerDto(int ledgerId, Integer leaveAccrued, String leaveType, int leaveUsed, int leaveBalance, LeaveStatus status, String processedBy, long empId, Integer leaveRequestId, Integer compensatoryLeaveId) {
         this.ledgerId = ledgerId;
         this.leaveAccrued = leaveAccrued;
-        this.date = date;
         this.leaveType = leaveType;
         this.leaveUsed = leaveUsed;
         this.leaveBalance = leaveBalance;
-        this.remarks = remarks;
         this.status = status;
         this.processedBy = processedBy;
         this.empId = empId;
@@ -45,20 +38,12 @@ public class LeaveLedgerDto {
         this.ledgerId = ledgerId;
     }
 
-    public int getLeaveAccrued() {
+    public Integer getLeaveAccrued() {
         return leaveAccrued;
     }
 
-    public void setLeaveAccrued(int leaveAccrued) {
+    public void setLeaveAccrued(Integer leaveAccrued) {
         this.leaveAccrued = leaveAccrued;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getLeaveType() {
@@ -85,14 +70,6 @@ public class LeaveLedgerDto {
         this.leaveBalance = leaveBalance;
     }
 
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
-
     public LeaveLedger.LeaveStatus getStatus() {
         return status;
     }
@@ -117,19 +94,19 @@ public class LeaveLedgerDto {
         this.empId = empId;
     }
 
-    public int getLeaveRequestId() {
+    public Integer getLeaveRequestId() {
         return leaveRequestId;
     }
 
-    public void setLeaveRequestId(int leaveRequestId) {
+    public void setLeaveRequestId(Integer leaveRequestId) {
         this.leaveRequestId = leaveRequestId;
     }
 
-    public int getCompensatoryLeaveId() {
+    public Integer getCompensatoryLeaveId() {
         return compensatoryLeaveId;
     }
 
-    public void setCompensatoryLeaveId(int compensatoryLeaveId) {
+    public void setCompensatoryLeaveId(Integer compensatoryLeaveId) {
         this.compensatoryLeaveId = compensatoryLeaveId;
     }
 }

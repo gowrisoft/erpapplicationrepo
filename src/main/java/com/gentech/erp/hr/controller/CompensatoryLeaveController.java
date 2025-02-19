@@ -37,13 +37,19 @@ public class CompensatoryLeaveController {
         return new ResponseEntity<CompensatoryLeaveDto>(compensatoryLeaveService.getAllCompensatoryLeaveById(id), HttpStatusCode.valueOf(200));
     }
 
+    @GetMapping("/getCompensatoryLeavesByEmployeeId")
+    ResponseEntity<List<CompensatoryLeaveDto>> getCompensatoryLeavesByEmployeeId(@RequestParam int id) {
+        return new ResponseEntity<List<CompensatoryLeaveDto>>(compensatoryLeaveService.getCompensatoryLeaveByEmployeeId(id), HttpStatusCode.valueOf(200));
+    }
+
     @PutMapping("/updateCompensatoryLeave")
     ResponseEntity<CompensatoryLeaveDto> updateCompensatoryLeave(@RequestParam int id, @RequestBody CompensatoryLeaveDto compensatoryLeaveDto) {
         return new ResponseEntity<CompensatoryLeaveDto>(compensatoryLeaveService.updateCompensatoryLeave(id, compensatoryLeaveDto), HttpStatusCode.valueOf(200));
     }
 
-    @DeleteMapping("/admin/deleteCompensatoryLeaveById")
+    @DeleteMapping("/deleteCompensatoryLeaveById")
     ResponseEntity<String> deleteCompensatoryLeaveById(@RequestParam int id) {
         return new ResponseEntity<String>(compensatoryLeaveService.deleteCompensatoryLeaveById(id), HttpStatusCode.valueOf(200));
     }
+
 }

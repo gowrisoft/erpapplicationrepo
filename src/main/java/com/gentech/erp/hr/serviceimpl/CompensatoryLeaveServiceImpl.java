@@ -50,6 +50,17 @@ public class CompensatoryLeaveServiceImpl implements CompensatoryLeaveService {
     }
 
     @Override
+    public List<CompensatoryLeaveDto> getCompensatoryLeaveByEmployeeId(long id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee", "emp_id", id));
+
+        List<CompensatoryLeave> compensatoryLeaves = compensatoryLeaveRepository.getCompensatoryLeavesByEmployeeId(id);
+        return compensatoryLeaves.stream()
+                .map((compensatoryLeave) -> CompensatoryLeaveMapper.mapCompToCompDto(compensatoryLeave))
+                .toList();
+    }
+
+    @Override
     @Transactional
     public String deleteCompensatoryLeaveById(int id) {
         CompensatoryLeave compensatoryLeaveEntity = compensatoryLeaveRepository.findById(id)
