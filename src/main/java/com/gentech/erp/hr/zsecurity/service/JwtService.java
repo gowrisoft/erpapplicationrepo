@@ -26,11 +26,16 @@ public class JwtService {
     @Autowired
     private MyUserRepository myUserRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     public String generateToken(UserDetails userDetails) {
         MyUser user = myUserRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if(!user.isVerified()){
+            String verificationToken = generateVerificationToken(user.getEmployee().getEmail());
+            emailService.sendVerificationEmail(user.getEmployee().getEmail(), verificationToken);
             throw new RuntimeException("Email Id not verified");
         }
 
