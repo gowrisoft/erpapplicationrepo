@@ -61,4 +61,20 @@ public class MyUserService {
 
         return modelMapper.map(myUser, MyUserDto.class);
     }
+
+    @Transactional
+    public String verifyEmail(String token) {
+        if (!jwtService.isTokenValid(token)) {
+            throw new IllegalArgumentException("Invalid or expired token.");
+        }
+
+        String email = jwtService.getEmailFromVerificationToken(token);
+        MyUser user = repository.findByEmployee_Email(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        user.setVerified(true);
+        repository.save(user);
+
+        return "Email verified successfully! You can now log in.";
+    }
 }
