@@ -18,43 +18,15 @@ import java.util.Optional;
 public class MyUserController {
 
     @Autowired
-    private MyUserService service;
-
-    @Autowired
-    private JwtService jwtService;
-
-    @Autowired
-    private MyUserRepository myUserRepository;
+    private MyUserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<MyUserDto> registerUser(@RequestBody MyUserDto user) {
-        return new ResponseEntity<>(service.registerUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.registerUser(user), HttpStatus.CREATED);
     }
 
     @GetMapping("/auth/verify-email")
     public ResponseEntity<String> verifyEmail(@RequestParam String token) {
-        try{
-            String email = jwtService.getEmailFromVerificationToken(token);
-            Optional<MyUser> myUser = myUserRepository.findByEmployee_Email(email);
-
-            if(!myUser.isPresent()) {
-                return ResponseEntity.badRequest().body("User not found");
-            }
-
-            MyUser user = myUser.get();
-            user.setVerified(true);
-            myUserRepository.save(user);
-
-            return ResponseEntity.ok("Email verified successfully! You can now log in.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Invalid or expired token.");
-        }
+        return ResponseEntity.ok(userService.verifyEmail(token));
     }
 }
-
-
-
-
-
-
-
