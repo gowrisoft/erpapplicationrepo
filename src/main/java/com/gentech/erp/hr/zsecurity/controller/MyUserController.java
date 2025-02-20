@@ -32,7 +32,7 @@ public class MyUserController {
     }
 
     @GetMapping("/auth/verify-email")
-    public ResponseEntity<String> verifyEmail(@RequestParam String token, HttpServletResponse response) {
+    public ResponseEntity<String> verifyEmail(@RequestParam String token) {
         try{
             String email = jwtService.getEmailFromVerificationToken(token);
             Optional<MyUser> myUser = myUserRepository.findByEmployee_Email(email);
@@ -44,8 +44,6 @@ public class MyUserController {
             MyUser user = myUser.get();
             user.setVerified(true);
             myUserRepository.save(user);
-
-            response.sendRedirect("http://localhost:3000/login");
 
             return ResponseEntity.ok("Email verified successfully! You can now log in.");
         } catch (Exception e) {
