@@ -12,7 +12,7 @@ public class EmailService {
     private JavaMailSender mailSender;
 
     public void sendVerificationEmail(String email, String token) {
-        String verificationUrl = "http://localhost:9091/v1/api/auth/verify-email?token=" + token;
+        String verificationUrl = "http://localhost:3000/verify-email?token=" + token;
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(email);
