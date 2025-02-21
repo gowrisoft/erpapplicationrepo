@@ -77,4 +77,28 @@ public class MyUserService {
 
         return "Email verified successfully! You can now log in.";
     }
+
+    @Transactional
+    public void forgotPassword(String email) {
+        MyUser user = repository.findByEmployee_Email(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        String resetToken = jwtService.generateVerificationToken(email);
+
+        emailService.sendPasswordResetEmail(email, resetToken);
+    }
+
+    @Transactional
+    public void resetPassword(String token, String newPassword) {
+        if (!jwtService.isTokenValid(token)) {
+            throw new IllegalArgumentException("Invalid or expired reset token.");
+        }
+
+        String email = jwtService.getEmailFromVerificationToken(token);
+        MyUser user = repository.findByEmployee_Email(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        repository.save(user);
+    }
 }
