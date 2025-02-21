@@ -29,4 +29,16 @@ public class MyUserController {
     public ResponseEntity<String> verifyEmail(@RequestParam String token) {
         return ResponseEntity.ok(userService.verifyEmail(token));
     }
+
+    @PostMapping("/auth/forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestParam String email) {
+        userService.forgotPassword(email);
+        return ResponseEntity.ok("Password reset link sent to your email.");
+    }
+
+    @PostMapping("/auth/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestParam String token, @RequestParam String newPassword) {
+        userService.resetPassword(token, newPassword);
+        return ResponseEntity.ok("Password has been reset successfully.");
+    }
 }
