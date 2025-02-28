@@ -80,12 +80,11 @@ public class MyUserService {
 
     @Transactional
     public void forgotPassword(String email) {
-        if (!repository.existsByEmployee_Email(email)) {
-            throw new IllegalArgumentException("User not found");
-        }
+        MyUser user = repository.findByEmployee_Email(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         String resetToken = jwtService.generateVerificationToken(email);
-        emailService.sendPasswordResetEmail(email, resetToken);
+        emailService.sendPasswordResetEmail(email, user.getUsername(), resetToken);
     }
 
     @Transactional
