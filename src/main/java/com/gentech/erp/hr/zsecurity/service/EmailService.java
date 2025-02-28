@@ -37,6 +37,34 @@ public class EmailService {
         }
     }
 
+    public void sendVerificationEmail(String email, String token, String userName, String password) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            String verificationUrl = "http://localhost:3000/verify-email?token=" + token;
+
+            String emailContent = "<div style='font-family: Arial, sans-serif; padding: 20px; color: #333;'>"
+                    + "<p>Dear " + userName + ",</p>"
+                    + "<p>Thank you for signing up! Your account has been created with the following credentials:</p>"
+                    + "<p><strong>Username:</strong> " + userName + "</p>"
+                    + "<p><strong>Password:</strong> " + password + "</p>"
+                    + "<p>Please verify your email within <strong>24 hours</strong> by clicking the button below:</p>"
+                    + "<a href='" + verificationUrl + "' style='display: inline-block; background-color: #28a745; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;'>Verify Email</a>"
+                    + "<p>If you did not request this, you can safely ignore this email.</p>"
+                    + "<p style='margin-top: 20px;'>Best Regards,<br><strong>Gowri Software Solutions</strong></p>"
+                    + "</div>";
+
+            helper.setTo(email);
+            helper.setSubject("Verify Your Email within 24 hours");
+            helper.setText(emailContent, true);
+
+            mailSender.send(message);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to send email", e);
+        }
+    }
+
     public void sendPasswordResetEmail(String to, String resetToken) {
         try {
             MimeMessage message = mailSender.createMimeMessage();

@@ -57,7 +57,7 @@ public class MyUserService {
         MyUser myUser = repository.save(user);
 
         String verificationToken = jwtService.generateVerificationToken(user.getEmployee().getEmail());
-        emailService.sendVerificationEmail(user.getEmployee().getEmail(), verificationToken);
+        emailService.sendVerificationEmail(user.getEmployee().getEmail(), verificationToken, user.getUsername(), userDto.getPassword());
 
         return modelMapper.map(myUser, MyUserDto.class);
     }
@@ -80,11 +80,11 @@ public class MyUserService {
 
     @Transactional
     public void forgotPassword(String email) {
-        MyUser user = repository.findByEmployee_Email(email)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        if (!repository.existsByEmployee_Email(email)) {
+            throw new IllegalArgumentException("User not found");
+        }
 
         String resetToken = jwtService.generateVerificationToken(email);
-
         emailService.sendPasswordResetEmail(email, resetToken);
     }
 
